@@ -2,7 +2,6 @@
     <Mapbox :access-token="accessToken"
             :map-options="options"
             @map-load="initMap"
-            @map-click="clicked"
     />
 </template>
 
@@ -10,6 +9,7 @@
   import Mapbox from 'mapbox-gl-vue';
   import MapboxGl from 'mapbox-gl';
   import Vue from 'vue';
+  import {mapState} from 'vuex';
 
   import Infobox from './Infobox';
 
@@ -26,15 +26,11 @@
         options: {
           style: 'mapbox://styles/mapbox/light-v9',
           center: [50, 50]
-        },
-        targets: [
-          {lng: 12.259568217916211, lat: 50.599617329304294},
-          {lng: 12.86608547341038, lat: 50.85812957593282},
-          {lng: 12.829225087508064, lat: 50.79433207522962},
-          {lng: 13.082087334814588, lat: 50.83858048449676},
-          {lng: 12.96929455394428, lat: 50.782680788490666}
-        ]
+        }
       };
+    },
+    computed: {
+      ...mapState('BookStorage', ['targets'])
     },
     methods: {
       initMap(map) {
@@ -44,19 +40,27 @@
         });
       },
       clicked(map, event) {
-        this.addPopUp(map, event.lngLat);
+        const target = {
+          coord: event.lngLat
+        };
+        this.addPopUp(map, target);
       },
-      addPopUp(map, coordinates) {
-        new MapboxGl.Popup()
-          .setLngLat(coordinates)
+      addPopUp(map, target) {
+        const options = {
+          closeButton: false,
+          closeOnClick: false
+        };
+
+        new MapboxGl.Popup(options)
+          .setLngLat(target.coord)
           .setHTML("<div id='infobox-wrapper'></div>")
           .addTo(map);
 
 
         const infoBox = Vue.extend(Infobox);
         const box = new infoBox();
-        box.$props.map = map;
-        box.$props.coordinates = coordinates;
+        box.$props.map = this.map;
+        box.$props.target = target;
         box.$mount('#infobox-wrapper');
       }
     }
