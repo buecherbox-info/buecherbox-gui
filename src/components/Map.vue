@@ -2,6 +2,7 @@
     <Mapbox :access-token="accessToken"
             :map-options="options"
             @map-load="initMap"
+            @focusInfobox="focusInfobox"
     />
 </template>
 
@@ -11,6 +12,7 @@
   import Vue from 'vue';
   import {mapState} from 'vuex';
 
+  import {EventBus, EventNames} from "../events";
   import Infobox from './Infobox';
 
   export default {
@@ -32,27 +34,27 @@
     computed: {
       ...mapState('BookStorage', ['targets'])
     },
+    async mounted() {
+      await this.$store.dispatch('BookStorage/getBookBoxInfos');
+
+      EventBus.$on(EventNames.FOCUS_INFOBOX, (data) => {
+        this.focusInfobox(data);
+      });
+    },
     methods: {
-      initMap(map) {
-        this.map = map;
-        this.targets.forEach((target) => {
-          this.addPopUp(this.map, target);
-        });
-      },
-      clicked(map, event) {
-        const target = {
-          coord: event.lngLat
-        };
-        this.addPopUp(map, target);
-      },
       addPopUp(map, target) {
         const options = {
           closeButton: false,
           closeOnClick: false
         };
 
+        const coordinates = {
+          lng: target.lng,
+          lat: target.lat
+        };
+
         new MapboxGl.Popup(options)
-          .setLngLat(target.coord)
+          .setLngLat(coordinates)
           .setHTML("<div id='infobox-wrapper'></div>")
           .addTo(map);
 
@@ -62,6 +64,29 @@
         box.$props.map = this.map;
         box.$props.target = target;
         box.$mount('#infobox-wrapper');
+      },
+      clicked(map, event) {
+        const target = {
+          coordinates: event.lngLat
+        };
+        this.addPopUp(map, target);
+      },
+      focusInfobox(coordinates) {
+        if (!this.map) return;
+
+        this.map.flyTo({
+          center: [
+            coordinates.lng,
+            coordinates.lat
+          ],
+          zoom: 15
+        });
+      },
+      initMap(map) {
+        this.map = map;
+        this.targets.forEach((target) => {
+          this.addPopUp(this.map, target);
+        });
       }
     }
   }

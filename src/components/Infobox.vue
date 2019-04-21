@@ -1,6 +1,6 @@
 <template>
-    <div class="book-box-info">
-        <h1>{{target.name}}</h1>
+    <div class="book-box-info" @click="focusInfobox">
+        <h1>{{target.description}}</h1>
         <h2>{{target.location}}</h2>
         <img v-if="target.imgSrc" :src="target.imgSrc" :alt="altImgTag">
         <p>{{target.hint}}</p>
@@ -9,6 +9,8 @@
 
 <script>
   import Axios from 'axios';
+
+  import {EventBus, EventNames} from "../events";
 
   export default {
     name: "Infobox",
@@ -20,33 +22,42 @@
       this.getLocation();
     },
     methods: {
+      focusInfobox() {
+        EventBus.$emit(EventNames.FOCUS_INFOBOX, this.coordinates);
+      },
       async getLocation() {
         const result = await Axios.get(" https://nominatim.openstreetmap.org/reverse", {
           params: {
             format: 'json',
-            lat: this.target.coord.lat,
-            lon: this.target.coord.lng
+            lat: this.target.lat,
+            lon: this.target.lng
           }
         });
-        this.target.location = result.data.display_name;
+        //this.target.location = result.data.display_name;
       }
     },
     computed: {
       altImgTag() {
         return `${this.target.name} - ${this.target.location}`;
+      },
+      coordinates() {
+        return {
+          lng: this.target.lng,
+          lat: this.target.lat
+        };
       }
     }
   }
 </script>
 
 <style scoped>
-.book-box-info {
-    width: 200px;
-    height: 400px;
-}
+    .book-box-info {
+        width: 200px;
+        height: 400px;
+    }
 
-img {
-    width: 200px;
-    height: 200px;
-}
+    img {
+        width: 200px;
+        height: 200px;
+    }
 </style>
