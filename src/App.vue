@@ -1,6 +1,6 @@
 <template>
     <div class="app">
-        <Sidebar class="sidebar"></Sidebar>
+        <Sidebar :class="cssSidebar" @toggle-sidebar="showSidebar = !showSidebar"></Sidebar>
         <div class="content">
             <router-view></router-view>
         </div>
@@ -14,22 +14,37 @@
     name: 'app',
     components: {
       Sidebar
+    },
+    data() {
+      return {
+        showSidebar: true
+      }
+    },
+    computed: {
+      cssSidebar() {
+        return this.showSidebar ? 'sidebar' : 'sidebar-collapsed';
+      }
     }
   }
 </script>
 
 <style>
+    .app {
+        width: 100%;
+        overflow: hidden;
+    }
+
     .sidebar {
-        margin: 0;
-        padding: 0;
         width: 200px;
-        background-color: #fff;
-        position: fixed;
-        height: 100%;
-        overflow: auto;
+        float: left;
+    }
+
+    .sidebar-collapsed {
+        width: 50px;
+        float: left;
     }
 
     .content {
-        margin-left: 200px;
+        overflow: hidden;
     }
 </style>
