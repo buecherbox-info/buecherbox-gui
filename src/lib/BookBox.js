@@ -1,6 +1,6 @@
 const Axios = require('axios');
 
 export async function getBookBoxInfos () {
-  const result = await Axios.get('http://localhost:3000/bookboxes');
+  const result = await Axios.get('/bookboxes');
   return result.data;
 }
