@@ -8,8 +8,6 @@
 </template>
 
 <script>
-  import Axios from 'axios';
-
   import {EventBus, EventNames} from "../events";
 
   export default {
@@ -19,21 +17,11 @@
       target: Object
     },
     mounted() {
-      this.getLocation();
+      // this.getLocation();
     },
     methods: {
       focusInfobox() {
         EventBus.$emit(EventNames.FOCUS_INFOBOX, this.coordinates);
-      },
-      async getLocation() {
-        const result = await Axios.get(" https://nominatim.openstreetmap.org/reverse", {
-          params: {
-            format: 'json',
-            lat: this.target.lat,
-            lon: this.target.lng
-          }
-        });
-        //this.target.location = result.data.display_name;
       }
     },
     computed: {

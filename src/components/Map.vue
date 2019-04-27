@@ -1,24 +1,20 @@
 <template>
-    <Mapbox :access-token="accessToken"
-            :map-options="options"
-            @map-load="initMap"
-            @focusInfobox="focusInfobox"
-    />
+    <div id="map"></div>
 </template>
 
 <script>
-  import Mapbox from 'mapbox-gl-vue';
   import MapboxGl from 'mapbox-gl';
   import Vue from 'vue';
   import {mapState} from 'vuex';
 
   import {EventBus, EventNames} from "../events";
   import Infobox from './Infobox';
+  import EditInfo from './EditInfo';
 
   export default {
     name: "Map",
     components: {
-      Mapbox
+      // Mapbox
     },
     data() {
       return {
@@ -26,16 +22,21 @@
         // https://account.mapbox.com/
         accessToken: "***REMOVED***",
         options: {
-          style: 'mapbox://styles/mapbox/light-v9',
+          style: 'mapbox://styles/timmepfeife/cjuwcfsz71ddk1fqm520lj59t',
           center: [50, 50]
-        }
+        },
+        showEdit: false
       };
     },
     computed: {
       ...mapState('BookStorage', ['targets'])
     },
     async mounted() {
+      this.createMap();
+
       await this.$store.dispatch('BookStorage/getBookBoxInfos');
+
+      this.initMap();
 
       EventBus.$on(EventNames.FOCUS_INFOBOX, (data) => {
         this.focusInfobox(data);
@@ -66,10 +67,28 @@
         box.$mount('#infobox-wrapper');
       },
       clicked(map, event) {
-        const target = {
-          coordinates: event.lngLat
-        };
-        this.addPopUp(map, target);
+        new MapboxGl.Popup()
+          .setLngLat(event.lngLat)
+          .setHTML("<div id='edit-info-wrapper'></div>")
+          .addTo(map);
+
+
+        const editInfo = Vue.extend(EditInfo);
+        const edit = new editInfo();
+        edit.$props.lngLat = event.lngLat;
+        edit.$mount('#edit-info-wrapper');
+      },
+      createMap() {
+        MapboxGl.accessToken = this.accessToken;
+
+        this.map = new MapboxGl.Map({
+          container: 'map',
+          style: 'mapbox://styles/timmepfeife/cjuwcfsz71ddk1fqm520lj59t',
+          center: [50, 50],
+          zoom: 1.0
+        });
+
+        this.map.addControl(new MapboxGl.NavigationControl());
       },
       focusInfobox(coordinates) {
         if (!this.map) return;
@@ -79,11 +98,10 @@
             coordinates.lng,
             coordinates.lat
           ],
-          zoom: 15
+          zoom: 14
         });
       },
-      initMap(map) {
-        this.map = map;
+      initMap() {
         this.targets.forEach((target) => {
           this.addPopUp(this.map, target);
         });
