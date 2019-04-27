@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import Map from './components/Map';
+import Index from './pages/Index';
 
 Vue.use(VueRouter);
 
 const router = [
-  { path: '/', component: Map}
+  { path: '/', component: Index, props: true}
 ];
 
 

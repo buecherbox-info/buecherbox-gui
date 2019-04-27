@@ -2,7 +2,7 @@
     <div class="app">
         <Sidebar :class="cssSidebar" @toggle-sidebar="showSidebar = !showSidebar"></Sidebar>
         <div class="content">
-            <router-view></router-view>
+            <router-view :showSidebar="showSidebar"></router-view>
         </div>
     </div>
 </template>

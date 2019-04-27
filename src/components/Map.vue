@@ -13,8 +13,11 @@
 
   export default {
     name: "Map",
-    components: {
-      // Mapbox
+    props: {
+      showSidebar: {
+        type: Boolean,
+        default: true
+      }
     },
     data() {
       return {
@@ -88,7 +91,7 @@
           zoom: 1.0
         });
 
-        this.map.addControl(new MapboxGl.NavigationControl());
+        this.map.addControl(new MapboxGl.NavigationControl(), 'top-left');
 
         this.map.on('click', this.clicked);
       },
