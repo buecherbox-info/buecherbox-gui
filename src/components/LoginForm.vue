@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { EventNames } from '../events';
 import { mapState } from 'vuex';
 
 export default {
@@ -64,9 +65,11 @@ export default {
   methods: {
     async loginUser () {
       await this.$store.dispatch('User/login');
+      this.$emit(EventNames.USER_LOGGED_IN);
     },
     async logoutUser () {
       await this.$store.commit('User/logout');
+      this.$emit(EventNames.USER_LOGGED_OUT);
     }
   }
 };

@@ -2,7 +2,8 @@ const BookBox = require('../lib/BookBox');
 
 // initial state
 const state = {
-  targets: []
+  targets: [],
+  created: []
 };
 
 // getters
@@ -11,9 +12,13 @@ const getters = {
 
 // actions
 const actions = {
-  async getBookBoxInfos () {
+  async getBookBoxInfos (context) {
     const targets = await BookBox.getBookBoxInfos();
-    this.commit('BookStorage/setTargets', targets);
+    context.commit('setTargets', targets);
+  },
+  async getBookBoxInfosByUser (context, token) {
+    const created = await BookBox.getBookBoxInfosByUser(token);
+    context.commit('setCreated', created);
   }
 };
 
@@ -21,6 +26,9 @@ const actions = {
 const mutations = {
   setTargets (state, targets) {
     state.targets = targets;
+  },
+  setCreated (state, created) {
+    state.created = created;
   }
 };
 
