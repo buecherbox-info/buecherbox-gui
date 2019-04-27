@@ -1,17 +1,9 @@
 <template>
     <div class="sidebar">
-        <ul>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-        </ul>
+        <p><router-link to="/">Home</router-link></p>
+        <p><router-link to="/profile">Profil</router-link></p>
+        <p><router-link to="/favorites">Favoriten</router-link></p>
+        <p><router-link to="/about">Über</router-link></p>
     </div>
 </template>
 

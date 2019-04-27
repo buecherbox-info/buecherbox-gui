@@ -2,19 +2,17 @@
     <div class="app">
         <Sidebar class="sidebar"></Sidebar>
         <div class="content">
-            <Map class="map"></Map>
+            <router-view></router-view>
         </div>
     </div>
 </template>
 
 <script>
-  import Map from './components/Map.vue';
   import Sidebar from './components/Sidebar';
 
   export default {
     name: 'app',
     components: {
-      Map,
       Sidebar
     }
   }
