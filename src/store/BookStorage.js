@@ -11,7 +11,7 @@ const getters = {
 
 // actions
 const actions = {
-  async getBookBoxInfos() {
+  async getBookBoxInfos () {
     const targets = await BookBox.getBookBoxInfos();
     this.commit('BookStorage/setTargets', targets);
   }
@@ -19,7 +19,7 @@ const actions = {
 
 // mutations
 const mutations = {
-  setTargets(state, targets) {
+  setTargets (state, targets) {
     state.targets = targets;
   }
 };

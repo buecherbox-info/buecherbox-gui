@@ -1,22 +1,22 @@
 <template>
-    <Map :show-sidebar="showSidebar"></Map>
+  <Map :show-sidebar="showSidebar" />
 </template>
 
 <script>
-  import Map from '../components/Map';
+import Map from '../components/Map'
 
-  export default {
-    name: "Index",
-    components: {
-      Map
-    },
-    props: {
-      showSidebar: {
-        type: Boolean,
-        default: true
-      }
-    },
+export default {
+  name: 'Index',
+  components: {
+    Map
+  },
+  props: {
+    showSidebar: {
+      type: Boolean,
+      default: true
+    }
   }
+};
 </script>
 
 <style scoped>
