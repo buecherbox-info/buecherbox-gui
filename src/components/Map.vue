@@ -66,11 +66,11 @@
         box.$props.target = target;
         box.$mount('#infobox-wrapper');
       },
-      clicked(map, event) {
+      clicked(event) {
         new MapboxGl.Popup()
           .setLngLat(event.lngLat)
           .setHTML("<div id='edit-info-wrapper'></div>")
-          .addTo(map);
+          .addTo(this.map);
 
 
         const editInfo = Vue.extend(EditInfo);
@@ -89,6 +89,8 @@
         });
 
         this.map.addControl(new MapboxGl.NavigationControl());
+
+        this.map.on('click', this.clicked);
       },
       focusInfobox(coordinates) {
         if (!this.map) return;
