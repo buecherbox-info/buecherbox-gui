@@ -1,33 +1,46 @@
 <template>
   <div class="edit-info-container">
     <h1>Neue Bücherbox anlegen</h1>
-
-    <label>
-      Beschreibung
-      <input type="text">
-    </label>
-    <br>
-    <label>
-      Ort
-      <input
-        v-model="location"
-        type="text"
-      >
-    </label>
-    <br>
-    <label>
-      Hinweis
-      <textarea></textarea>
-    </label>
+    <div
+      v-if="isLoggedIn"
+      id="form"
+    >
+      <label>
+        Beschreibung
+        <input type="text">
+      </label>
+      <br>
+      <label>
+        Ort
+        <input
+          v-model="location"
+          type="text"
+        >
+      </label>
+      <br>
+      <label>
+        Hinweis
+        <textarea />
+      </label>
+    </div>
+    <div v-else>
+      <p>Du musst dich erst einloggen um eine neue Bücherbox anzulegen.</p>
+      <span @click="login">Login</span>
+    </div>
   </div>
 </template>
 
 <script>
 import Axios from 'axios';
+import { EventBus, EventNames } from '../events';
 
 export default {
   name: 'EditInfo',
   props: {
+    isLoggedIn: {
+      type: Boolean,
+      default: false
+    },
     lngLat: {
       type: Object,
       default: null
@@ -56,6 +69,9 @@ export default {
       if (address) {
         this.location = address;
       }
+    },
+    login () {
+      EventBus.$emit(EventNames.LOGIN_ROUTE);
     }
   }
 };

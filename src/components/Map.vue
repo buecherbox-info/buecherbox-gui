@@ -1,5 +1,5 @@
 <template>
-  <div id="map"></div>
+  <div id="map" />
 </template>
 
 <script>
@@ -32,7 +32,8 @@ export default {
     }
   },
   computed: {
-    ...mapState('BookStorage', ['targets'])
+    ...mapState('BookStorage', ['targets']),
+    ...mapState('User', ['isLoggedIn'])
   },
   async mounted () {
     this.createMap();
@@ -43,6 +44,10 @@ export default {
 
     EventBus.$on(EventNames.FOCUS_INFOBOX, (data) => {
       this.focusInfobox(data);
+    });
+
+    EventBus.$on(EventNames.LOGIN_ROUTE, () => {
+      this.$router.push({ path: '/profile' });
     })
   },
   methods: {
@@ -62,8 +67,8 @@ export default {
         .setHTML("<div id='infobox-wrapper'></div>")
         .addTo(map);
 
-      const infoBox = Vue.extend(Infobox);
-      const box = new infoBox();
+      const InfoBoxComponent = Vue.extend(Infobox);
+      const box = new InfoBoxComponent();
       box.$props.map = this.map;
       box.$props.target = target;
       box.$mount('#infobox-wrapper');
@@ -74,9 +79,11 @@ export default {
         .setHTML("<div id='edit-info-wrapper'></div>")
         .addTo(this.map);
 
-      const editInfo = Vue.extend(EditInfo);
-      const edit = new editInfo();
+      const EditInfoComponent = Vue.extend(EditInfo);
+      const edit = new EditInfoComponent();
+      edit.$state = this.$state;
       edit.$props.lngLat = event.lngLat;
+      edit.$props.isLoggedIn = this.isLoggedIn;
       edit.$mount('#edit-info-wrapper');
     },
     createMap () {
