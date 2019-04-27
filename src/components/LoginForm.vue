@@ -7,14 +7,14 @@
     <h1>Login</h1>
 
     <label>
-      Benutzername:
+      {{ $t(Messages.USERNAME) }}:
       <input v-model="username">
     </label>
 
     <br>
 
     <label>
-      Passwort:
+      {{ $t(Messages.PASSWORD) }}:
       <input
         v-model="password"
         type="password"
@@ -40,9 +40,15 @@
 <script>
 import { EventNames } from '../events';
 import { mapState } from 'vuex';
+import Messages from '../assets/lang/messages';
 
 export default {
   name: 'LoginForm',
+  data () {
+    return {
+      Messages
+    }
+  },
   computed: {
     ...mapState('User', ['isLoggedIn']),
     username: {

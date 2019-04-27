@@ -1,7 +1,7 @@
 <template>
   <div id="profile">
     <h1>
-      Profil
+      {{ $t(Messages.PROFILE) }}
       <span
         v-if="isLoggedIn"
         class="logout"
@@ -32,6 +32,7 @@
 <script>
 import { EventNames } from '../events';
 import { mapState } from 'vuex';
+import Messages from '../assets/lang/messages';
 
 import LoginForm from '../components/LoginForm';
 
@@ -40,12 +41,19 @@ export default {
   components: {
     LoginForm
   },
+  data () {
+    return {
+      Messages
+    }
+  },
   computed: {
     ...mapState('BookStorage', ['created']),
     ...mapState('User', ['isLoggedIn', 'token'])
   },
   created () {
-    this.$refs.loginForm.$on(EventNames.USER_LOGGED_IN, this.getBookBoxInfosByUser());
+    if (this.$refs.loginForm) {
+      this.$refs.loginForm.$on(EventNames.USER_LOGGED_IN, this.getBookBoxInfosByUser());
+    }
   },
   async updated () {
     if (this.isLoggedIn) {

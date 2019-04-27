@@ -56,6 +56,7 @@ export default {
   },
   methods: {
     async getLocation () {
+      // TODO BASe URl Abschalten
       const result = await Axios.get(' https://nominatim.openstreetmap.org/reverse', {
         params: {
           format: 'json',

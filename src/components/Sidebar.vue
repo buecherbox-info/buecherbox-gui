@@ -1,11 +1,21 @@
 <template>
   <div id="sidebar-wrapper">
+    <select v-model="$i18n.locale">
+      <option
+        v-for="(lang, i) in languages"
+        :key="`Lang${i}`"
+        :value="lang"
+      >
+        {{ lang }}
+      </option>
+    </select>
+
     <div
       class="sidebar-element"
       @click="toggleSidebar"
     >
       <img
-        src="../assets/menu.svg"
+        src="../assets/img/menu.svg"
         alt="menu-icon"
       >
       <span v-if="!collapsed">Menü</span>
@@ -16,7 +26,7 @@
       class="sidebar-element"
     >
       <img
-        src="../assets/home.svg"
+        src="../assets/img/home.svg"
         alt="home-icon"
       >
       <span v-if="!collapsed">Home</span>
@@ -27,7 +37,7 @@
       class="sidebar-element"
     >
       <img
-        src="../assets/star.svg"
+        src="../assets/img/star.svg"
         alt="home-icon"
       >
       <span v-if="!collapsed">Favoriten</span>
@@ -38,7 +48,7 @@
       class="sidebar-element"
     >
       <img
-        src="../assets/user.svg"
+        src="../assets/img/user.svg"
         alt="profile-icon"
       >
       <span v-if="!collapsed">Profil</span>
@@ -49,7 +59,7 @@
       class="sidebar-element"
     >
       <img
-        src="../assets/info.svg"
+        src="../assets/img/info.svg"
         alt="about-icon"
       >
       <span v-if="!collapsed">Über</span>
@@ -62,7 +72,11 @@ export default {
   name: 'Sidebar',
   data () {
     return {
-      collapsed: false
+      collapsed: false,
+      languages: [
+        'de',
+        'en'
+      ]
     }
   },
   methods: {
