@@ -1,73 +1,80 @@
 <template>
-  <div class="sidebar-wrapper">
-    <select v-model="$i18n.locale">
-      <option
-        v-for="(lang, i) in languages"
-        :key="`Lang${i}`"
-        :value="lang"
+  <div :class="wrapperCss">
+    <div class="sidebar-header">
+      <div
+        class="menu-icon"
+        @click="toggleSidebar"
       >
-        {{ lang }}
-      </option>
-    </select>
-
-    <div
-      class="sidebar-element"
-      @click="toggleSidebar"
-    >
-      <img
-        src="../assets/img/menu.svg"
-        alt="menu-icon"
-      >
-      <span v-if="!collapsed">Menü</span>
+        <img
+          src="../assets/img/menu.svg"
+          alt="menu-icon"
+        >
+      </div>
     </div>
 
-    <router-link
-      to="/"
-      class="sidebar-element"
-    >
-      <img
-        src="../assets/img/home.svg"
-        alt="home-icon"
+    <div class="sidebar-content">
+      <router-link
+        to="/"
+        class="sidebar-element"
       >
-      <span v-if="!collapsed">Home</span>
-    </router-link>
+        <img
+          src="../assets/img/home.svg"
+          alt="home-icon"
+        >
+        <span v-if="!collapsed">Home</span>
+      </router-link>
 
-    <router-link
-      to="/favorites"
-      class="sidebar-element"
-    >
-      <img
-        src="../assets/img/star.svg"
-        alt="home-icon"
+      <router-link
+        to="/favorites"
+        class="sidebar-element"
       >
-      <span v-if="!collapsed">Favoriten</span>
-    </router-link>
+        <img
+          src="../assets/img/star.svg"
+          alt="home-icon"
+        >
+        <span v-if="!collapsed">Favoriten</span>
+      </router-link>
 
-    <router-link
-      to="/profile"
-      class="sidebar-element"
-    >
-      <img
-        src="../assets/img/user.svg"
-        alt="profile-icon"
+      <router-link
+        to="/profile"
+        class="sidebar-element"
       >
-      <span v-if="!collapsed">Profil</span>
-    </router-link>
+        <img
+          src="../assets/img/user.svg"
+          alt="profile-icon"
+        >
+        <span v-if="!collapsed">Profil</span>
+      </router-link>
 
-    <router-link
-      to="/about"
-      class="sidebar-element"
-    >
-      <img
-        src="../assets/img/info.svg"
-        alt="about-icon"
+      <router-link
+        to="/about"
+        class="sidebar-element"
       >
-      <span v-if="!collapsed">Über</span>
-    </router-link>
+        <img
+          src="../assets/img/info.svg"
+          alt="about-icon"
+        >
+        <span v-if="!collapsed">Über</span>
+      </router-link>
+
+      <select v-model="$i18n.locale">
+        <option
+          v-for="(lang, i) in languages"
+          :key="`Lang${i}`"
+          :value="lang"
+        >
+          {{ lang }}
+        </option>
+      </select>
+    </div>
+
+    <div class="sidebar-footer"></div>
   </div>
 </template>
 
 <script>
+import { EventNames } from '../events';
+
 export default {
   name: 'Sidebar',
   data () {
@@ -79,26 +86,64 @@ export default {
       ]
     }
   },
+  computed: {
+    wrapperCss () {
+      return {
+        'sidebar-wrapper': true,
+        'collapsed': this.collapsed
+      }
+    }
+  },
   methods: {
     toggleSidebar () {
       this.collapsed = !this.collapsed;
-      this.$emit('toggle-sidebar');
+      this.$emit(EventNames.TOGGLE_SIDEBAR);
     }
   }
 }
 </script>
 
 <style scoped>
-.sidebar-element {
-  display: flex;
-  align-items: center;
-  height: 25px;
-  margin: 5px 0;
-  padding: 5px;
-  border-bottom: 1px solid grey;
-}
+  .sidebar-wrapper {
+    width: 200px;
+    padding-right: 1em;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
 
-span {
-  margin-left: 1em;
-}
+  .collapsed {
+    width: 50px !important;
+  }
+
+  .sidebar-header {
+    margin-bottom: 50px;
+  }
+
+  .sidebar-content {
+
+  }
+
+  .sidebar-footer {
+    position: fixed;
+    bottom: 0;
+    margin-top: 50px;
+  }
+
+  .sidebar-element {
+    display: flex;
+    align-items: center;
+    height: 25px;
+    margin: 5px 0;
+    padding: 5px;
+    border-bottom: 1px solid grey;
+  }
+
+  span {
+    margin-left: 1em;
+  }
+
+  .menu-icon {
+    display: inline-block;
+    float: right;
+    margin-right: 1em;
+  }
 </style>
