@@ -10,6 +10,7 @@ import { mapState } from 'vuex'
 import { EventBus, EventNames } from '../events'
 import Infobox from './Infobox'
 import EditInfo from './EditInfo'
+import Messages from '../assets/lang/messages';
 
 export default {
   name: 'Map',
@@ -79,12 +80,20 @@ export default {
         .setHTML("<div id='edit-info-wrapper'></div>")
         .addTo(this.map);
 
+      const texts = {
+        [Messages.CREATE_NEW_BOOKBOX]: this.$t(Messages.CREATE_NEW_BOOKBOX),
+        [Messages.DESCRIPTION]: this.$t(Messages.DESCRIPTION),
+        [Messages.LOCATION]: this.$t(Messages.LOCATION),
+        [Messages.HINT]: this.$t(Messages.HINT),
+        [Messages.LOGIN]: this.$t(Messages.LOGIN)
+      };
+
       const EditInfoComponent = Vue.extend(EditInfo);
       const edit = new EditInfoComponent();
       edit.$state = this.$state;
       edit.$props.lngLat = event.lngLat;
       edit.$props.isLoggedIn = this.isLoggedIn;
-      edit.$props.$t = this.$t;
+      edit.$props.texts = texts;
       edit.$mount('#edit-info-wrapper');
     },
     createMap () {

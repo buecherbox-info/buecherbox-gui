@@ -1,17 +1,17 @@
 <template>
   <div class="edit-info-container">
-    <h1>{{ $t(Messages.CREATE_NEW_BOOKBOX) }}</h1>
+    <h1>{{ texts[Messages.CREATE_NEW_BOOKBOX] }}</h1>
     <div
       v-if="isLoggedIn"
       id="form"
     >
       <label>
-        {{ $t(Messages.DESCRIPTION) }}
+        {{ texts[Messages.DESCRIPTION] }}
         <input type="text">
       </label>
       <br>
       <label>
-        {{ $t(Messages.LOCATION) }}
+        {{ texts[Messages.LOCATION] }}
         <input
           v-model="location"
           type="text"
@@ -19,13 +19,13 @@
       </label>
       <br>
       <label>
-        {{ $t(Messages.HINT) }}
+        {{ texts[Messages.HINT] }}
         <textarea></textarea>
       </label>
     </div>
     <div v-else>
       <p>Du musst dich erst einloggen um eine neue Bücherbox anzulegen.</p>
-      <span @click="login">{{ $t(Messages.LOGIN) }}</span>
+      <span @click="login">{{ texts[Messages.LOGIN] }}</span>
     </div>
   </div>
 </template>
@@ -46,7 +46,7 @@ export default {
       type: Object,
       default: null
     },
-    $t: {
+    texts: {
       type: Object,
       default: null
     }
@@ -55,6 +55,11 @@ export default {
     return {
       location: '',
       Messages
+    }
+  },
+  beforeCreate () {
+    if (!this.$t) {
+      this.$t = this.t;
     }
   },
   async mounted () {

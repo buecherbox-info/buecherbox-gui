@@ -26,8 +26,8 @@
     <label v-if="register">
       {{ $t(Messages.CONFIRM_PASSWORD) }}:
       <input
-              v-model="passwordConfirmation"
-              type="password"
+        v-model="passwordConfirmation"
+        type="password"
       >
     </label>
 
