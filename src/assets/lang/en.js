@@ -12,5 +12,8 @@ export default {
   [Messages.LOCATION]: 'Location',
   [Messages.HINT]: 'Hint',
   [Messages.SENT]: 'Sent',
-  [Messages.SAVE]: 'Save'
+  [Messages.SAVE]: 'Save',
+  [Messages.OVERVIEW]: 'Overview',
+  [Messages.FAVORITES]: 'Favorites',
+  [Messages.ABOUT]: 'About'
 }

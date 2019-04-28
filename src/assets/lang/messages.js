@@ -11,5 +11,8 @@ export default {
   LOCATION: 'location',
   HINT: 'hint',
   SENT: 'sent',
-  SAVE: 'save'
+  SAVE: 'save',
+  OVERVIEW: 'overview',
+  FAVORITES: 'favorites',
+  ABOUT: 'about'
 };

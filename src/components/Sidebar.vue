@@ -21,7 +21,7 @@
           src="../assets/img/home.svg"
           alt="home-icon"
         >
-        <span v-if="!collapsed">Home</span>
+        <span v-if="!collapsed">{{ $t(Messages.OVERVIEW) }}</span>
       </router-link>
 
       <router-link
@@ -32,7 +32,7 @@
           src="../assets/img/star.svg"
           alt="home-icon"
         >
-        <span v-if="!collapsed">Favoriten</span>
+        <span v-if="!collapsed">{{ $t(Messages.FAVORITES) }}</span>
       </router-link>
 
       <router-link
@@ -43,7 +43,7 @@
           src="../assets/img/user.svg"
           alt="profile-icon"
         >
-        <span v-if="!collapsed">Profil</span>
+        <span v-if="!collapsed">{{ $t(Messages.PROFILE) }}</span>
       </router-link>
 
       <router-link
@@ -54,7 +54,7 @@
           src="../assets/img/info.svg"
           alt="about-icon"
         >
-        <span v-if="!collapsed">Über</span>
+        <span v-if="!collapsed">{{ $t(Messages.ABOUT) }}</span>
       </router-link>
 
       <select v-model="$i18n.locale">
@@ -74,11 +74,13 @@
 
 <script>
 import { EventNames } from '../events';
+import Messages from '../assets/lang/messages';
 
 export default {
   name: 'Sidebar',
   data () {
     return {
+      Messages,
       collapsed: false,
       languages: [
         'de',

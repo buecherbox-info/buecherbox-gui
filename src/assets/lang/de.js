@@ -13,5 +13,8 @@ export default {
   [Messages.LOCATION]: 'Ort',
   [Messages.HINT]: 'Hinweis',
   [Messages.SENT]: 'Absenden',
-  [Messages.SAVE]: 'Speichern'
+  [Messages.SAVE]: 'Speichern',
+  [Messages.OVERVIEW]: 'Übersicht',
+  [Messages.FAVORITES]: 'Favoriten',
+  [Messages.ABOUT]: 'Über'
 }
