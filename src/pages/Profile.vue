@@ -77,6 +77,12 @@ export default {
 </script>
 
 <style scoped>
+#profile {
+  width: 100%;
+  margin-left: 5em;
+  margin-right: 5em;
+}
+
 .book-box-info {
     border: 1px solid black;
 }

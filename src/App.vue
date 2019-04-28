@@ -1,7 +1,10 @@
 <template>
   <div class="app">
-    <Sidebar class="sidebar" />
-    <div class="content">
+    <Sidebar
+      class="sidebar"
+      @toggleSidebar="toggledSidebar = !toggledSidebar"
+    />
+    <div :class="contentCss">
       <router-view />
     </div>
   </div>
@@ -14,11 +17,28 @@ export default {
   name: 'App',
   components: {
     Sidebar
+  },
+  data () {
+    return {
+      toggledSidebar: false
+    }
+  },
+  computed: {
+    contentCss () {
+      return {
+        'content': true,
+        'full': this.toggledSidebar
+      }
+    }
   }
 };
 </script>
 
 <style>
+body {
+  margin: 0;
+}
+
 .app {
   width: 100%;
   overflow: hidden;
@@ -36,5 +56,11 @@ export default {
   display: block;
   position: static;
   z-index: 0;
+  transition: ease-in-out .2s;
+  margin-left: 200px;
+}
+
+.full {
+  margin-left: 50px !important;
 }
 </style>

@@ -142,7 +142,7 @@ export default {
       this.map.flyTo({
         center: [
           coordinates.lng,
-          coordinates.lat - 0.006
+          coordinates.lat - 0.01
         ],
         zoom: 14
       });
