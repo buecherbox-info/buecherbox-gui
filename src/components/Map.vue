@@ -132,7 +132,7 @@ export default {
         zoom: 1.0
       });
 
-      this.map.addControl(new MapboxGl.NavigationControl(), 'top-left');
+      this.map.addControl(new MapboxGl.NavigationControl());
 
       this.map.on('click', this.clicked);
     },

@@ -1,5 +1,5 @@
 <template>
-  <div id="sidebar-wrapper">
+  <div class="sidebar-wrapper">
     <select v-model="$i18n.locale">
       <option
         v-for="(lang, i) in languages"
@@ -89,16 +89,16 @@ export default {
 </script>
 
 <style scoped>
-    .sidebar-element {
-        display: flex;
-        align-items: center;
-        height: 25px;
-        margin: 5px 0;
-        padding: 5px;
-        border-bottom: 1px solid grey;
-    }
+.sidebar-element {
+  display: flex;
+  align-items: center;
+  height: 25px;
+  margin: 5px 0;
+  padding: 5px;
+  border-bottom: 1px solid grey;
+}
 
-    span {
-        margin-left: 1em;
-    }
+span {
+  margin-left: 1em;
+}
 </style>

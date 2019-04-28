@@ -25,7 +25,10 @@ export default {
   },
   computed: {
     cssSidebar () {
-      return this.showSidebar ? 'sidebar' : 'sidebar-collapsed';
+      return {
+        'sidebar': true,
+        'collapsed': !this.showSidebar
+      };
     }
   }
 };
@@ -33,21 +36,27 @@ export default {
 
 <style>
 .app {
-    width: 100%;
-    overflow: hidden;
+  width: 100%;
+  overflow: hidden;
 }
 
 .sidebar {
-    width: 200px;
-    float: left;
+  display: block;
+  width: 200px;
+  height: calc(100vh);
+  float: left;
+  position: relative;
+  z-index: 1;
+  background-color: rgba(255,255,255,0.8);
 }
 
-.sidebar-collapsed {
-    width: 50px;
-    float: left;
+.collapsed {
+  width: 50px !important;
 }
 
 .content {
-    overflow: hidden;
+  display: block;
+  position: static;
+  z-index: 0;
 }
 </style>

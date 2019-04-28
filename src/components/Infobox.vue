@@ -53,7 +53,10 @@ export default {
       };
     },
     cssClass () {
-      return this.focused ? 'book-box-info' : 'book-box-info-preview';
+      return {
+        'book-box-info': this.focused,
+        'book-box-info-preview': !this.focused
+      };
     },
     name () {
       return this.target.description ? this.target.description : `Box #${this.target.id}`;
@@ -77,8 +80,8 @@ export default {
 
 <style scoped>
 .book-box-info {
-    width: 200px;
-    height: 400px;
+  width: 200px;
+  height: 400px;
 }
 
 .book-box-info-preview {
@@ -87,7 +90,7 @@ export default {
 }
 
 img {
-    width: 200px;
-    height: 200px;
+  width: 200px;
+  height: 200px;
 }
 </style>
