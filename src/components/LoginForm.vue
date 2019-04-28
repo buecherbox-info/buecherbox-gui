@@ -4,7 +4,7 @@
     v-if="!isLoggedIn"
     id="login-form"
   >
-    <h1>Login</h1>
+    <h3>{{ $t(Messages.LOGIN) }}</h3>
 
     <label>
       {{ $t(Messages.USERNAME) }}:
@@ -23,8 +23,21 @@
 
     <br>
 
+    <label v-if="register">
+      {{ $t(Messages.CONFIRM_PASSWORD) }}:
+      <input
+              v-model="passwordConfirmation"
+              type="password"
+      >
+    </label>
+
+    <br>
+
     <button @click="loginUser">
-      Login
+      {{ $t(Messages.LOGIN) }}
+    </button>
+    <button @click="registerUser">
+      {{ registerLabel }}
     </button>
   </div>
 
@@ -32,7 +45,7 @@
   <div v-else>
     <p>Sie sind bereits eingeloggt.</p>
     <button @click="logoutUser">
-      Logout
+      {{ $t(Messages.LOGOUT) }}:
     </button>
   </div>
 </template>
@@ -46,7 +59,9 @@ export default {
   name: 'LoginForm',
   data () {
     return {
-      Messages
+      Messages,
+      register: false,
+      passwordConfirmation: ''
     }
   },
   computed: {
@@ -66,6 +81,9 @@ export default {
       set (value) {
         this.$store.commit('User/setPassword', value);
       }
+    },
+    registerLabel () {
+      return this.register ? this.$t(Messages.SENT) : this.$t(Messages.REGISTER);
     }
   },
   methods: {
@@ -76,6 +94,14 @@ export default {
     async logoutUser () {
       await this.$store.commit('User/logout');
       this.$emit(EventNames.USER_LOGGED_OUT);
+    },
+    async registerUser () {
+      if (this.register) {
+
+      } else {
+
+      }
+      this.register = !this.register;
     }
   }
 };

@@ -1,17 +1,17 @@
 <template>
   <div class="edit-info-container">
-    <h1>Neue Bücherbox anlegen</h1>
+    <h1>{{ $t(Messages.CREATE_NEW_BOOKBOX) }}</h1>
     <div
       v-if="isLoggedIn"
       id="form"
     >
       <label>
-        Beschreibung
+        {{ $t(Messages.DESCRIPTION) }}
         <input type="text">
       </label>
       <br>
       <label>
-        Ort
+        {{ $t(Messages.LOCATION) }}
         <input
           v-model="location"
           type="text"
@@ -19,13 +19,13 @@
       </label>
       <br>
       <label>
-        Hinweis
-        <textarea />
+        {{ $t(Messages.HINT) }}
+        <textarea></textarea>
       </label>
     </div>
     <div v-else>
       <p>Du musst dich erst einloggen um eine neue Bücherbox anzulegen.</p>
-      <span @click="login">Login</span>
+      <span @click="login">{{ $t(Messages.LOGIN) }}</span>
     </div>
   </div>
 </template>
@@ -33,6 +33,7 @@
 <script>
 import Axios from 'axios';
 import { EventBus, EventNames } from '../events';
+import Messages from '../assets/lang/messages';
 
 export default {
   name: 'EditInfo',
@@ -44,11 +45,16 @@ export default {
     lngLat: {
       type: Object,
       default: null
+    },
+    $t: {
+      type: Object,
+      default: null
     }
   },
   data () {
     return {
-      location: ''
+      location: '',
+      Messages
     }
   },
   async mounted () {
@@ -56,8 +62,8 @@ export default {
   },
   methods: {
     async getLocation () {
-      // TODO BASe URl Abschalten
       const result = await Axios.get(' https://nominatim.openstreetmap.org/reverse', {
+        baseURL: '',
         params: {
           format: 'json',
           lat: this.lngLat.lat,

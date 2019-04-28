@@ -1,5 +1,5 @@
 <template>
-  <div id="map" />
+  <div id="map"></div>
 </template>
 
 <script>
@@ -84,6 +84,7 @@ export default {
       edit.$state = this.$state;
       edit.$props.lngLat = event.lngLat;
       edit.$props.isLoggedIn = this.isLoggedIn;
+      edit.$props.$t = this.$t;
       edit.$mount('#edit-info-wrapper');
     },
     createMap () {
