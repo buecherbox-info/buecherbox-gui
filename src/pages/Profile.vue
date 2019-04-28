@@ -78,7 +78,7 @@ export default {
 
 <style scoped>
 #profile {
-  width: 100%;
+  width: 80vw;
   margin-left: 5em;
   margin-right: 5em;
 }

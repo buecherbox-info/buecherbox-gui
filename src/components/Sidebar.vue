@@ -65,19 +65,24 @@
           <span v-if="!collapsed">{{ $t(Messages.ABOUT) }}</span>
         </router-link>
 
-        <select
-          v-if="!collapsed"
-          v-model="$i18n.locale"
-          class="sidebar-lang"
-        >
+        <label>
+          <input
+            v-if="!collapsed"
+            v-model="$i18n.locale"
+            list="languages"
+            class="sidebar-lang"
+            @focus="$i18n.locale = ''"
+          >
+        </label>
+        <datalist id="languages">
           <option
-            v-for="(lang, i) in languages"
-            :key="`Lang${i}`"
+            v-for="(lang, idx) in languages"
+            :key="`${idx}_${lang[1]}`"
             :value="lang[0]"
           >
             {{ lang[1] }}
           </option>
-        </select>
+        </datalist>
       </div>
     </transition>
 

@@ -6,6 +6,7 @@ export default {
   [Messages.PASSWORD]: 'Password',
   [Messages.CONFIRM_PASSWORD]: 'Confirm password',
   [Messages.LOGIN]: 'Login',
+  [Messages.LOGOUT]: 'Logout',
   [Messages.REGISTER]: 'Register',
   [Messages.CREATE_NEW_BOOKBOX]: 'Create new book box',
   [Messages.DESCRIPTION]: 'Description',

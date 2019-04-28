@@ -1,12 +1,19 @@
 <template>
   <div id="favorites">
-    <h1>Favoriten</h1>
+    <h1>{{ $t(Messages.FAVORITES) }}</h1>
   </div>
 </template>
 
 <script>
+import Messages from '../assets/lang/messages';
+
 export default {
-  name: 'Favorites'
+  name: 'Favorites',
+  data () {
+    return {
+      Messages,
+    };
+  }
 };
 </script>
 
