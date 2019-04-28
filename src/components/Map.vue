@@ -1,8 +1,9 @@
 <template>
-  <div id="map"></div>
+  <div id="map" />
 </template>
 
 <script>
+import Axios from 'axios';
 import MapboxGl from 'mapbox-gl'
 import Vue from 'vue'
 import { mapState } from 'vuex'
@@ -34,7 +35,7 @@ export default {
   },
   computed: {
     ...mapState('BookStorage', ['targets']),
-    ...mapState('User', ['isLoggedIn'])
+    ...mapState('User', ['isLoggedIn', 'userId', 'token'])
   },
   async mounted () {
     this.createMap();
@@ -49,6 +50,30 @@ export default {
 
     EventBus.$on(EventNames.LOGIN_ROUTE, () => {
       this.$router.push({ path: '/profile' });
+    });
+
+    EventBus.$on(EventNames.SAVE_NEW_BOOKBOX, async (bookbox) => {
+      console.log(bookbox);
+
+      const formData = new FormData();
+      formData.append('userid', this.userId);
+      formData.append('description', bookbox.description);
+      formData.append('lat', bookbox.lat);
+      formData.append('lng', bookbox.lng);
+      formData.append('hint', bookbox.hint);
+      formData.append('location', bookbox.location);
+      formData.append('file', bookbox.imgsrc);
+
+      console.log(formData);
+
+      const options = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          'authorization': `Bearer ${this.token}`
+        }
+      };
+
+      await Axios.post('/bookboxes', formData, options);
     })
   },
   methods: {
@@ -85,7 +110,8 @@ export default {
         [Messages.DESCRIPTION]: this.$t(Messages.DESCRIPTION),
         [Messages.LOCATION]: this.$t(Messages.LOCATION),
         [Messages.HINT]: this.$t(Messages.HINT),
-        [Messages.LOGIN]: this.$t(Messages.LOGIN)
+        [Messages.LOGIN]: this.$t(Messages.LOGIN),
+        [Messages.SAVE]: this.$t(Messages.SAVE)
       };
 
       const EditInfoComponent = Vue.extend(EditInfo);
@@ -116,7 +142,7 @@ export default {
       this.map.flyTo({
         center: [
           coordinates.lng,
-          coordinates.lat
+          coordinates.lat - 0.006
         ],
         zoom: 14
       });
@@ -131,10 +157,10 @@ export default {
 </script>
 
 <style scoped>
-#map {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-}
+    #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+    }
 </style>

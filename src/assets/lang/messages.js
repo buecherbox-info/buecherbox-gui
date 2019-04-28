@@ -10,5 +10,6 @@ export default {
   DESCRIPTION: 'description',
   LOCATION: 'location',
   HINT: 'hint',
-  SENT: 'sent'
+  SENT: 'sent',
+  SAVE: 'save'
 };

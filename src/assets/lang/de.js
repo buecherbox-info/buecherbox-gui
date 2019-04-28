@@ -12,5 +12,6 @@ export default {
   [Messages.DESCRIPTION]: 'Beschreibung',
   [Messages.LOCATION]: 'Ort',
   [Messages.HINT]: 'Hinweis',
-  [Messages.SENT]: 'Absenden'
+  [Messages.SENT]: 'Absenden',
+  [Messages.SAVE]: 'Speichern'
 }

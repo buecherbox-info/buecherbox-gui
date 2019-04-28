@@ -7,21 +7,34 @@
     >
       <label>
         {{ texts[Messages.DESCRIPTION] }}
-        <input type="text">
+        <input
+          v-model="details.description"
+          type="text"
+        >
       </label>
       <br>
       <label>
         {{ texts[Messages.LOCATION] }}
         <input
-          v-model="location"
+          v-model="details.location"
           type="text"
         >
       </label>
       <br>
       <label>
         {{ texts[Messages.HINT] }}
-        <textarea></textarea>
+        <textarea v-model="details.hint"></textarea>
       </label>
+      <label>
+        Datei:
+        <input type="file" @change="setFile" />
+      </label>
+
+      <br>
+
+      <button @click="save">
+        {{ texts[Messages.SAVE] }}
+      </button>
     </div>
     <div v-else>
       <p>Du musst dich erst einloggen um eine neue Bücherbox anzulegen.</p>
@@ -53,8 +66,13 @@ export default {
   },
   data () {
     return {
-      location: '',
-      Messages
+      Messages,
+      details: {
+        description: '',
+        hint: '',
+        location: '',
+        imgsrc: null
+      }
     }
   },
   beforeCreate () {
@@ -79,20 +97,38 @@ export default {
       const address = result.data.display_name;
 
       if (address) {
-        this.location = address;
+        this.details.location = address;
       }
     },
     login () {
       EventBus.$emit(EventNames.LOGIN_ROUTE);
+    },
+    save () {
+      const bookbox = {
+        description: this.details.description,
+        lat: this.lngLat.lat,
+        lng: this.lngLat.lng,
+        imgsrc: this.details.imgsrc,
+        hint: this.details.hint,
+        location: this.details.location
+      };
+
+      EventBus.$emit(EventNames.SAVE_NEW_BOOKBOX, bookbox);
+    },
+    setFile (event) {
+      const files = event.target.files || event.dataTransfer.files;
+      if (files.length) {
+        this.details.imgsrc = files[0];
+      }
     }
   }
 };
 </script>
 
 <style scoped>
-.coordinates-container {
-    width: 50vw;
-    margin: 0px auto;
-    padding: 20px 30px;
-}
+    .coordinates-container {
+        width: 50vw;
+        margin: 0px auto;
+        padding: 20px 30px;
+    }
 </style>

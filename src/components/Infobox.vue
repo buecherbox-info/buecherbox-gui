@@ -1,16 +1,24 @@
 <template>
   <div
-    class="book-box-info"
+    :class="cssClass"
     @click="focusInfobox"
   >
-    <h1>{{ target.description }}</h1>
-    <h2>{{ target.location }}</h2>
+    <!-- Preview -->
+    <h1>{{ name }}</h1>
     <img
       v-if="target.imgSrc"
       :src="target.imgSrc"
       :alt="altImgTag"
     >
-    <p>{{ target.hint }}</p>
+
+    <!-- Infos -->
+    <div
+      v-if="focused"
+      class="book-box-description"
+    >
+      <h2>{{ target.location }}</h2>
+      <p>{{ target.hint }}</p>
+    </div>
   </div>
 </template>
 
@@ -29,6 +37,11 @@ export default {
       default: null
     }
   },
+  data () {
+    return {
+      focused: false
+    }
+  },
   computed: {
     altImgTag () {
       return `${this.target.name} - ${this.target.location}`;
@@ -38,13 +51,24 @@ export default {
         lng: this.target.lng,
         lat: this.target.lat
       };
+    },
+    cssClass () {
+      return this.focused ? 'book-box-info' : 'book-box-info-preview';
+    },
+    name () {
+      return this.target.description ? this.target.description : `Box #${this.target.id}`;
     }
   },
-  mounted () {
-    // this.getLocation();
+  created () {
+    EventBus.$on(EventNames.FOCUS_INFOBOX, (coords) => {
+      if (this.coordinates !== coords) {
+        this.focused = false;
+      }
+    });
   },
   methods: {
     focusInfobox () {
+      this.focused = true;
       EventBus.$emit(EventNames.FOCUS_INFOBOX, this.coordinates);
     }
   }
@@ -55,6 +79,11 @@ export default {
 .book-box-info {
     width: 200px;
     height: 400px;
+}
+
+.book-box-info-preview {
+  width: 150px;
+  height: 150px;
 }
 
 img {

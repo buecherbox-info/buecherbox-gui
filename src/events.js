@@ -5,7 +5,8 @@ export const EventNames = {
   LOGIN_ROUTE: 'routeToLogin',
   SHOW_EDIT_INFO: 'showEditInfo',
   USER_LOGGED_IN: 'userLoggedIn',
-  USER_LOGGED_OUT: 'userLoggedOut'
+  USER_LOGGED_OUT: 'userLoggedOut',
+  SAVE_NEW_BOOKBOX: 'saveNewBookbox'
 };
 
 export const EventBus = new Vue();
