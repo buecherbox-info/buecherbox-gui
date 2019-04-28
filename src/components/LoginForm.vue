@@ -60,8 +60,7 @@ export default {
   data () {
     return {
       Messages,
-      register: false,
-      passwordConfirmation: ''
+      register: false
     }
   },
   computed: {
@@ -82,6 +81,14 @@ export default {
         this.$store.commit('User/setPassword', value);
       }
     },
+    passwordConfirmation: {
+      get () {
+        return this.$store.state.User.passwordConfirmation;
+      },
+      set (value) {
+        this.$store.commit('User/setPasswordConfirmation', value);
+      }
+    },
     registerLabel () {
       return this.register ? this.$t(Messages.SENT) : this.$t(Messages.REGISTER);
     }
@@ -97,11 +104,11 @@ export default {
     },
     async registerUser () {
       if (this.register) {
-
+        if (this.password !== this.passwordConfirmation) return;
+        await this.$store.dispatch('User/register');
       } else {
-
+        this.register = !this.register;
       }
-      this.register = !this.register;
     }
   }
 };

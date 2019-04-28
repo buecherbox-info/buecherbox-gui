@@ -16,8 +16,8 @@ const actions = {
     const targets = await BookBox.getBookBoxInfos();
     context.commit('setTargets', targets);
   },
-  async getBookBoxInfosByUser (context, token) {
-    const created = await BookBox.getBookBoxInfosByUser(token);
+  async getBookBoxInfosByUser (context, user) {
+    const created = await BookBox.getBookBoxInfosByUser(user.userId, user.token);
     context.commit('setCreated', created);
   }
 };

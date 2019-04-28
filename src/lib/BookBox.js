@@ -5,11 +5,11 @@ export async function getBookBoxInfos () {
   return result.data;
 }
 
-export async function getBookBoxInfosByUser (token) {
+export async function getBookBoxInfosByUser (userId, token) {
   const options = {
     headers: { 'Authorization': `bearer ${token}` }
   };
 
-  const result = await Axios.get('/users/bookboxes', options);
+  const result = await Axios.get(`/users/${userId}/bookboxes`, options);
   return result.data;
 }

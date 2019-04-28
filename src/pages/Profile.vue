@@ -11,7 +11,7 @@
 
     <LoginForm
       v-if="!isLoggedIn"
-      ref="loginForm"
+      @userLoggedIn="getBookBoxInfosByUser"
     />
 
     <div v-else>
@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import { EventNames } from '../events';
 import { mapState } from 'vuex';
 import Messages from '../assets/lang/messages';
 
@@ -48,14 +47,16 @@ export default {
   },
   computed: {
     ...mapState('BookStorage', ['created']),
-    ...mapState('User', ['isLoggedIn', 'token'])
+    ...mapState('User', ['userId', 'isLoggedIn', 'token'])
   },
-  created () {
-    if (this.$refs.loginForm) {
-      this.$refs.loginForm.$on(EventNames.USER_LOGGED_IN, this.getBookBoxInfosByUser());
+  watch: {
+    async isLoggedIn () {
+      if (this.isLoggedIn) {
+        await this.getBookBoxInfosByUser();
+      }
     }
   },
-  async updated () {
+  async mounted () {
     if (this.isLoggedIn) {
       await this.getBookBoxInfosByUser();
     }
@@ -65,7 +66,11 @@ export default {
       await this.$store.commit('User/logout');
     },
     async getBookBoxInfosByUser () {
-      await this.$store.dispatch('BookStorage/getBookBoxInfosByUser', this.token);
+      const user = {
+        userId: this.userId,
+        token: this.token
+      };
+      await this.$store.dispatch('BookStorage/getBookBoxInfosByUser', user);
     }
   }
 };
