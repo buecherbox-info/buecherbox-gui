@@ -17,6 +17,8 @@
 }
 
 .book-box-info > img {
+    display: block;
+    margin: auto;
     max-height: 200px;
     max-width: 200px;
 }
@@ -25,11 +27,17 @@
  * Infobox Preview
  */
 .book-box-info-preview {
-    width: 200px;
-    height: 200px;
+    width: 50px;
+    height: 50px;
 }
 
 .book-box-info-preview > img {
-    max-height: 150px;
-    max-width: 150px;
+    position: absolute;
+    margin: auto;
+    top: 1em;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 30px;
+    height: 30px;
 }

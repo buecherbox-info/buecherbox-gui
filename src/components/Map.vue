@@ -32,7 +32,16 @@ export default {
         center: [50, 50],
         zoom: 1.0
       },
-      showEdit: false
+      showEdit: false,
+      texts: {
+        [Messages.CREATE_NEW_BOOKBOX]: this.$t(Messages.CREATE_NEW_BOOKBOX),
+        [Messages.DESCRIPTION]: this.$t(Messages.DESCRIPTION),
+        [Messages.LOCATION]: this.$t(Messages.LOCATION),
+        [Messages.HINT]: this.$t(Messages.HINT),
+        [Messages.LOGIN]: this.$t(Messages.LOGIN),
+        [Messages.SAVE]: this.$t(Messages.SAVE)
+      },
+      popups: []
     }
   },
   computed: {
@@ -74,15 +83,18 @@ export default {
         lat: target.lat
       };
 
-      new MapboxGl.Popup(options)
+      const popup = new MapboxGl.Popup(options)
         .setLngLat(coordinates)
         .setHTML("<div id='infobox-wrapper'></div>")
         .addTo(map);
+
+      this.popups.push(popup);
 
       const InfoBoxComponent = Vue.extend(Infobox);
       const box = new InfoBoxComponent();
       box.$props.map = this.map;
       box.$props.target = target;
+      box.$props.texts = this.texts;
       box.$mount('#infobox-wrapper');
     },
     clicked (event) {
@@ -91,21 +103,12 @@ export default {
         .setHTML("<div id='edit-info-wrapper'></div>")
         .addTo(this.map);
 
-      const texts = {
-        [Messages.CREATE_NEW_BOOKBOX]: this.$t(Messages.CREATE_NEW_BOOKBOX),
-        [Messages.DESCRIPTION]: this.$t(Messages.DESCRIPTION),
-        [Messages.LOCATION]: this.$t(Messages.LOCATION),
-        [Messages.HINT]: this.$t(Messages.HINT),
-        [Messages.LOGIN]: this.$t(Messages.LOGIN),
-        [Messages.SAVE]: this.$t(Messages.SAVE)
-      };
-
       const EditInfoComponent = Vue.extend(EditInfo);
       const edit = new EditInfoComponent();
       edit.$state = this.$state;
       edit.$props.lngLat = event.lngLat;
       edit.$props.isLoggedIn = this.isLoggedIn;
-      edit.$props.texts = texts;
+      edit.$props.texts = this.texts;
       edit.$mount('#edit-info-wrapper');
     },
     createMap () {
@@ -129,6 +132,7 @@ export default {
       });
     },
     initMap () {
+      console.log(this.texts);
       this.targets.forEach((target) => {
         this.addPopUp(this.map, target)
       });

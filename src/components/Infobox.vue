@@ -1,22 +1,32 @@
 <template>
   <div
-    :class="cssClass"
     @click="focusInfobox"
   >
     <!-- Preview -->
-    <h1>{{ name }}</h1>
-    <img
-      v-if="imgSrc"
-      :src="imgSrc"
-      :alt="altImgTag"
+    <div
+      v-if="!focused"
+      class="book-box-info-preview"
     >
+      {{ shortName }}
+      <img
+        src="../assets/img/book-open.svg"
+        alt="book-open-icon"
+      >
+    </div>
 
     <!-- Infos -->
     <div
-      v-if="focused"
-      class="book-box-description"
+      v-else
+      class="book-box-info"
     >
+      <h1>{{ name }}</h1>
       <h2>{{ target.location }}</h2>
+      <img
+        v-if="imgSrc"
+        :src="imgSrc"
+        :alt="altImgTag"
+      >
+      <p>{{ texts[Messages.HINT] }}:</p>
       <p>{{ target.hint }}</p>
     </div>
   </div>
@@ -24,6 +34,7 @@
 
 <script>
 import { EventBus, EventNames } from '../events';
+import Messages from '../assets/lang/messages';
 
 export default {
   name: 'Infobox',
@@ -35,10 +46,15 @@ export default {
     target: {
       type: Object,
       default: null
+    },
+    texts: {
+      type: Object,
+      default: null
     }
   },
   data () {
     return {
+      Messages,
       focused: false
     };
   },
@@ -60,6 +76,9 @@ export default {
     },
     name () {
       return this.target.description ? this.target.description : `Box #${this.target.id}`;
+    },
+    shortName () {
+      return `Box #${this.target.id}`;
     },
     imgSrc () {
       const imgId = this.target.imgid;
