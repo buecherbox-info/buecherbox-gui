@@ -29,6 +29,9 @@ const mutations = {
   },
   setCreated (state, created) {
     state.created = created;
+  },
+  addTarget (state, target) {
+    state.targets.push(target);
   }
 };
 

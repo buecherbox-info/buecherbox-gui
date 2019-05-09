@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Axios from 'axios';
+import * as BookBox from '../lib/BookBox';
 import MapboxGl from 'mapbox-gl'
 import Vue from 'vue'
 import { mapState } from 'vuex'
@@ -55,24 +55,12 @@ export default {
     });
 
     EventBus.$on(EventNames.SAVE_NEW_BOOKBOX, async (bookbox) => {
-      const formData = new FormData();
-      formData.append('userid', this.userId);
-      formData.append('description', bookbox.description);
-      formData.append('lat', bookbox.lat);
-      formData.append('lng', bookbox.lng);
-      formData.append('hint', bookbox.hint);
-      formData.append('location', bookbox.location);
-      formData.append('file', bookbox.img);
-
-      const options = {
-        headers: {
-          'content-type': 'multipart/form-data',
-          'authorization': `Bearer ${this.token}`
-        }
-      };
-
-      await Axios.post('/bookboxes', formData, options);
+      const newBox = await BookBox.postBookBoxInfos(this.userId, this.token, bookbox);
+      await this.$store.commit('BookStorage/addTarget', newBox);
     })
+  },
+  beforeDestroy () {
+    EventBus.$off(EventNames.SAVE_NEW_BOOKBOX);
   },
   methods: {
     addPopUp (map, target) {
