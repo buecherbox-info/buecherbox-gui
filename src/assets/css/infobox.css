@@ -1,0 +1,35 @@
+/**
+ * infobox.css
+ *
+ * These are the styles for the infobox component.
+ *
+ * Index
+ * - Infobox Focused
+ * - Infobox Preview
+ */
+
+/**
+ * Infobox Focused
+ */
+.book-box-info {
+    width: 200px;
+    height: 400px;
+}
+
+.book-box-info > img {
+    max-height: 200px;
+    max-width: 200px;
+}
+
+/**
+ * Infobox Preview
+ */
+.book-box-info-preview {
+    width: 200px;
+    height: 200px;
+}
+
+.book-box-info-preview > img {
+    max-height: 150px;
+    max-width: 150px;
+}

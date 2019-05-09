@@ -6,8 +6,8 @@
     <!-- Preview -->
     <h1>{{ name }}</h1>
     <img
-      v-if="target.imgSrc"
-      :src="target.imgSrc"
+      v-if="imgSrc"
+      :src="imgSrc"
       :alt="altImgTag"
     >
 
@@ -40,7 +40,7 @@ export default {
   data () {
     return {
       focused: false
-    }
+    };
   },
   computed: {
     altImgTag () {
@@ -60,6 +60,11 @@ export default {
     },
     name () {
       return this.target.description ? this.target.description : `Box #${this.target.id}`;
+    },
+    imgSrc () {
+      const imgId = this.target.imgid;
+      const thumnail = this.focused ? '' : '/thumbnail';
+      return imgId ? `http://localhost:3000/images/${imgId}${thumnail}` : '';
     }
   },
   created () {
@@ -71,6 +76,11 @@ export default {
   },
   methods: {
     focusInfobox () {
+      if (this.focused) {
+        this.focused = false;
+        return;
+      }
+
       this.focused = true;
       EventBus.$emit(EventNames.FOCUS_INFOBOX, this.coordinates);
     }
@@ -78,19 +88,6 @@ export default {
 };
 </script>
 
-<style scoped>
-.book-box-info {
-  width: 200px;
-  height: 400px;
-}
-
-.book-box-info-preview {
-  width: 150px;
-  height: 150px;
-}
-
-img {
-  width: 200px;
-  height: 200px;
-}
+<style>
+@import "../assets/css/infobox.css";
 </style>

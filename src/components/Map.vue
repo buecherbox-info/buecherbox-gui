@@ -156,11 +156,6 @@ export default {
 };
 </script>
 
-<style scoped>
-    #map {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 100%;
-    }
+<style>
+@import "../assets/css/map.css";
 </style>

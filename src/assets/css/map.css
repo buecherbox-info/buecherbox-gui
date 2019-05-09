@@ -1,0 +1,26 @@
+/**
+ * map.css
+ *
+ * These are the styles for the map component.
+ *
+ * Index
+ * - Mapbox GL Map
+ * - Mapbox GL Popup
+ */
+
+/**
+ * Mapbox GL Map
+ */
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+/**
+ * Mapbox GL Popup
+ */
+.mapboxgl-popup-content {
+    border-radius: 25px;
+}

@@ -1,0 +1,17 @@
+/**
+ * editinfo.css
+ *
+ * These are the styles for the editinfo component.
+ *
+ * Index
+ * - Editinfo
+ */
+
+/**
+ * Editinfo
+ */
+.coordinates-container {
+    width: 50vw;
+    margin: 0px auto;
+    padding: 20px 30px;
+}
