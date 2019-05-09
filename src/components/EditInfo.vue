@@ -125,10 +125,6 @@ export default {
 };
 </script>
 
-<style scoped>
-    .coordinates-container {
-        width: 50vw;
-        margin: 0px auto;
-        padding: 20px 30px;
-    }
+<style>
+@import "../assets/css/editinfo.css";
 </style>

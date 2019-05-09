@@ -1,0 +1,23 @@
+.mapboxgl-popup-content {
+    border-radius: 25px;
+}
+
+.book-box-info {
+    width: 200px;
+    height: 400px;
+}
+
+.book-box-info > img {
+    max-height: 200px;
+    max-width: 200px;
+}
+
+.book-box-info-preview {
+    width: 200px;
+    height: 200px;
+}
+
+.book-box-info-preview > img {
+    max-height: 150px;
+    max-width: 150px;
+}
