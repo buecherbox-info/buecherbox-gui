@@ -122,6 +122,5 @@ export default {
 };
 </script>
 
-<style scoped>
-@import "../assets/css/pages/profile.css";
+<style scoped src="../assets/css/pages/profile.css">
 </style>

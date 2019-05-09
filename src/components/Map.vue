@@ -27,8 +27,10 @@ export default {
       // https://account.mapbox.com/
       accessToken: '***REMOVED***',
       options: {
-        style: 'mapbox://styles/timmepfeife/cjuwcfsz71ddk1fqm520lj59t',
-        center: [50, 50]
+        container: 'map',
+        style: 'mapbox://styles/timmepfeife/cjv8fr1tq0lck1hp94kgp4fhb',
+        center: [50, 50],
+        zoom: 1.0
       },
       showEdit: false
     }
@@ -125,12 +127,7 @@ export default {
     createMap () {
       MapboxGl.accessToken = this.accessToken;
 
-      this.map = new MapboxGl.Map({
-        container: 'map',
-        style: 'mapbox://styles/timmepfeife/cjuwcfsz71ddk1fqm520lj59t',
-        center: [50, 50],
-        zoom: 1.0
-      });
+      this.map = new MapboxGl.Map(this.options);
 
       this.map.addControl(new MapboxGl.NavigationControl());
 
@@ -156,6 +153,6 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 @import "../assets/css/components/map.css";
 </style>

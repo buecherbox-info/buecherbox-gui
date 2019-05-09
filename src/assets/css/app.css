@@ -7,6 +7,7 @@
  * - Application
  * - Sidebar
  * - Content
+ * - Globals
  */
 
 /**
@@ -14,6 +15,8 @@
  */
 body {
     margin: 0;
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
 }
 
 .app {
@@ -40,4 +43,30 @@ body {
     position: static;
     z-index: 0;
     transition: ease-in-out .2s;
+}
+
+.content > :not(#map) {
+    position: fixed;
+    left:  50%;
+    top: 10%;
+    transform: translate(-50%, 0);
+    padding: 3em;
+    border: 1px solid;
+    border-radius: 25px;
+    width: 50%;
+}
+
+/**
+ * Globals
+ */
+:root {
+     /*
+      * - https://coolors.co/f8f4e3-13070c-92140c-3e78b2-abc798
+      */
+    --color-primary: #FFFFF;
+    --color-primary-rgb: 255, 255, 255;
+    --color-secondary: #32292F;
+    --color-danger: #92140C;
+    --color-info: #3E78B2;
+    --color-success: #ABC798;
 }
