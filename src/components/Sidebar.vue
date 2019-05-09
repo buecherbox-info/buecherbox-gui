@@ -69,8 +69,8 @@
         <!-- Language -->
         <select
           v-if="!collapsed"
-          v-model="$i18n.locale"
           class="sidebar-lang"
+          @change="changeLocale"
         >
           <option
             v-for="(lang, idx) in languages"
@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import { EventNames } from '../events';
+import { EventBus, EventNames } from '../events'
 import Messages from '../assets/lang/messages';
 
 export default {
@@ -115,6 +115,10 @@ export default {
     toggleSidebar () {
       this.collapsed = !this.collapsed;
       this.$emit(EventNames.TOGGLE_SIDEBAR);
+    },
+    changeLocale (event) {
+      this.$i18n.locale = event.target.value;
+      EventBus.$emit(EventNames.CHANGE_LOCALE);
     }
   }
 }

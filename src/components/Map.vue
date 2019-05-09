@@ -33,20 +33,22 @@ export default {
         zoom: 1.0
       },
       showEdit: false,
-      texts: {
+      popups: []
+    }
+  },
+  computed: {
+    ...mapState('BookStorage', ['targets']),
+    ...mapState('User', ['isLoggedIn', 'userId', 'token']),
+    texts () {
+      return {
         [Messages.CREATE_NEW_BOOKBOX]: this.$t(Messages.CREATE_NEW_BOOKBOX),
         [Messages.DESCRIPTION]: this.$t(Messages.DESCRIPTION),
         [Messages.LOCATION]: this.$t(Messages.LOCATION),
         [Messages.HINT]: this.$t(Messages.HINT),
         [Messages.LOGIN]: this.$t(Messages.LOGIN),
         [Messages.SAVE]: this.$t(Messages.SAVE)
-      },
-      popups: []
+      }
     }
-  },
-  computed: {
-    ...mapState('BookStorage', ['targets']),
-    ...mapState('User', ['isLoggedIn', 'userId', 'token'])
   },
   async mounted () {
     this.createMap();
@@ -66,7 +68,16 @@ export default {
     EventBus.$on(EventNames.SAVE_NEW_BOOKBOX, async (bookbox) => {
       const newBox = await BookBox.postBookBoxInfos(this.userId, this.token, bookbox);
       await this.$store.commit('BookStorage/addTarget', newBox);
-    })
+    });
+
+    EventBus.$on(EventNames.CHANGE_LOCALE, () => {
+      this.popups.forEach((el) => {
+        el.remove();
+      });
+      this.targets.forEach((target) => {
+        this.addPopUp(this.map, target)
+      });
+    });
   },
   beforeDestroy () {
     EventBus.$off(EventNames.SAVE_NEW_BOOKBOX);
@@ -132,7 +143,6 @@ export default {
       });
     },
     initMap () {
-      console.log(this.texts);
       this.targets.forEach((target) => {
         this.addPopUp(this.map, target)
       });
