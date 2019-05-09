@@ -1,0 +1,30 @@
+/**
+ * profile.css
+ *
+ * These are the styles for the profile page.
+ *
+ * Index
+ * - Profile Infos
+ * - Created Bookboxes
+ */
+
+/**
+ * Profile Infos
+ */
+#profile {
+    width: 80vw;
+    margin-left: 5em;
+    margin-right: 5em;
+}
+
+.logout {
+    font-weight: normal;
+    font-size: 12pt;
+}
+
+/**
+ * Created Bookboxes
+ */
+.book-box-info {
+    border: 1px solid black;
+}

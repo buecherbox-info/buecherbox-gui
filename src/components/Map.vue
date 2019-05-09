@@ -156,6 +156,6 @@ export default {
 };
 </script>
 
-<style>
-@import "../assets/css/map.css";
+<style scoped>
+@import "../assets/css/components/map.css";
 </style>

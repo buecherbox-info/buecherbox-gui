@@ -77,18 +77,5 @@ export default {
 </script>
 
 <style scoped>
-#profile {
-  width: 80vw;
-  margin-left: 5em;
-  margin-right: 5em;
-}
-
-.book-box-info {
-    border: 1px solid black;
-}
-
-.logout {
-    font-weight: normal;
-    font-size: 12pt;
-}
+@import "../assets/css/pages/profile.css";
 </style>

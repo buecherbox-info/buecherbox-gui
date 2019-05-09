@@ -88,6 +88,6 @@ export default {
 };
 </script>
 
-<style>
-@import "../assets/css/infobox.css";
+<style scoped>
+@import "../assets/css/components/infobox.css";
 </style>

@@ -22,27 +22,5 @@ export default {
 </script>
 
 <style>
-body {
-  margin: 0;
-}
-
-.app {
-  width: 100%;
-  overflow: hidden;
-}
-
-.sidebar {
-  display: block;
-  height: calc(100vh);
-  float: left;
-  position: relative;
-  z-index: 1;
-}
-
-.content {
-  display: block;
-  position: static;
-  z-index: 0;
-  transition: ease-in-out .2s;
-}
+@import "assets/css/app.css";
 </style>

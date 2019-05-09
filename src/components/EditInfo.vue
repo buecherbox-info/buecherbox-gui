@@ -125,6 +125,6 @@ export default {
 };
 </script>
 
-<style>
-@import "../assets/css/editinfo.css";
+<style scoped>
+@import "../assets/css/components/editinfo.css";
 </style>

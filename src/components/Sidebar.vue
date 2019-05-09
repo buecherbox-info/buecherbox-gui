@@ -123,6 +123,6 @@ export default {
 }
 </script>
 
-<style>
-@import "../assets/css/sidebar.css";
+<style scoped>
+@import "../assets/css/components/sidebar.css";
 </style>
