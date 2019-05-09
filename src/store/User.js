@@ -25,6 +25,10 @@ const actions = {
   async register (context) {
     const result = await User.register(context.state.username, context.state.password);
     context.commit('login', result);
+  },
+  async getProfile (context) {
+    const result = await User.getProfile(context.state.userId, context.state.token);
+    context.commit('setUsername', result.username);
   }
 };
 
@@ -40,6 +44,7 @@ const mutations = {
     state.userId = -1;
     state.username = '';
     state.password = '';
+    state.passwordConfirmation = '';
     state.isLoggedIn = false;
   },
   setIsLoggedIn (state, isLoggedIn) {

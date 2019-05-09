@@ -3,6 +3,9 @@ export default {
   USERNAME: 'username',
   PASSWORD: 'password',
   CONFIRM_PASSWORD: 'confirmPassword',
+  CONFIRM_NEW_PASSWORD: 'confirmNewPassword',
+  NEW_PASSWORD: 'newPassword',
+  OLD_PASSWORD: 'oldPassword',
   LOGIN: 'login',
   LOGOUT: 'logout',
   REGISTER: 'register',
@@ -14,5 +17,6 @@ export default {
   SAVE: 'save',
   OVERVIEW: 'overview',
   FAVORITES: 'favorites',
-  ABOUT: 'about'
+  ABOUT: 'about',
+  CANCEL: 'cancel'
 };
