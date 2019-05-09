@@ -26,23 +26,26 @@
       <!-- Personal Data -->
       <table>
         <tr>
-          <td>{{ $t(Messages.USERNAME) }}:</td>
+          <td class="form-label">{{ $t(Messages.USERNAME) }}:</td>
           <td>{{ username }}</td>
         </tr>
         <tr>
-          <td>{{ $t(Messages.PASSWORD) }}:</td>
+          <td class="form-label">{{ $t(Messages.PASSWORD) }}:</td>
           <td>
             {{ maskPassword }}
 
             <div v-if="changePassword">
               <input :placeholder="$t(Messages.OLD_PASSWORD)">
-              <br>
               <input :placeholder="$t(Messages.NEW_PASSWORD)">
-              <br>
               <input :placeholder="$t(Messages.CONFIRM_NEW_PASSWORD)">
               <br>
-              <button>{{ $t(Messages.SENT) }}</button>
-              <button @click="changePassword = false">
+              <button class="btn">
+                {{ $t(Messages.SENT) }}
+              </button>
+              <button
+                class="btn"
+                @click="changePassword = false"
+              >
                 {{ $t(Messages.CANCEL) }}
               </button>
             </div>

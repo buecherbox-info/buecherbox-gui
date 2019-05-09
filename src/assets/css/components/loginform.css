@@ -1,0 +1,15 @@
+/**
+ * loginform.css
+ *
+ * These are the styles for the loginform component.
+ *
+ * Index
+ * - Loginform
+ */
+
+/**
+ * Loginform
+ */
+label {
+    font-weight: bold;
+}

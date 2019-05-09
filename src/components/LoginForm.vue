@@ -8,13 +8,13 @@
 
     <label>
       {{ $t(Messages.USERNAME) }}:
+      <br>
       <input v-model="username">
     </label>
 
-    <br>
-
     <label>
       {{ $t(Messages.PASSWORD) }}:
+      <br>
       <input
         v-model="password"
         type="password"
@@ -31,12 +31,16 @@
       >
     </label>
 
-    <br>
-
-    <button @click="loginUser">
+    <button
+      class="btn"
+      @click="loginUser"
+    >
       {{ $t(Messages.LOGIN) }}
     </button>
-    <button @click="registerUser">
+    <button
+      class="btn"
+      @click="registerUser"
+    >
       {{ registerLabel }}
     </button>
   </div>
@@ -114,6 +118,5 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style scoped src="../assets/css/components/loginform.css">
 </style>

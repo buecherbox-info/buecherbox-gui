@@ -21,6 +21,7 @@
 
     <transition name="fade">
       <div class="sidebar-content">
+        <!-- Links -->
         <router-link
           to="/"
           class="sidebar-element first"
@@ -65,24 +66,20 @@
           <span v-if="!collapsed">{{ $t(Messages.ABOUT) }}</span>
         </router-link>
 
-        <label>
-          <input
-            v-if="!collapsed"
-            v-model="$i18n.locale"
-            list="languages"
-            class="sidebar-lang"
-            @focus="$i18n.locale = ''"
-          >
-        </label>
-        <datalist id="languages">
+        <!-- Language -->
+        <select
+          v-if="!collapsed"
+          v-model="$i18n.locale"
+          class="sidebar-lang"
+        >
           <option
             v-for="(lang, idx) in languages"
-            :key="`${idx}_${lang[1]}`"
-            :value="lang[0]"
+            :key="idx + lang.code"
+            :value="lang.code"
           >
-            {{ lang[1] }}
+            {{ lang.language }}
           </option>
-        </datalist>
+        </select>
       </div>
     </transition>
 
@@ -101,8 +98,8 @@ export default {
       Messages,
       collapsed: false,
       languages: [
-        ['de', 'Deutsch'],
-        ['en', 'Englisch']
+        { code: 'de', language: 'Deutsch' },
+        { code: 'en', language: 'Englisch' }
       ]
     }
   },

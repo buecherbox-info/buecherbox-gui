@@ -4,11 +4,27 @@
  * These are the styles for the application.
  *
  * Index
+ * - Globals
  * - Application
  * - Sidebar
  * - Content
- * - Globals
+ * - Input
  */
+
+/**
+ * Globals
+ */
+:root {
+    /*
+     * - https://coolors.co/f8f4e3-13070c-92140c-3e78b2-abc798
+     */
+    --color-primary: #FFFFF;
+    --color-primary-rgb: 255, 255, 255;
+    --color-secondary: #32292F;
+    --color-danger: #92140C;
+    --color-info: #3E78B2;
+    --color-success: #ABC798;
+}
 
 /**
  * Application
@@ -17,6 +33,7 @@ body {
     margin: 0;
     background-color: var(--color-primary);
     color: var(--color-secondary);
+    font-size: 14pt;
 }
 
 .app {
@@ -57,16 +74,41 @@ body {
 }
 
 /**
- * Globals
+ * Input
  */
-:root {
-     /*
-      * - https://coolors.co/f8f4e3-13070c-92140c-3e78b2-abc798
-      */
-    --color-primary: #FFFFF;
-    --color-primary-rgb: 255, 255, 255;
-    --color-secondary: #32292F;
-    --color-danger: #92140C;
-    --color-info: #3E78B2;
-    --color-success: #ABC798;
+.btn {
+    background-color: #ffffff00;
+    border: 1px solid;
+    border-radius: .25em;
+    padding: .375em .75em;;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: .25em;
+    margin-right: .25em;
+}
+
+.btn:hover {
+    background-color: black;
+    color: white;
+}
+
+input {
+    display: block;
+    margin-top: .5em;
+    border: 1px solid black;
+    border-radius: .2em;
+    padding: 12px 20px;
+    font-size: 12pt;
+}
+
+textarea {
+    display: block;
+    margin-top: .5em;
+    border: 1px solid black;
+    border-radius: .2em;
+    padding: 12px 20px;
+    font-size: 12pt;
 }

@@ -25,6 +25,11 @@ tr {
     float: right;
 }
 
+.form-label {
+    font-weight: bold;
+    width: 150px
+}
+
 /**
  * Created Bookboxes
  */
