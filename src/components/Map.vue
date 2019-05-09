@@ -55,8 +55,6 @@ export default {
     });
 
     EventBus.$on(EventNames.SAVE_NEW_BOOKBOX, async (bookbox) => {
-      console.log(bookbox);
-
       const formData = new FormData();
       formData.append('userid', this.userId);
       formData.append('description', bookbox.description);
@@ -64,9 +62,7 @@ export default {
       formData.append('lng', bookbox.lng);
       formData.append('hint', bookbox.hint);
       formData.append('location', bookbox.location);
-      formData.append('file', bookbox.imgsrc);
-
-      console.log(formData);
+      formData.append('file', bookbox.img);
 
       const options = {
         headers: {

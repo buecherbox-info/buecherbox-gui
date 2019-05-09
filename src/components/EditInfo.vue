@@ -108,7 +108,7 @@ export default {
         description: this.details.description,
         lat: this.lngLat.lat,
         lng: this.lngLat.lng,
-        imgsrc: this.details.imgsrc,
+        img: this.details.imgsrc,
         hint: this.details.hint,
         location: this.details.location
       };
