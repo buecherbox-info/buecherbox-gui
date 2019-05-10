@@ -1,5 +1,9 @@
 <template>
-  <div id="map" />
+  <div id="map">
+    <div
+      id="geocoder"
+      class="geocoder"></div>
+  </div>
 </template>
 
 <script>
@@ -12,6 +16,7 @@ import { EventBus, EventNames } from '../events'
 import Infobox from './Infobox'
 import EditInfo from './EditInfo'
 import Messages from '../assets/lang/messages';
+const MapboxGeocoder = require('@mapbox/mapbox-gl-geocoder');
 
 export default {
   name: 'Map',
@@ -49,11 +54,18 @@ export default {
         [Messages.LOGIN]: this.$t(Messages.LOGIN),
         [Messages.SAVE]: this.$t(Messages.SAVE)
       }
+    },
+    locale () {
+      return this.$i18n.locale
     }
   },
   watch: {
     targets () {
       this.resetMap();
+    },
+    locale () {
+      this.map.removeControl(this.geocoder);
+      this.createGeoCoder();
     }
   },
   async mounted () {
@@ -140,6 +152,15 @@ export default {
 
       this.map.on('contextmenu', this.clicked);
     },
+    createGeoCoder () {
+      this.geocoder = new MapboxGeocoder({
+        accessToken: this.accessToken,
+        mapboxgl: MapboxGl,
+        language: this.$i18n.locale
+      });
+
+      document.getElementById('geocoder').appendChild(this.geocoder.onAdd(this.map))
+    },
     focusInfobox (coordinates) {
       if (!this.map) return;
 
@@ -155,6 +176,7 @@ export default {
       this.targets.forEach((target) => {
         this.addPopUp(this.map, target)
       });
+      this.createGeoCoder();
     },
     resetMap () {
       this.popups.forEach((el) => {
@@ -170,4 +192,12 @@ export default {
 
 <style>
 @import "../assets/css/components/map.css";
+@import "~@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
+.geocoder {
+  position:absolute;
+  z-index:1;
+  width: 100%;
+  left:50%;
+  top:2em;
+}
 </style>
