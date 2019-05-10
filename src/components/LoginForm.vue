@@ -3,46 +3,77 @@
   <div
     v-if="!isLoggedIn"
     id="login-form"
+    class="box"
   >
     <h3>{{ $t(Messages.LOGIN) }}</h3>
 
-    <label>
-      {{ $t(Messages.USERNAME) }}:
-      <br>
-      <input v-model="username">
-    </label>
+    <div class="field">
+      <label class="label">
+        {{ $t(Messages.USERNAME) }}:
+      </label>
+      <div class="control">
+        <input
+          v-model="username"
+          class="input"
+          :placeholder="$t(Messages.USERNAME)"
+        >
+      </div>
+    </div>
 
-    <label>
-      {{ $t(Messages.PASSWORD) }}:
-      <br>
-      <input
-        v-model="password"
-        type="password"
-      >
-    </label>
+    <div class="field">
+      <label class="label">
+        {{ $t(Messages.PASSWORD) }}:
+      </label>
+      <div class="control">
+        <input
+          v-model="password"
+          type="password"
+          class="input"
+          :placeholder="$t(Messages.PASSWORD)"
+        >
+      </div>
+    </div>
 
-    <br>
-
-    <label v-if="register">
-      {{ $t(Messages.CONFIRM_PASSWORD) }}:
-      <input
-        v-model="passwordConfirmation"
-        type="password"
-      >
-    </label>
-
-    <button
-      class="btn"
-      @click="loginUser"
+    <div
+      v-if="register"
+      class="field"
     >
-      {{ $t(Messages.LOGIN) }}
-    </button>
-    <button
-      class="btn"
-      @click="registerUser"
-    >
-      {{ registerLabel }}
-    </button>
+      <div class="control">
+        <input
+          v-model="passwordConfirmation"
+          type="password"
+          class="input"
+          :placeholder="$t(Messages.CONFIRM_PASSWORD)"
+        >
+      </div>
+    </div>
+
+    <div class="field is-grouped">
+      <p class="control">
+        <a
+          class="button"
+          @click="loginUser"
+        >
+          {{ $t(Messages.LOGIN) }}
+        </a>
+      </p>
+      <p class="control">
+        <a
+          class="button"
+          @click="registerUser"
+        >
+          {{ registerLabel }}
+        </a>
+      </p>
+      <p class="control" v-if="register">
+        <a
+          class="button"
+          @click="register = false"
+        >
+          {{ $t(Messages.CANCEL) }}
+        </a>
+      </p>
+    </div>
   </div>
 
   <!-- Logout-->
@@ -118,5 +149,5 @@ export default {
 };
 </script>
 
-<style scoped src="../assets/css/components/loginform.css">
+<style scoped>
 </style>

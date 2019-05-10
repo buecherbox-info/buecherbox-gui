@@ -1,5 +1,5 @@
 <template>
-  <div :class="wrapperCss">
+  <aside :class="wrapperCss">
     <div class="sidebar-header">
       <transition name="fade">
         <img
@@ -21,70 +21,78 @@
 
     <transition name="fade">
       <div class="sidebar-content">
-        <!-- Links -->
-        <router-link
-          to="/"
-          class="sidebar-element first"
-        >
-          <img
-            src="../assets/img/home.svg"
-            alt="home-icon"
-          >
-          <span v-if="!collapsed">{{ $t(Messages.OVERVIEW) }}</span>
-        </router-link>
-
-        <router-link
-          to="/favorites"
-          class="sidebar-element"
-        >
-          <img
-            src="../assets/img/star.svg"
-            alt="home-icon"
-          >
-          <span v-if="!collapsed">{{ $t(Messages.FAVORITES) }}</span>
-        </router-link>
-
-        <router-link
-          to="/profile"
-          class="sidebar-element"
-        >
-          <img
-            src="../assets/img/user.svg"
-            alt="profile-icon"
-          >
-          <span v-if="!collapsed">{{ $t(Messages.PROFILE) }}</span>
-        </router-link>
-
-        <router-link
-          to="/about"
-          class="sidebar-element"
-        >
-          <img
-            src="../assets/img/info.svg"
-            alt="about-icon"
-          >
-          <span v-if="!collapsed">{{ $t(Messages.ABOUT) }}</span>
-        </router-link>
+        <ul class="menu-list">
+          <!-- Links -->
+          <li>
+            <router-link
+              to="/"
+              class="sidebar-element first"
+            >
+              <img
+                src="../assets/img/home.svg"
+                alt="home-icon"
+              >
+              <span v-if="!collapsed">{{ $t(Messages.OVERVIEW) }}</span>
+            </router-link>
+          </li>
+          <li>
+            <router-link
+              to="/favorites"
+              class="sidebar-element"
+            >
+              <img
+                src="../assets/img/star.svg"
+                alt="home-icon"
+                style="vertical-align: middle"
+              >
+              <span v-if="!collapsed">{{ $t(Messages.FAVORITES) }}</span>
+            </router-link>
+          </li>
+          <li>
+            <router-link
+              to="/profile"
+            >
+              <img
+                src="../assets/img/user.svg"
+                alt="profile-icon"
+              >
+              <span v-if="!collapsed">{{ $t(Messages.PROFILE) }}</span>
+            </router-link>
+          </li>
+          <li>
+            <router-link
+              to="/about"
+              class="sidebar-element"
+            >
+              <img
+                src="../assets/img/info.svg"
+                alt="about-icon"
+              >
+              <span v-if="!collapsed">{{ $t(Messages.ABOUT) }}</span>
+            </router-link>
+          </li>
+        </ul>
 
         <!-- Language -->
-        <select
-          v-if="!collapsed"
-          class="sidebar-lang"
-          @change="changeLocale"
-        >
-          <option
-            v-for="(lang, idx) in languages"
-            :key="idx + lang.code"
-            :value="lang.code"
+        <div class="select is-rounded is-centered">
+          <select
+            v-if="!collapsed"
+            @change="changeLocale"
           >
-            {{ lang.language }}
-          </option>
-        </select>
+            <option
+              v-for="(lang, idx) in languages"
+              :key="idx + lang.code"
+              :value="lang.code"
+            >
+              {{ lang.language }}
+            </option>
+          </select>
+        </div>
       </div>
     </transition>
 
     <div class="sidebar-footer" />
-  </div>
+  </aside>
 </template>
 
 <script>
@@ -106,6 +114,7 @@ export default {
   computed: {
     wrapperCss () {
       return {
+        'menu': true,
         'sidebar-wrapper': true,
         'collapsed': this.collapsed
       }

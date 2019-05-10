@@ -22,5 +22,6 @@ export default {
 </script>
 
 <style>
+@import "../node_modules/bulma/css/bulma.css";
 @import "assets/css/app.css";
 </style>

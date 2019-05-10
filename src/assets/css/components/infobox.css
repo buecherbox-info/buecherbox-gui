@@ -12,8 +12,8 @@
  * Infobox Focused
  */
 .book-box-info {
-    width: 200px;
-    height: 400px;
+    width: 250px;
+    height: auto;
 }
 
 .book-box-info > img {

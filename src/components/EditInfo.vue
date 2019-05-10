@@ -1,40 +1,69 @@
 <template>
-  <div class="edit-info-container">
-    <h1>{{ texts[Messages.CREATE_NEW_BOOKBOX] }}</h1>
+  <div class="edit-info-container box">
+    <h1 class="title">
+      {{ texts[Messages.CREATE_NEW_BOOKBOX] }}
+    </h1>
     <div
       v-if="isLoggedIn"
       id="form"
     >
-      <label>
-        {{ texts[Messages.DESCRIPTION] }}
-        <input
-          v-model="details.description"
-          type="text"
-        >
-      </label>
-      <br>
-      <label>
-        {{ texts[Messages.LOCATION] }}
-        <input
-          v-model="details.location"
-          type="text"
-        >
-      </label>
-      <br>
-      <label>
-        {{ texts[Messages.HINT] }}
-        <textarea v-model="details.hint"></textarea>
-      </label>
-      <label>
-        Datei:
-        <input type="file" @change="setFile" />
-      </label>
+      <div class="field">
+        <label class="label">
+          {{ texts[Messages.DESCRIPTION] }}
+        </label>
+        <div class="control">
+          <input
+            v-model="details.description"
+            type="text"
+            class="input"
+          >
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">
+          {{ texts[Messages.LOCATION] }}
+        </label>
+        <div class="control">
+          <input
+            v-model="details.location"
+            type="text"
+            class="input"
+          >
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">
+          {{ texts[Messages.HINT] }}
+        </label>
+        <div class="control">
+          <textarea
+            v-model="details.hint"
+            class="textarea"
+          />
+        </div>
+      </div>
 
-      <br>
+      <div class="field">
+        <label class="label">
+          Datei:
+        </label>
+        <div class="control">
+          <input
+            type="file"
+            class="file"
+            @change="setFile"
+          >
+        </div>
+      </div>
 
-      <button @click="save">
-        {{ texts[Messages.SAVE] }}
-      </button>
+      <div class="field">
+        <a
+          class="button"
+          @click="save"
+        >
+          {{ texts[Messages.SAVE] }}
+        </a>
+      </div>
     </div>
     <div v-else>
       <p>Du musst dich erst einloggen um eine neue Bücherbox anzulegen.</p>

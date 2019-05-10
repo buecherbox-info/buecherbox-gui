@@ -1,20 +1,23 @@
 <template>
-  <div id="profile">
-    <h1>
+  <div
+    id="profile"
+  >
+    <h1 class="title">
       {{ $t(Messages.PROFILE) }}
 
       <img
-        v-if="isLoggedIn && !changePassword"
+        v-if="isLoggedIn"
         src="../assets/img/edit.svg"
         alt="edit-icon"
-        @click="changePassword = true"
+        style="cursor: pointer"
+        @click="changePassword = !changePassword"
       >
 
-      <span
+      <a
         v-if="isLoggedIn"
-        class="logout"
+        class="button is-link is-pulled-right"
         @click="logoutUser"
-      >Logout</span>
+      >Logout</a>
     </h1>
 
     <LoginForm
@@ -22,47 +25,101 @@
       @userLoggedIn="getBookBoxInfosByUser"
     />
 
-    <div v-else>
+    <div
+      v-else
+    >
       <!-- Personal Data -->
-      <table>
-        <tr>
-          <td class="form-label">{{ $t(Messages.USERNAME) }}:</td>
-          <td>{{ username }}</td>
-        </tr>
-        <tr>
-          <td class="form-label">{{ $t(Messages.PASSWORD) }}:</td>
+      <div class="box">
+        <div class="field">
+          <label class="label">
+            {{ $t(Messages.USERNAME) }}:
+          </label>
+          <div class="control">
+            <input
+              v-model="username"
+              class="input is-disabled"
+              disabled
+            >
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">
+            {{ $t(Messages.PASSWORD) }}:
+          </label>
+          <div class="control" />
           <td>
-            {{ maskPassword }}
+            <div class="field">
+              <div class="control">
+                <input
+                  class="input"
+                  type="password"
+                  :placeholder="$t(Messages.OLD_PASSWORD)"
+                  :disabled="!changePassword"
+                  :value="maskPassword"
+                >
+              </div>
+            </div>
 
-            <div v-if="changePassword">
-              <input :placeholder="$t(Messages.OLD_PASSWORD)">
-              <input :placeholder="$t(Messages.NEW_PASSWORD)">
-              <input :placeholder="$t(Messages.CONFIRM_NEW_PASSWORD)">
-              <br>
-              <button class="btn">
-                {{ $t(Messages.SENT) }}
-              </button>
-              <button
-                class="btn"
-                @click="changePassword = false"
-              >
-                {{ $t(Messages.CANCEL) }}
-              </button>
+            <div
+              v-if="changePassword"
+            >
+              <div class="field">
+                <div class="control">
+                  <input
+                    class="input"
+                    type="password"
+                    :placeholder="$t(Messages.NEW_PASSWORD)"
+                  >
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="control">
+                  <input
+                    class="input"
+                    type="password"
+                    :placeholder="$t(Messages.CONFIRM_NEW_PASSWORD)"
+                  >
+                </div>
+              </div>
+
+              <div class="field is-grouped">
+                <p class="control">
+                  <a class="button">{{ $t(Messages.SENT) }}</a>
+                </p><p class="control">
+                  <a
+                    class="button"
+                    @click="changePassword = false"
+                  >{{ $t(Messages.CANCEL) }}</a>
+                </p>
+              </div>
             </div>
           </td>
-        </tr>
-      </table>
+        </div>
+      </div>
 
       <!-- Created -->
-      <h2>Meine Bücherboxen:</h2>
+      <h2 class="title">
+        Meine Bücherboxen:
+      </h2>
       <div
         v-for="(box, idx) in created"
         :key="idx"
-        class="book-box-info"
+        class="box"
       >
         <h3>{{ box.description }}</h3>
-        <p>Ort: {{ box.location }}</p>
-        <p>Hinweis: {{ box.hint }}</p>
+        <p><label class="label">Ort:</label> {{ box.location }}</p>
+        <label class="label">
+          {{ $t(Messages.HINT) }}:
+        </label>
+        <ul>
+          <li
+            v-for="(hint, idx) in hints(box.hint)"
+            :key="idx"
+          >
+            {{ hint }}
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -88,10 +145,7 @@ export default {
   },
   computed: {
     ...mapState('BookStorage', ['created']),
-    ...mapState('User', ['userId', 'isLoggedIn', 'token', 'username']),
-    maskPassword1 () {
-      return this.changePassword ? '' : '******';
-    }
+    ...mapState('User', ['userId', 'isLoggedIn', 'token', 'username'])
   },
   watch: {
     async isLoggedIn () {
@@ -120,6 +174,9 @@ export default {
     },
     async getUserProfile () {
       await this.$store.dispatch('User/getProfile');
+    },
+    hints (hints) {
+      return hints ? hints.split('\n') : [];
     }
   }
 };

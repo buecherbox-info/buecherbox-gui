@@ -51,21 +51,21 @@ a:visited {
     margin-top: 50px;
 }
 
-.sidebar-element {
-    display: flex;
-    align-items: center;
-    height: 25px;
-    padding: .5em;
-    border-bottom: 1px solid grey;
-}
+/*.sidebar-element {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    height: 25px;*/
+/*    padding: .5em;*/
+/*    border-bottom: 1px solid grey;*/
+/*}*/
 
-.sidebar-element:hover {
-    text-decoration: underline;
-}
+/*.sidebar-element:hover {*/
+/*    text-decoration: underline;*/
+/*}*/
 
-.sidebar-element.first {
-    border-top: 1px solid grey;
-}
+/*.sidebar-element.first {*/
+/*    border-top: 1px solid grey;*/
+/*}*/
 
 .sidebar-lang {
     /*position: absolute;*/

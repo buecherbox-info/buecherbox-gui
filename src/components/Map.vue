@@ -33,7 +33,8 @@ export default {
         zoom: 1.0
       },
       showEdit: false,
-      popups: []
+      popups: [],
+      editPopup: null
     }
   },
   computed: {
@@ -48,6 +49,11 @@ export default {
         [Messages.LOGIN]: this.$t(Messages.LOGIN),
         [Messages.SAVE]: this.$t(Messages.SAVE)
       }
+    }
+  },
+  watch: {
+    targets () {
+      this.resetMap();
     }
   },
   async mounted () {
@@ -68,15 +74,14 @@ export default {
     EventBus.$on(EventNames.SAVE_NEW_BOOKBOX, async (bookbox) => {
       const newBox = await BookBox.postBookBoxInfos(this.userId, this.token, bookbox);
       await this.$store.commit('BookStorage/addTarget', newBox);
+      if (this.editPopup) {
+        this.editPopup.remove();
+        this.editPopup = null;
+      }
     });
 
     EventBus.$on(EventNames.CHANGE_LOCALE, () => {
-      this.popups.forEach((el) => {
-        el.remove();
-      });
-      this.targets.forEach((target) => {
-        this.addPopUp(this.map, target)
-      });
+      this.resetMap();
     });
   },
   beforeDestroy () {
@@ -109,7 +114,11 @@ export default {
       box.$mount('#infobox-wrapper');
     },
     clicked (event) {
-      new MapboxGl.Popup()
+      if (this.editPopup) {
+        this.editPopup.remove();
+      }
+
+      this.editPopup = new MapboxGl.Popup()
         .setLngLat(event.lngLat)
         .setHTML("<div id='edit-info-wrapper'></div>")
         .addTo(this.map);
@@ -129,7 +138,7 @@ export default {
 
       this.map.addControl(new MapboxGl.NavigationControl());
 
-      this.map.on('click', this.clicked);
+      this.map.on('contextmenu', this.clicked);
     },
     focusInfobox (coordinates) {
       if (!this.map) return;
@@ -143,6 +152,14 @@ export default {
       });
     },
     initMap () {
+      this.targets.forEach((target) => {
+        this.addPopUp(this.map, target)
+      });
+    },
+    resetMap () {
+      this.popups.forEach((el) => {
+        el.remove();
+      });
       this.targets.forEach((target) => {
         this.addPopUp(this.map, target)
       });

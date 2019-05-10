@@ -7,7 +7,9 @@
       v-if="!focused"
       class="book-box-info-preview"
     >
-      {{ shortName }}
+      <label class="label is-small is-center">
+        {{ shortName }}
+      </label>
       <img
         src="../assets/img/book-open.svg"
         alt="book-open-icon"
@@ -17,17 +19,35 @@
     <!-- Infos -->
     <div
       v-else
-      class="book-box-info"
+      class="book-box-info box"
     >
-      <h1>{{ name }}</h1>
-      <h2>{{ target.location }}</h2>
-      <img
-        v-if="imgSrc"
-        :src="imgSrc"
-        :alt="altImgTag"
-      >
-      <p>{{ texts[Messages.HINT] }}:</p>
-      <p>{{ target.hint }}</p>
+      <p class="title">
+        {{ name }}
+      </p>
+
+      <p class="subtitle is-6">
+        {{ target.location }}
+      </p>
+
+      <figure class="image">
+        <img
+          v-if="imgSrc"
+          :src="imgSrc"
+          :alt="altImgTag"
+        >
+      </figure>
+
+      <label class="label">
+        {{ texts[Messages.HINT] }}:
+      </label>
+      <ul>
+        <li
+          v-for="(hint, idx) in hints"
+          :key="idx"
+        >
+          {{ hint }}
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -84,6 +104,10 @@ export default {
       const imgId = this.target.imgid;
       const thumnail = this.focused ? '' : '/thumbnail';
       return imgId ? `http://localhost:3000/images/${imgId}${thumnail}` : '';
+    },
+    hints () {
+      let hint = this.target.hint;
+      return hint ? hint.split('\n') : [];
     }
   },
   created () {
