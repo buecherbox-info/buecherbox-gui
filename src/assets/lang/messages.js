@@ -23,5 +23,6 @@ export default {
   ADD_FAVORITE: 'addFavorite',
   REMOVE_FAVORITE: 'removeFavorite',
   EDIT_PROFILE: 'editProfile',
-  CHANGE_LOCALE: 'changeLocale'
+  CHANGE_LOCALE: 'changeLocale',
+  LOGIN_HINT: 'loginHint'
 };

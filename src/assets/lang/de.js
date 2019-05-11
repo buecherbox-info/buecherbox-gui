@@ -25,5 +25,6 @@ export default {
   [Messages.ADD_FAVORITE]: 'Favorit hinzufügen',
   [Messages.REMOVE_FAVORITE]: 'Favorit entfernen',
   [Messages.EDIT_PROFILE]: 'Profil bearbeiten',
-  [Messages.CHANGE_LOCALE]: 'Sprache ändern'
+  [Messages.CHANGE_LOCALE]: 'Sprache ändern',
+  [Messages.LOGIN_HINT]: 'Du musst dich erst einloggen um eine neue Bücherbox anzulegen.'
 }

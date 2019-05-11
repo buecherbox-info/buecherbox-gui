@@ -25,5 +25,6 @@ export default {
   [Messages.ADD_FAVORITE]: 'Add favorite',
   [Messages.REMOVE_FAVORITE]: 'Remove favorite',
   [Messages.EDIT_PROFILE]: 'Edit Profile',
-  [Messages.CHANGE_LOCALE]: 'Change language'
+  [Messages.CHANGE_LOCALE]: 'Change language',
+  [Messages.LOGIN_HINT]: 'You have to log in to create a new bookbox.'
 }

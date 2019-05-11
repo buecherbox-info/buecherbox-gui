@@ -56,7 +56,8 @@ export default {
         [Messages.LOGIN]: this.$t(Messages.LOGIN),
         [Messages.SAVE]: this.$t(Messages.SAVE),
         [Messages.ADD_FAVORITE]: this.$t(Messages.ADD_FAVORITE),
-        [Messages.REMOVE_FAVORITE]: this.$t(Messages.REMOVE_FAVORITE)
+        [Messages.REMOVE_FAVORITE]: this.$t(Messages.REMOVE_FAVORITE),
+        [Messages.LOGIN_HINT]: this.$t(Messages.LOGIN_HINT)
       }
     },
     locale () {

@@ -66,7 +66,7 @@
       </div>
     </div>
     <div v-else>
-      <p>Du musst dich erst einloggen um eine neue Bücherbox anzulegen.</p>
+      <p>{{ texts[Messages.LOGIN_HINT] }}</p>
       <span @click="login">{{ texts[Messages.LOGIN] }}</span>
     </div>
   </div>
