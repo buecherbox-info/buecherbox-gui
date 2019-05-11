@@ -51,12 +51,14 @@
     <div class="field is-grouped">
       <p class="control">
         <a
+          v-if="!register"
           class="button"
           @click="loginUser"
         >
           {{ $t(Messages.LOGIN) }}
         </a>
       </p>
+
       <p class="control">
         <a
           class="button"
@@ -65,6 +67,7 @@
           {{ registerLabel }}
         </a>
       </p>
+
       <p
         v-if="register"
         class="control"
