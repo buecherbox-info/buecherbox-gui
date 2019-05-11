@@ -6,6 +6,7 @@
         v-if="type === 'favorite'"
         src="../assets/img/trash.svg"
         style="cursor: pointer;"
+        :title="$t(Messages.REMOVE_FAVORITE)"
         @click="deleteFavorite"
       >
     </p>

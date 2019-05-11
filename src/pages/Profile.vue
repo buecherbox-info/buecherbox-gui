@@ -10,6 +10,7 @@
         src="../assets/img/edit.svg"
         alt="edit-icon"
         style="cursor: pointer"
+        :title="$t(Messages.EDIT_PROFILE)"
         @click="changePassword = !changePassword"
       >
 

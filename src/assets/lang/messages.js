@@ -19,5 +19,9 @@ export default {
   FAVORITES: 'favorites',
   ABOUT: 'about',
   CANCEL: 'cancel',
-  MAP: 'map'
+  MAP: 'map',
+  ADD_FAVORITE: 'addFavorite',
+  REMOVE_FAVORITE: 'removeFavorite',
+  EDIT_PROFILE: 'editProfile',
+  CHANGE_LOCALE: 'changeLocale'
 };

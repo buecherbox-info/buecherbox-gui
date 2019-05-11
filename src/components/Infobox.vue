@@ -28,12 +28,14 @@
             v-if="isFavorite"
             src="../assets/img/star_fill.svg"
             style="cursor: pointer;"
+            :title="texts[Messages.REMOVE_FAVORITE]"
             @click="removeFavorite"
           >
           <img
             v-else
             src="../assets/img/star.svg"
             style="cursor: pointer;"
+            :title="texts[Messages.ADD_FAVORITE]"
             @click="addFavorite"
           >
         </span>

@@ -21,5 +21,9 @@ export default {
   [Messages.FAVORITES]: 'Favoriten',
   [Messages.ABOUT]: 'Über',
   [Messages.CANCEL]: 'Abbrechen',
-  [Messages.MAP]: 'Karte'
+  [Messages.MAP]: 'Karte',
+  [Messages.ADD_FAVORITE]: 'Favorit hinzufügen',
+  [Messages.REMOVE_FAVORITE]: 'Favorit entfernen',
+  [Messages.EDIT_PROFILE]: 'Profil bearbeiten',
+  [Messages.CHANGE_LOCALE]: 'Sprache ändern'
 }

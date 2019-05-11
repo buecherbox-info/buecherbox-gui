@@ -86,6 +86,7 @@
           <div class="control has-icons-left">
             <div class="select is-rounded is-centered">
               <select
+                :title="$t(Messages.CHANGE_LOCALE)"
                 @change="changeLocale"
               >
                 <option
