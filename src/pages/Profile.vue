@@ -47,54 +47,52 @@
             {{ $t(Messages.PASSWORD) }}:
           </label>
           <div class="control" />
-          <td>
+          <div class="field">
+            <div class="control">
+              <input
+                class="input"
+                type="password"
+                :placeholder="$t(Messages.OLD_PASSWORD)"
+                :disabled="!changePassword"
+                :value="maskPassword"
+              >
+            </div>
+          </div>
+
+          <div
+            v-if="changePassword"
+          >
             <div class="field">
               <div class="control">
                 <input
                   class="input"
                   type="password"
-                  :placeholder="$t(Messages.OLD_PASSWORD)"
-                  :disabled="!changePassword"
-                  :value="maskPassword"
+                  :placeholder="$t(Messages.NEW_PASSWORD)"
                 >
               </div>
             </div>
 
-            <div
-              v-if="changePassword"
-            >
-              <div class="field">
-                <div class="control">
-                  <input
-                    class="input"
-                    type="password"
-                    :placeholder="$t(Messages.NEW_PASSWORD)"
-                  >
-                </div>
-              </div>
-
-              <div class="field">
-                <div class="control">
-                  <input
-                    class="input"
-                    type="password"
-                    :placeholder="$t(Messages.CONFIRM_NEW_PASSWORD)"
-                  >
-                </div>
-              </div>
-
-              <div class="field is-grouped">
-                <p class="control">
-                  <a class="button">{{ $t(Messages.SENT) }}</a>
-                </p><p class="control">
-                  <a
-                    class="button"
-                    @click="changePassword = false"
-                  >{{ $t(Messages.CANCEL) }}</a>
-                </p>
+            <div class="field">
+              <div class="control">
+                <input
+                  class="input"
+                  type="password"
+                  :placeholder="$t(Messages.CONFIRM_NEW_PASSWORD)"
+                >
               </div>
             </div>
-          </td>
+
+            <div class="field is-grouped">
+              <p class="control">
+                <a class="button">{{ $t(Messages.SENT) }}</a>
+              </p><p class="control">
+                <a
+                  class="button"
+                  @click="changePassword = false"
+                >{{ $t(Messages.CANCEL) }}</a>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -102,25 +100,11 @@
       <h2 class="title">
         Meine Bücherboxen:
       </h2>
-      <div
+      <book-info
         v-for="(box, idx) in created"
-        :key="idx"
-        class="box"
-      >
-        <h3>{{ box.description }}</h3>
-        <p><label class="label">Ort:</label> {{ box.location }}</p>
-        <label class="label">
-          {{ $t(Messages.HINT) }}:
-        </label>
-        <ul>
-          <li
-            v-for="(hint, idx) in hints(box.hint)"
-            :key="idx"
-          >
-            {{ hint }}
-          </li>
-        </ul>
-      </div>
+        :key="'box_' + idx"
+        :bookbox="box"
+      />
     </div>
   </div>
 </template>
@@ -129,11 +113,13 @@
 import { mapState } from 'vuex';
 import Messages from '../assets/lang/messages';
 
+import BookInfo from '../components/BookInfo';
 import LoginForm from '../components/LoginForm';
 
 export default {
   name: 'Profile',
   components: {
+    BookInfo,
     LoginForm
   },
   data () {

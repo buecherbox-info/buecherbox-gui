@@ -27,6 +27,7 @@
             <router-link
               to="/"
               class="sidebar-element"
+              :title="collapsed ? $t(Messages.MAP) : ''"
             >
               <img
                 src="../assets/img/map.svg"
@@ -39,6 +40,7 @@
             <router-link
               to="/favorites"
               class="sidebar-element"
+              :title="collapsed ? $t(Messages.FAVORITES) : ''"
             >
               <img
                 src="../assets/img/star.svg"
@@ -52,6 +54,7 @@
             <router-link
               to="/profile"
               class="sidebar-element"
+              :title="collapsed ? $t(Messages.PROFILE) : ''"
             >
               <img
                 src="../assets/img/user.svg"
@@ -64,6 +67,7 @@
             <router-link
               to="/about"
               class="sidebar-element"
+              :title="collapsed ? $t(Messages.ABOUT) : ''"
             >
               <img
                 src="../assets/img/info.svg"
@@ -94,7 +98,7 @@
             <div class="icon is-small is-left">
               <img
                 src="../assets/img/globe.svg"
-                alt="globe-icon&quot;"
+                alt="globe-icon"
               >
             </div>
           </div>
