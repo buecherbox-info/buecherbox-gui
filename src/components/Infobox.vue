@@ -23,6 +23,20 @@
     >
       <p class="title">
         {{ name }}
+        <span v-if="isLoggedIn">
+          <img
+            v-if="isFavorite"
+            src="../assets/img/star_fill.svg"
+            style="cursor: pointer;"
+            @click="removeFavorite"
+          >
+          <img
+            v-else
+            src="../assets/img/star.svg"
+            style="cursor: pointer;"
+            @click="addFavorite"
+          >
+        </span>
       </p>
 
       <p class="subtitle is-6">
@@ -70,6 +84,14 @@ export default {
     texts: {
       type: Object,
       default: null
+    },
+    isFavorite: {
+      type: Boolean,
+      default: false
+    },
+    isLoggedIn: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -126,6 +148,14 @@ export default {
 
       this.focused = true;
       EventBus.$emit(EventNames.FOCUS_INFOBOX, this.coordinates);
+    },
+    addFavorite () {
+      this.isFavorite = true;
+      EventBus.$emit(EventNames.ADD_FAVORITE, this.target.id);
+    },
+    removeFavorite () {
+      this.isFavorite = false;
+      EventBus.$emit(EventNames.DELETE_FAVORITE, this.target.id);
     }
   }
 };

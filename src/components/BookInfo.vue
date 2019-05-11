@@ -2,6 +2,12 @@
   <div class="box">
     <p class="title">
       {{ bookbox.description }}
+      <img
+        v-if="type === 'favorite'"
+        src="../assets/img/trash.svg"
+        style="cursor: pointer;"
+        @click="deleteFavorite"
+      >
     </p>
 
     <p class="subtitle">
@@ -31,6 +37,7 @@
 </template>
 
 <script>
+import { EventNames } from '../events';
 import Messages from '../assets/lang/messages';
 
 export default {
@@ -39,6 +46,10 @@ export default {
     bookbox: {
       type: Object,
       default: null
+    },
+    type: {
+      type: String,
+      default: 'info'
     }
   },
   data () {
@@ -53,6 +64,11 @@ export default {
     imgSrc () {
       const imgId = this.bookbox.imgid;
       return imgId ? `http://localhost:3000/images/${imgId}/thumbnail` : '';
+    }
+  },
+  methods: {
+    deleteFavorite () {
+      this.$emit(EventNames.DELETE_FAVORITE, this.bookbox.id);
     }
   }
 }

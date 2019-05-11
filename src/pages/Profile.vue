@@ -130,8 +130,10 @@ export default {
     }
   },
   computed: {
-    ...mapState('BookStorage', ['created']),
-    ...mapState('User', ['userId', 'isLoggedIn', 'token', 'username'])
+    ...mapState('User', ['userId', 'isLoggedIn', 'token', 'username']),
+    created () {
+      return this.$store.getters['BookStorage/created'](this.userId);
+    }
   },
   watch: {
     async isLoggedIn () {
@@ -150,6 +152,7 @@ export default {
   methods: {
     async logoutUser () {
       await this.$store.commit('User/logout');
+      await this.$store.commit('BookStorage/setFavorites', []);
     },
     async getBookBoxInfosByUser () {
       const user = {

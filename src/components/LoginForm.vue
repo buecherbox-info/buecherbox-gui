@@ -65,7 +65,10 @@
           {{ registerLabel }}
         </a>
       </p>
-      <p class="control" v-if="register">
+      <p
+        v-if="register"
+        class="control"
+      >
         <a
           class="button"
           @click="register = false"

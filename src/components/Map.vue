@@ -2,7 +2,8 @@
   <div id="map">
     <div
       id="geocoder"
-      class="geocoder"></div>
+      class="geocoder"
+    />
   </div>
 </template>
 
@@ -10,7 +11,7 @@
 import * as BookBox from '../lib/BookBox';
 import MapboxGl from 'mapbox-gl'
 import Vue from 'vue'
-import { mapState } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 import { EventBus, EventNames } from '../events'
 import Infobox from './Infobox'
@@ -43,6 +44,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('BookStorage', ['userFavorites']),
     ...mapState('BookStorage', ['targets']),
     ...mapState('User', ['isLoggedIn', 'userId', 'token']),
     texts () {
@@ -69,9 +71,18 @@ export default {
     }
   },
   async mounted () {
-    this.createMap();
+    if (!this.map) {
+      this.createMap();
+    }
 
     await this.$store.dispatch('BookStorage/getBookBoxInfos');
+    if (this.isLoggedIn) {
+      const user = {
+        userId: this.userId,
+        token: this.token
+      };
+      await this.$store.dispatch('BookStorage/getBookBoxFavoritesByUser', user);
+    }
 
     this.initMap();
 
@@ -95,9 +106,29 @@ export default {
     EventBus.$on(EventNames.CHANGE_LOCALE, () => {
       this.resetMap();
     });
+
+    EventBus.$on(EventNames.ADD_FAVORITE, async (bookboxId) => {
+      const favorite = {
+        userId: this.userId,
+        token: this.token,
+        bookboxId
+      };
+      await this.$store.dispatch('BookStorage/addFavorite', favorite);
+    });
+    EventBus.$on(EventNames.DELETE_FAVORITE, async (bookboxId) => {
+      const favorite = {
+        userId: this.userId,
+        token: this.token,
+        bookboxId
+      };
+      await this.$store.dispatch('BookStorage/deleteFavorite', favorite);
+    });
   },
   beforeDestroy () {
+    // Disable Event,
     EventBus.$off(EventNames.SAVE_NEW_BOOKBOX);
+    EventBus.$off(EventNames.ADD_FAVORITE);
+    EventBus.$off(EventNames.DELETE_FAVORITE);
   },
   methods: {
     addPopUp (map, target) {
@@ -123,6 +154,8 @@ export default {
       box.$props.map = this.map;
       box.$props.target = target;
       box.$props.texts = this.texts;
+      box.$props.isLoggedIn = this.isLoggedIn;
+      box.$props.isFavorite = this.isFavorite(target.id);
       box.$mount('#infobox-wrapper');
     },
     clicked (event) {
@@ -182,9 +215,16 @@ export default {
       this.popups.forEach((el) => {
         el.remove();
       });
+
+      this.popups = [];
+
       this.targets.forEach((target) => {
         this.addPopUp(this.map, target)
       });
+    },
+    isFavorite (bookboxId) {
+      const box = this.userFavorites.find(el => el.id === bookboxId);
+      return !!box;
     }
   }
 };

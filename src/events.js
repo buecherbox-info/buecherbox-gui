@@ -8,7 +8,9 @@ export const EventNames = {
   USER_LOGGED_OUT: 'userLoggedOut',
   SAVE_NEW_BOOKBOX: 'saveNewBookbox',
   TOGGLE_SIDEBAR: 'toggleSidebar',
-  CHANGE_LOCALE: 'changeLocale'
+  CHANGE_LOCALE: 'changeLocale',
+  ADD_FAVORITE: 'addFavorite',
+  DELETE_FAVORITE: 'deleteFavorite'
 };
 
 export const EventBus = new Vue();

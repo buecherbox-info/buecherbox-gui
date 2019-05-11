@@ -43,3 +43,25 @@ export async function postBookBoxInfos (userId, token, bookbox) {
   const result = await Axios.post('/bookboxes', formData, options);
   return result.data;
 }
+
+export async function addFavorite (userId, token, bookboxId) {
+  const options = {
+    headers: { 'Authorization': `bearer ${token}` }
+  };
+
+  const result = await Axios.post(`/users/${userId}/favorites`, { bookboxId }, options);
+  return result.data;
+}
+
+export async function deleteFavorite (userId, token, bookboxId) {
+  const options = {
+    method: 'DELETE',
+    url: `/users/${userId}/favorites`,
+    headers: { 'Authorization': `bearer ${token}` },
+    data: {
+      bookboxId
+    }
+  };
+
+  await Axios(options);
+}

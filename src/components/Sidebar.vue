@@ -79,7 +79,10 @@
         </ul>
 
         <!-- Language -->
-        <div class="field" v-if="!collapsed">
+        <div
+          v-if="!collapsed"
+          class="field"
+        >
           <div class="control has-icons-left">
             <div class="select is-rounded is-centered">
               <select
