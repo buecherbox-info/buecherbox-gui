@@ -1,7 +1,6 @@
 <template>
   <!-- Login -->
   <div
-    v-if="!isLoggedIn"
     id="login-form"
     class="box"
   >
@@ -80,14 +79,6 @@
         </a>
       </p>
     </div>
-  </div>
-
-  <!-- Logout-->
-  <div v-else>
-    <p>Sie sind bereits eingeloggt.</p>
-    <button @click="logoutUser">
-      {{ $t(Messages.LOGOUT) }}:
-    </button>
   </div>
 </template>
 

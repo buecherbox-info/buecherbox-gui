@@ -2,10 +2,7 @@
   <div id="favorites">
     <h1>{{ $t(Messages.FAVORITES) }}</h1>
 
-    <LoginForm
-      v-if="!isLoggedIn"
-      @userLoggedIn="getBookBoxInfosByUser"
-    />
+    <LoginForm v-if="!isLoggedIn" />
 
     <div v-else>
       <!-- Created -->
@@ -44,7 +41,9 @@ export default {
   },
   watch: {
     async isLoggedIn () {
-      await this.getBookBoxFavoritesByUser();
+      if (this.isLoggedIn) {
+        await this.getBookBoxFavoritesByUser();
+      }
     }
   },
   async mounted () {
