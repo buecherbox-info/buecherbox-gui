@@ -26,13 +26,13 @@
           <li>
             <router-link
               to="/"
-              class="sidebar-element first"
+              class="sidebar-element"
             >
               <img
-                src="../assets/img/home.svg"
+                src="../assets/img/map.svg"
                 alt="home-icon"
               >
-              <span v-if="!collapsed">{{ $t(Messages.OVERVIEW) }}</span>
+              <span v-if="!collapsed">{{ $t(Messages.MAP) }}</span>
             </router-link>
           </li>
           <li>
@@ -51,6 +51,7 @@
           <li>
             <router-link
               to="/profile"
+              class="sidebar-element"
             >
               <img
                 src="../assets/img/user.svg"
@@ -74,19 +75,29 @@
         </ul>
 
         <!-- Language -->
-        <div class="select is-rounded is-centered">
-          <select
-            v-if="!collapsed"
-            @change="changeLocale"
-          >
-            <option
-              v-for="(lang, idx) in languages"
-              :key="idx + lang.code"
-              :value="lang.code"
-            >
-              {{ lang.language }}
-            </option>
-          </select>
+        <div class="field" v-if="!collapsed">
+          <div class="control has-icons-left">
+            <div class="select is-rounded is-centered">
+              <select
+                @change="changeLocale"
+              >
+                <option
+                  v-for="(lang, idx) in languages"
+                  :key="idx + lang.code"
+                  :value="lang.code"
+                  :selected="$i18n.locale === lang.code"
+                >
+                  {{ lang.language }}
+                </option>
+              </select>
+            </div>
+            <div class="icon is-small is-left">
+              <img
+                src="../assets/img/globe.svg"
+                alt="globe-icon&quot;"
+              >
+            </div>
+          </div>
         </div>
       </div>
     </transition>
@@ -114,7 +125,7 @@ export default {
   computed: {
     wrapperCss () {
       return {
-        'menu': true,
+        'box': true,
         'sidebar-wrapper': true,
         'collapsed': this.collapsed
       }

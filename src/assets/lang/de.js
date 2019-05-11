@@ -20,5 +20,6 @@ export default {
   [Messages.OVERVIEW]: 'Übersicht',
   [Messages.FAVORITES]: 'Favoriten',
   [Messages.ABOUT]: 'Über',
-  [Messages.CANCEL]: 'Abbrechen'
+  [Messages.CANCEL]: 'Abbrechen',
+  [Messages.MAP]: 'Karte'
 }

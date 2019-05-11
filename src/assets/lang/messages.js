@@ -18,5 +18,6 @@ export default {
   OVERVIEW: 'overview',
   FAVORITES: 'favorites',
   ABOUT: 'about',
-  CANCEL: 'cancel'
+  CANCEL: 'cancel',
+  MAP: 'map'
 };
