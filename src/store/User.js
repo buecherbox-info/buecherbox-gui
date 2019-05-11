@@ -7,7 +7,8 @@ const state = {
   username: '',
   password: '',
   passwordConfirmation: '',
-  token: ''
+  token: '',
+  locale: 'en'
 };
 
 // getters
@@ -64,6 +65,9 @@ const mutations = {
   },
   setToken (state, token) {
     state.token = token;
+  },
+  setLocale (state, locale) {
+    state.locale = locale;
   }
 };
 

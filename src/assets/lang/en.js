@@ -28,5 +28,6 @@ export default {
   [Messages.CHANGE_LOCALE]: 'Change language',
   [Messages.LOGIN_HINT]: 'You have to log in to create a new bookbox.',
   [Messages.HIDE_SIDEBAR]: 'Hide sidebar',
-  [Messages.SHOW_SIDEBAR]: 'Show sidebar'
+  [Messages.SHOW_SIDEBAR]: 'Show sidebar',
+  [Messages.LOGOUT_USER]: 'Logout user'
 }

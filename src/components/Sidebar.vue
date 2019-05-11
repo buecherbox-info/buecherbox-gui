@@ -147,7 +147,9 @@ export default {
       this.$emit(EventNames.TOGGLE_SIDEBAR);
     },
     changeLocale (event) {
-      this.$i18n.locale = event.target.value;
+      const locale = event.target.value;
+      this.$i18n.locale = locale;
+      this.$store.commit('User/setLocale', locale);
       EventBus.$emit(EventNames.CHANGE_LOCALE);
     }
   }

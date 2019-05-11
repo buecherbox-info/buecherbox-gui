@@ -1,9 +1,6 @@
 <template>
   <div class="app">
-    <Sidebar
-      class="sidebar"
-      @toggleSidebar="toggledSidebar = !toggledSidebar"
-    />
+    <Sidebar class="sidebar" />
     <div class="content">
       <router-view />
     </div>
@@ -21,9 +18,10 @@ export default {
     Sidebar
   },
   computed: {
-    ...mapState('User', ['userId', 'isLoggedIn', 'token'])
+    ...mapState('User', ['userId', 'isLoggedIn', 'token', 'locale'])
   },
   async created () {
+    this.$i18n.locale = this.locale;
     await this.getBookbBoxInfos();
   },
   methods: {

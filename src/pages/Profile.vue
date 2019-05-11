@@ -16,7 +16,8 @@
 
       <a
         v-if="isLoggedIn"
-        class="button is-link is-pulled-right"
+        class="button is-small is-pulled-right"
+        :title="$t(Messages.LOGOUT_USER)"
         @click="logoutUser"
       >Logout</a>
     </h1>

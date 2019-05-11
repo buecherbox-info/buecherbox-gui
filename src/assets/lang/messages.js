@@ -26,5 +26,6 @@ export default {
   CHANGE_LOCALE: 'changeLocale',
   LOGIN_HINT: 'loginHint',
   HIDE_SIDEBAR: 'hideSidebar',
-  SHOW_SIDEBAR: 'showSidebar'
+  SHOW_SIDEBAR: 'showSidebar',
+  LOGOUT_USER: 'logoutUser'
 };

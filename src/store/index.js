@@ -21,7 +21,8 @@ export default new Vuex.Store({
         'User.isLoggedIn',
         'User.userId',
         'User.username',
-        'User.token'
+        'User.token',
+        'User.locale'
       ]
     })
   ],
