@@ -193,11 +193,4 @@ export default {
 <style>
 @import "../assets/css/components/map.css";
 @import "~@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
-.geocoder {
-  position:absolute;
-  z-index:1;
-  width: 100%;
-  left:50%;
-  top:2em;
-}
 </style>

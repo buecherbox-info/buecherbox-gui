@@ -6,6 +6,7 @@
  * Index
  * - Mapbox GL Map
  * - Mapbox GL Popup
+ * - Mapbox GL Geocoder
  */
 
 /**
@@ -23,4 +24,18 @@
  */
 .mapboxgl-popup-content {
     border-radius: 25px;
+}
+
+/**
+ * Mapbox GL Geocoder
+ */
+.geocoder {
+    z-index:1;
+    position: absolute;
+    top:2em;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
 }
