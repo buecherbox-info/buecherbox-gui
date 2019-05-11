@@ -24,5 +24,7 @@ export default {
   REMOVE_FAVORITE: 'removeFavorite',
   EDIT_PROFILE: 'editProfile',
   CHANGE_LOCALE: 'changeLocale',
-  LOGIN_HINT: 'loginHint'
+  LOGIN_HINT: 'loginHint',
+  HIDE_SIDEBAR: 'hideSidebar',
+  SHOW_SIDEBAR: 'showSidebar'
 };

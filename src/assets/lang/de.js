@@ -26,5 +26,7 @@ export default {
   [Messages.REMOVE_FAVORITE]: 'Favorit entfernen',
   [Messages.EDIT_PROFILE]: 'Profil bearbeiten',
   [Messages.CHANGE_LOCALE]: 'Sprache ändern',
-  [Messages.LOGIN_HINT]: 'Du musst dich erst einloggen um eine neue Bücherbox anzulegen.'
+  [Messages.LOGIN_HINT]: 'Du musst dich erst einloggen um eine neue Bücherbox anzulegen.',
+  [Messages.HIDE_SIDEBAR]: 'Seitenleiste ausblenden',
+  [Messages.SHOW_SIDEBAR]: 'Seitenleiste anzeigen'
 }

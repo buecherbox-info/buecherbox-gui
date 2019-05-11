@@ -7,6 +7,7 @@
           src="../assets/img/menu.svg"
           alt="menu-icon"
           class="menu-icon"
+          :title="$t(Messages.SHOW_SIDEBAR)"
           @click="toggleSidebar"
         >
         <img
@@ -14,6 +15,7 @@
           src="../assets/img/x.svg"
           alt="menu-icon"
           class="menu-icon"
+          :title="$t(Messages.HIDE_SIDEBAR)"
           @click="toggleSidebar"
         >
       </transition>
