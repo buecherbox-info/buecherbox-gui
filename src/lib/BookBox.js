@@ -14,6 +14,15 @@ export async function getBookBoxInfosByUser (userId, token) {
   return result.data;
 }
 
+export async function getBookBoxFavoritesByUser (userId, token) {
+  const options = {
+    headers: { 'Authorization': `bearer ${token}` }
+  };
+
+  const result = await Axios.get(`/users/${userId}/favorites`, options);
+  return result.data;
+}
+
 export async function postBookBoxInfos (userId, token, bookbox) {
   const formData = new FormData();
   formData.append('userid', userId);

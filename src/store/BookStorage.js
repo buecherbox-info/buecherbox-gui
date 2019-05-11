@@ -3,7 +3,8 @@ const BookBox = require('../lib/BookBox');
 // initial state
 const state = {
   targets: [],
-  created: []
+  created: [],
+  favorites: []
 };
 
 // getters
@@ -19,6 +20,10 @@ const actions = {
   async getBookBoxInfosByUser (context, user) {
     const created = await BookBox.getBookBoxInfosByUser(user.userId, user.token);
     context.commit('setCreated', created);
+  },
+  async getBookBoxFavoritesByUser (context, user) {
+    const created = await BookBox.getBookBoxFavoritesByUser(user.userId, user.token);
+    context.commit('setFavorites', created);
   }
 };
 
@@ -32,6 +37,9 @@ const mutations = {
   },
   addTarget (state, target) {
     state.targets.push(target);
+  },
+  setFavorites (state, favorites) {
+    state.favorites = favorites;
   }
 };
 
