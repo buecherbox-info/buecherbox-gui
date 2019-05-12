@@ -47,7 +47,7 @@
           <input
             :ref="Messages.PASSWORD"
             v-model="password"
-            v-validate="'required'"
+            v-validate="'required|password'"
             :data-vv-as="$t(Messages.PASSWORD)"
             :name="Messages.PASSWORD"
             type="password"
