@@ -33,5 +33,7 @@ export default {
   [Messages.SHOW_ON_MAP]: 'Показать на карте',
   [Messages.WRONG_AUTH]: 'Ваше имя пользователя или пароль неверны.',
   [Messages.LOGIN_FAILED]: 'Не удалось войти в систему.',
-  [Messages.MY_BOOKBOXES]: 'Мои книжные шкафчики'
+  [Messages.MY_BOOKBOXES]: 'Мои книжные шкафчики',
+  [Messages.REGISTERATION_FAILED]: 'Регистрация не прошла.',
+  [Messages.USERNAME_EXISTS]: 'Имя пользователя уже существует.'
 }

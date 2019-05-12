@@ -33,5 +33,7 @@ export default {
   [Messages.SHOW_ON_MAP]: 'Show on map',
   [Messages.WRONG_AUTH]: 'Your username or password is incorrect.',
   [Messages.LOGIN_FAILED]: 'Login failed.',
-  [Messages.MY_BOOKBOXES]: 'My bookboxes'
+  [Messages.MY_BOOKBOXES]: 'My bookboxes',
+  [Messages.REGISTERATION_FAILED]: 'Registration failed.',
+  [Messages.USERNAME_EXISTS]: 'Username already exists.'
 }

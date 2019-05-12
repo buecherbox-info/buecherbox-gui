@@ -148,8 +148,6 @@ export default {
         errorMsg += ' ';
       });
 
-      console.log(errorMsg);
-
       return errorMsg;
     }
   },
@@ -171,11 +169,19 @@ export default {
       this.$emit(EventNames.USER_LOGGED_OUT);
     },
     async registerUser () {
-      if (this.register) {
-        if (this.password !== this.passwordConfirmation) return;
-        await this.$store.dispatch('User/register');
-      } else {
-        this.register = !this.register;
+      try {
+        if (this.register) {
+          if (this.password !== this.passwordConfirmation) return;
+          await this.$store.dispatch('User/register');
+        } else {
+          this.register = !this.register;
+        }
+      } catch (e) {
+        this.showNotification = true;
+        if (e.response.status === 409) {
+          this.errorMessages.push(Messages.REGISTERATION_FAILED);
+          this.errorMessages.push(Messages.USERNAME_EXISTS);
+        }
       }
     }
   }

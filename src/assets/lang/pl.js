@@ -33,5 +33,7 @@ export default {
   [Messages.SHOW_ON_MAP]: 'Pokaż na mapie',
   [Messages.WRONG_AUTH]: 'Twoja nazwa użytkownika lub hasło są nieprawidłowe.',
   [Messages.LOGIN_FAILED]: 'Logowanie nie powiodło się.',
-  [Messages.MY_BOOKBOXES]: 'Moje pudełka na książki'
+  [Messages.MY_BOOKBOXES]: 'Moje pudełka na książki',
+  [Messages.REGISTERATION_FAILED]: 'Rejestracja nie powiodła się.',
+  [Messages.USERNAME_EXISTS]: 'Nazwa użytkownika już istnieje.'
 }

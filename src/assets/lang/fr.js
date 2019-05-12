@@ -33,5 +33,7 @@ export default {
   [Messages.SHOW_ON_MAP]: 'Afficher sur la carte',
   [Messages.WRONG_AUTH]: 'Votre nom d\'utilisateur ou mot de passe est incorrect.',
   [Messages.LOGIN_FAILED]: 'La connexion a échoué.',
-  [Messages.MY_BOOKBOXES]: 'Ma boîte à livres'
+  [Messages.MY_BOOKBOXES]: 'Ma boîte à livres',
+  [Messages.REGISTERATION_FAILED]: "L'enregistrement a échoué.",
+  [Messages.USERNAME_EXISTS]: "Le nom d'utilisateur existe déjà."
 }

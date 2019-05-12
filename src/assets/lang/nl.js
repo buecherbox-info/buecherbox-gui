@@ -33,5 +33,7 @@ export default {
   [Messages.SHOW_ON_MAP]: 'Toon op de kaart',
   [Messages.WRONG_AUTH]: 'Uw gebruikersnaam of wachtwoord is onjuist.',
   [Messages.LOGIN_FAILED]: 'Inloggen is mislukt.',
-  [Messages.MY_BOOKBOXES]: 'Mijn boekenkasten'
+  [Messages.MY_BOOKBOXES]: 'Mijn boekenkasten',
+  [Messages.REGISTERATION_FAILED]: 'Registratie is mislukt.',
+  [Messages.USERNAME_EXISTS]: 'De gebruikersnaam bestaat al.'
 }

@@ -33,5 +33,7 @@ export default {
   [Messages.SHOW_ON_MAP]: 'Mostra sulla mappa',
   [Messages.WRONG_AUTH]: 'Il tuo nome utente o password non è corretto.',
   [Messages.LOGIN_FAILED]: 'Login fallito.',
-  [Messages.MY_BOOKBOXES]: 'I miei bookboxes'
+  [Messages.MY_BOOKBOXES]: 'I miei bookboxes',
+  [Messages.REGISTERATION_FAILED]: 'Registrazione fallita.',
+  [Messages.USERNAME_EXISTS]: 'Il nome utente esiste già.'
 }

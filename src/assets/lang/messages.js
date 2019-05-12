@@ -31,5 +31,7 @@ export default {
   SHOW_ON_MAP: 'showOnMap',
   WRONG_AUTH: 'wrongAuth',
   LOGIN_FAILED: 'loginFailed',
-  MY_BOOKBOXES: 'myBookboxes'
+  MY_BOOKBOXES: 'myBookboxes',
+  REGISTERATION_FAILED: 'registrationFailed',
+  USERNAME_EXISTS: 'usernameExists'
 };
