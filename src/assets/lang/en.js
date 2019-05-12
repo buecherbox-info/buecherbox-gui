@@ -30,5 +30,8 @@ export default {
   [Messages.HIDE_SIDEBAR]: 'Hide sidebar',
   [Messages.SHOW_SIDEBAR]: 'Show sidebar',
   [Messages.LOGOUT_USER]: 'Logout user',
-  [Messages.SHOW_ON_MAP]: 'Show on map'
+  [Messages.SHOW_ON_MAP]: 'Show on map',
+  [Messages.WRONG_AUTH]: 'Your username or password is incorrect.',
+  [Messages.LOGIN_FAILED]: 'Login failed.',
+  [Messages.MY_BOOKBOXES]: 'My bookboxes'
 }

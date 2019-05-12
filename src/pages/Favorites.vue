@@ -1,5 +1,5 @@
 <template>
-  <div id="favorites">
+  <div id="favorites" class="content">
     <h1>{{ $t(Messages.FAVORITES) }}</h1>
 
     <LoginForm v-if="!isLoggedIn" />

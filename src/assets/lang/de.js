@@ -30,5 +30,8 @@ export default {
   [Messages.HIDE_SIDEBAR]: 'Seitenleiste ausblenden',
   [Messages.SHOW_SIDEBAR]: 'Seitenleiste anze,igen',
   [Messages.LOGOUT_USER]: 'Benutzer abmelden',
-  [Messages.SHOW_ON_MAP]: 'Auf Karte zeigen'
+  [Messages.SHOW_ON_MAP]: 'Auf Karte zeigen',
+  [Messages.WRONG_AUTH]: 'Ihr Benutzername oder Passwort ist falsch.',
+  [Messages.LOGIN_FAILED]: 'Login Fehlgeschlagen.',
+  [Messages.MY_BOOKBOXES]: 'Meine Bücherboxen:'
 }

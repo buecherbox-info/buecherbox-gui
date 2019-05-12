@@ -6,6 +6,19 @@
   >
     <h3>{{ $t(Messages.LOGIN) }}</h3>
 
+    <!-- Notification -->
+    <div
+      v-if="showNotification"
+      class="notification is-danger"
+    >
+      <button
+        class="delete"
+        @click="showNotification = false"
+      />
+      {{ errorMessage }}
+    </div>
+
+    <!-- Login -->
     <div class="field">
       <label class="label">
         {{ $t(Messages.USERNAME) }}:
@@ -33,6 +46,7 @@
       </div>
     </div>
 
+    <!-- Register -->
     <div
       v-if="register"
       class="field"
@@ -92,7 +106,9 @@ export default {
   data () {
     return {
       Messages,
-      register: false
+      register: false,
+      showNotification: false,
+      errorMessages: []
     }
   },
   computed: {
@@ -103,7 +119,7 @@ export default {
       },
       set (value) {
         this.$store.commit('User/setUsername', value);
-      }
+      },
     },
     password: {
       get () {
@@ -123,12 +139,32 @@ export default {
     },
     registerLabel () {
       return this.register ? this.$t(Messages.SENT) : this.$t(Messages.REGISTER);
+    },
+    errorMessage () {
+      let errorMsg = '';
+
+      this.errorMessages.forEach((msg) => {
+        errorMsg += this.$t(msg);
+        errorMsg += ' ';
+      });
+
+      console.log(errorMsg);
+
+      return errorMsg;
     }
   },
   methods: {
     async loginUser () {
-      await this.$store.dispatch('User/login');
-      this.$emit(EventNames.USER_LOGGED_IN);
+      try {
+        await this.$store.dispatch('User/login');
+        this.$emit(EventNames.USER_LOGGED_IN);
+      } catch (e) {
+        this.showNotification = true;
+        if (e.response.status === 401) {
+          this.errorMessages.push(Messages.LOGIN_FAILED);
+          this.errorMessages.push(Messages.WRONG_AUTH);
+        }
+      }
     },
     async logoutUser () {
       await this.$store.commit('User/logout');
@@ -146,5 +182,5 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped src="../assets/css/components/loginform.css">
 </style>

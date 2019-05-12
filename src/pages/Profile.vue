@@ -1,6 +1,7 @@
 <template>
   <div
     id="profile"
+    class="content"
   >
     <h1 class="title">
       {{ $t(Messages.PROFILE) }}
@@ -13,14 +14,16 @@
         :title="$t(Messages.EDIT_PROFILE)"
         @click="changePassword = !changePassword"
       >
-
-      <a
-        v-if="isLoggedIn"
-        class="button is-small is-pulled-right"
-        :title="$t(Messages.LOGOUT_USER)"
-        @click="logoutUser"
-      >Logout</a>
     </h1>
+
+    <a
+      v-if="isLoggedIn"
+      class="subtitle button is-small"
+      :title="$t(Messages.LOGOUT_USER)"
+      @click="logoutUser"
+    >
+      Logout
+    </a>
 
     <LoginForm
       v-if="!isLoggedIn"
@@ -54,9 +57,8 @@
               <input
                 class="input"
                 type="password"
-                :placeholder="$t(Messages.OLD_PASSWORD)"
+                :placeholder="!changePassword ? '******' : $t(Messages.OLD_PASSWORD)"
                 :disabled="!changePassword"
-                :value="maskPassword"
               >
             </div>
           </div>
@@ -100,8 +102,9 @@
 
       <!-- Created -->
       <h2 class="title">
-        Meine Bücherboxen:
+        {{ $t(Messages.MY_BOOKBOXES) }}:
       </h2>
+
       <book-info
         v-for="(box, idx) in created"
         :key="'box_' + idx"
@@ -127,8 +130,7 @@ export default {
   data () {
     return {
       Messages,
-      changePassword: false,
-      maskPassword: '******'
+      changePassword: false
     }
   },
   computed: {

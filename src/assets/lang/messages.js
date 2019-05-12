@@ -28,5 +28,8 @@ export default {
   HIDE_SIDEBAR: 'hideSidebar',
   SHOW_SIDEBAR: 'showSidebar',
   LOGOUT_USER: 'logoutUser',
-  SHOW_ON_MAP: 'showOnMap'
+  SHOW_ON_MAP: 'showOnMap',
+  WRONG_AUTH: 'wrongAuth',
+  LOGIN_FAILED: 'loginFailed',
+  MY_BOOKBOXES: 'myBookboxes'
 };
