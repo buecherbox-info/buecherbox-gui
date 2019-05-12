@@ -20,29 +20,44 @@
 
     <!-- Login -->
     <div class="field">
-      <label class="label">
-        {{ $t(Messages.USERNAME) }}:
-      </label>
-      <div class="control">
-        <input
-          v-model="username"
-          class="input"
-          :placeholder="$t(Messages.USERNAME)"
-        >
+      <div class="field">
+        <label class="label">
+          {{ $t(Messages.USERNAME) }}:
+        </label>
+        <div class="control">
+          <input
+            v-model="username"
+            v-validate="'required'"
+            :data-vv-as="$t(Messages.USERNAME)"
+            :name="Messages.USERNAME"
+            class="input"
+            :placeholder="$t(Messages.USERNAME)"
+          >
+        </div>
+        <p class="help is-danger">
+          {{ errors.first(Messages.USERNAME) }}
+        </p>
       </div>
-    </div>
 
-    <div class="field">
-      <label class="label">
-        {{ $t(Messages.PASSWORD) }}:
-      </label>
-      <div class="control">
-        <input
-          v-model="password"
-          type="password"
-          class="input"
-          :placeholder="$t(Messages.PASSWORD)"
-        >
+      <div class="field">
+        <label class="label">
+          {{ $t(Messages.PASSWORD) }}:
+        </label>
+        <div class="control">
+          <input
+            :ref="Messages.PASSWORD"
+            v-model="password"
+            v-validate="'required'"
+            :data-vv-as="$t(Messages.PASSWORD)"
+            :name="Messages.PASSWORD"
+            type="password"
+            class="input"
+            :placeholder="$t(Messages.PASSWORD)"
+          >
+        </div>
+        <p class="help is-danger">
+          {{ errors.first(Messages.PASSWORD) }}
+        </p>
       </div>
     </div>
 
@@ -54,11 +69,17 @@
       <div class="control">
         <input
           v-model="passwordConfirmation"
+          v-validate="validateConfirmPassword"
           type="password"
+          :data-vv-as="$t(Messages.CONFIRM_PASSWORD)"
+          :name="Messages.CONFIRM_PASSWORD"
           class="input"
           :placeholder="$t(Messages.CONFIRM_PASSWORD)"
         >
       </div>
+      <p class="help is-danger">
+        {{ errors.first(Messages.CONFIRM_PASSWORD) }}
+      </p>
     </div>
 
     <div class="field is-grouped">
@@ -66,18 +87,35 @@
         <a
           v-if="!register"
           class="button"
+          :disabled="errors.any()"
           @click="loginUser"
         >
           {{ $t(Messages.LOGIN) }}
         </a>
       </p>
 
-      <p class="control">
+      <p
+        v-if="!register"
+        class="control"
+      >
         <a
           class="button"
+          @click="register = true"
+        >
+          {{ $t(Messages.REGISTER) }}
+        </a>
+      </p>
+
+      <p
+        v-if="register"
+        class="control"
+      >
+        <a
+          class="button"
+          :disabled="errors.any()"
           @click="registerUser"
         >
-          {{ registerLabel }}
+          {{ $t(Messages.SENT) }}
         </a>
       </p>
 
@@ -97,7 +135,7 @@
 </template>
 
 <script>
-import { EventNames } from '../events';
+import { EventNames } from '../plugins/events';
 import { mapState } from 'vuex';
 import Messages from '../assets/lang/messages';
 
@@ -119,7 +157,7 @@ export default {
       },
       set (value) {
         this.$store.commit('User/setUsername', value);
-      },
+      }
     },
     password: {
       get () {
@@ -149,6 +187,9 @@ export default {
       });
 
       return errorMsg;
+    },
+    validateConfirmPassword () {
+      return `required|confirmed:${Messages.PASSWORD}`;
     }
   },
   methods: {

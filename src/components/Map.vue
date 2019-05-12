@@ -13,7 +13,7 @@ import MapboxGl from 'mapbox-gl'
 import Vue from 'vue'
 import { mapGetters, mapState } from 'vuex'
 
-import { EventBus, EventNames } from '../events'
+import { EventBus, EventNames } from '../plugins/events'
 import Infobox from './Infobox'
 import EditInfo from './EditInfo'
 import Messages from '../assets/lang/messages';
