@@ -128,7 +128,14 @@ export default {
       collapsed: false,
       languages: [
         { code: 'de', language: 'Deutsch' },
-        { code: 'en', language: 'Englisch' }
+        { code: 'en', language: 'English' },
+        { code: 'es', language: 'Español' },
+        { code: 'fr', language: 'Français' },
+        { code: 'it', language: 'Italiano' },
+        { code: 'nl', language: 'Nederlands' },
+        { code: 'pl', language: 'Polski' },
+        { code: 'pt', language: 'Português' },
+        { code: 'ru', language: 'Русский язык' }
       ]
     }
   },
