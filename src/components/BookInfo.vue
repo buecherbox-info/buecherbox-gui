@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { EventNames } from '../events';
+import { EventNames } from '../plugins/events';
 import Messages from '../assets/lang/messages';
 
 export default {

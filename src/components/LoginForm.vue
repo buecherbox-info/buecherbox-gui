@@ -20,29 +20,39 @@
 
     <!-- Login -->
     <div class="field">
-      <label class="label">
-        {{ $t(Messages.USERNAME) }}:
-      </label>
-      <div class="control">
-        <input
-          v-model="username"
-          class="input"
-          :placeholder="$t(Messages.USERNAME)"
-        >
+      <div class="field">
+        <label class="label">
+          {{ $t(Messages.USERNAME) }}:
+        </label>
+        <div class="control">
+          <input
+            v-model="username"
+            v-validate="'required'"
+            :data-vv-as="$t(Messages.USERNAME)"
+            :name="Messages.USERNAME"
+            class="input"
+            :placeholder="$t(Messages.USERNAME)"
+          >
+        </div>
+        <p class="help is-danger">{{ errors.first(Messages.USERNAME) }}</p>
       </div>
-    </div>
 
-    <div class="field">
-      <label class="label">
-        {{ $t(Messages.PASSWORD) }}:
-      </label>
-      <div class="control">
-        <input
-          v-model="password"
-          type="password"
-          class="input"
-          :placeholder="$t(Messages.PASSWORD)"
-        >
+      <div class="field">
+        <label class="label">
+          {{ $t(Messages.PASSWORD) }}:
+        </label>
+        <div class="control">
+          <input
+            v-model="password"
+            v-validate="'required'"
+            :data-vv-as="$t(Messages.PASSWORD)"
+            :name="Messages.PASSWORD"
+            type="password"
+            class="input"
+            :placeholder="$t(Messages.PASSWORD)"
+          >
+        </div>
+        <p class="help is-danger">{{ errors.first(Messages.PASSWORD) }}</p>
       </div>
     </div>
 
@@ -55,10 +65,14 @@
         <input
           v-model="passwordConfirmation"
           type="password"
+          v-validate="'required'"
+          :data-vv-as="$t(Messages.CONFIRM_PASSWORD)"
+          :name="Messages.CONFIRM_PASSWORD"
           class="input"
           :placeholder="$t(Messages.CONFIRM_PASSWORD)"
         >
       </div>
+      <p class="help is-danger">{{ errors.first(Messages.CONFIRM_PASSWORD) }}</p>
     </div>
 
     <div class="field is-grouped">
@@ -97,7 +111,7 @@
 </template>
 
 <script>
-import { EventNames } from '../events';
+import { EventNames } from '../plugins/events';
 import { mapState } from 'vuex';
 import Messages from '../assets/lang/messages';
 
@@ -119,7 +133,7 @@ export default {
       },
       set (value) {
         this.$store.commit('User/setUsername', value);
-      },
+      }
     },
     password: {
       get () {

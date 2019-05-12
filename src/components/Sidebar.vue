@@ -117,7 +117,7 @@
 </template>
 
 <script>
-import { EventBus, EventNames } from '../events'
+import { EventBus, EventNames } from '../plugins/events'
 import Messages from '../assets/lang/messages';
 
 export default {
