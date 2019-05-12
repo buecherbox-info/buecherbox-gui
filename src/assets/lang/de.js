@@ -28,6 +28,7 @@ export default {
   [Messages.CHANGE_LOCALE]: 'Sprache ändern',
   [Messages.LOGIN_HINT]: 'Du musst dich erst einloggen um eine neue Bücherbox anzulegen.',
   [Messages.HIDE_SIDEBAR]: 'Seitenleiste ausblenden',
-  [Messages.SHOW_SIDEBAR]: 'Seitenleiste anzeigen',
-  [Messages.LOGOUT_USER]: 'Benutzer abmelden'
+  [Messages.SHOW_SIDEBAR]: 'Seitenleiste anze,igen',
+  [Messages.LOGOUT_USER]: 'Benutzer abmelden',
+  [Messages.SHOW_ON_MAP]: 'Auf Karte zeigen'
 }

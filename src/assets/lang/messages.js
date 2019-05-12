@@ -27,5 +27,6 @@ export default {
   LOGIN_HINT: 'loginHint',
   HIDE_SIDEBAR: 'hideSidebar',
   SHOW_SIDEBAR: 'showSidebar',
-  LOGOUT_USER: 'logoutUser'
+  LOGOUT_USER: 'logoutUser',
+  SHOW_ON_MAP: 'showOnMap'
 };

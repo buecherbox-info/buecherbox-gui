@@ -1,7 +1,13 @@
 <template>
   <div class="box">
     <p class="title">
-      {{ bookbox.description }}
+      <span
+        style="cursor: pointer"
+        :title="$t(Messages.SHOW_ON_MAP)"
+        @click="showOnMap"
+      >
+        {{ bookbox.description }}
+      </span>
       <img
         v-if="type === 'favorite'"
         src="../assets/img/trash.svg"
@@ -70,6 +76,9 @@ export default {
   methods: {
     deleteFavorite () {
       this.$emit(EventNames.DELETE_FAVORITE, this.bookbox.id);
+    },
+    showOnMap () {
+      this.$router.push({ path: '/', query: { bookbox: this.bookbox.id } });
     }
   }
 }

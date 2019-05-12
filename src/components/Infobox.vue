@@ -94,12 +94,15 @@ export default {
     isLoggedIn: {
       type: Boolean,
       default: false
+    },
+    focused: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
-      Messages,
-      focused: false
+      Messages
     };
   },
   computed: {

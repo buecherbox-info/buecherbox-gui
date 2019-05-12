@@ -29,5 +29,6 @@ export default {
   [Messages.LOGIN_HINT]: 'You have to log in to create a new bookbox.',
   [Messages.HIDE_SIDEBAR]: 'Hide sidebar',
   [Messages.SHOW_SIDEBAR]: 'Show sidebar',
-  [Messages.LOGOUT_USER]: 'Logout user'
+  [Messages.LOGOUT_USER]: 'Logout user',
+  [Messages.SHOW_ON_MAP]: 'Show on map'
 }
