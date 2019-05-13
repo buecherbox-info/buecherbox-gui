@@ -10,7 +10,7 @@
       </span>
       <img
         v-if="type === 'favorite'"
-        src="../assets/img/trash.svg"
+        src="../assets/img/trash-2.svg"
         style="cursor: pointer;"
         :title="$t(Messages.REMOVE_FAVORITE)"
         @click="deleteFavorite"
