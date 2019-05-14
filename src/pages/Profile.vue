@@ -109,6 +109,7 @@
         v-for="(box, idx) in created"
         :key="'box_' + idx"
         :bookbox="box"
+        type="created"
       />
     </div>
   </div>
