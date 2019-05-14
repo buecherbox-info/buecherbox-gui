@@ -110,12 +110,7 @@ export default {
       });
 
       EventBus.$on(EventNames.SAVE_NEW_BOOKBOX, async (bookbox) => {
-        const newBox = await BookBox.postBookBoxInfos(this.userId, this.token, bookbox);
-        await this.$store.commit('BookStorage/addTarget', newBox);
-        if (this.editPopup) {
-          this.editPopup.remove();
-          this.editPopup = null;
-        }
+        await this.saveNewBookbox(bookbox);
       });
 
       EventBus.$on(EventNames.CHANGE_LOCALE, () => {
@@ -123,20 +118,11 @@ export default {
       });
 
       EventBus.$on(EventNames.ADD_FAVORITE, async (bookboxId) => {
-        const favorite = {
-          userId: this.userId,
-          token: this.token,
-          bookboxId
-        };
-        await this.$store.dispatch('BookStorage/addFavorite', favorite);
+        await this.addFavorite(bookboxId);
       });
+
       EventBus.$on(EventNames.DELETE_FAVORITE, async (bookboxId) => {
-        const favorite = {
-          userId: this.userId,
-          token: this.token,
-          bookboxId
-        };
-        await this.$store.dispatch('BookStorage/deleteFavorite', favorite);
+        await this.deleteFavorite(bookboxId);
       });
     },
     disableEvents () {
@@ -172,7 +158,7 @@ export default {
       box.$props.focused = focused;
       box.$mount('#infobox-wrapper');
     },
-    clicked (event) {
+    onRightClick (event) {
       if (this.editPopup) {
         this.editPopup.remove();
       }
@@ -197,7 +183,7 @@ export default {
 
       this.map.addControl(new MapboxGl.NavigationControl());
 
-      this.map.on('contextmenu', this.clicked);
+      this.map.on('contextmenu', this.onRightClick);
     },
     createGeoCoder () {
       this.geocoder = new MapboxGeocoder({
@@ -250,6 +236,30 @@ export default {
       if (!bookboxId) return;
 
       this.focusedBookbox = parseInt(bookboxId);
+    },
+    async saveNewBookbox (bookbox) {
+      const newBox = await BookBox.postBookBoxInfos(this.userId, this.token, bookbox);
+      await this.$store.commit('BookStorage/addTarget', newBox);
+      if (this.editPopup) {
+        this.editPopup.remove();
+        this.editPopup = null;
+      }
+    },
+    async addFavorite (bookboxId) {
+      const favorite = {
+        userId: this.userId,
+        token: this.token,
+        bookboxId
+      };
+      await this.$store.dispatch('BookStorage/addFavorite', favorite);
+    },
+    async deleteFavorite (bookboxId) {
+      const favorite = {
+        userId: this.userId,
+        token: this.token,
+        bookboxId
+      };
+      await this.$store.dispatch('BookStorage/deleteFavorite', favorite);
     }
   }
 };
