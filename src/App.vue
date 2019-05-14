@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <Sidebar class="sidebar" />
-    <div class="container">
+    <div :class="cssClass">
       <router-view />
     </div>
   </div>
@@ -18,7 +18,13 @@ export default {
     Sidebar
   },
   computed: {
-    ...mapState('User', ['userId', 'isLoggedIn', 'token', 'locale'])
+    ...mapState('User', ['userId', 'isLoggedIn', 'token', 'locale']),
+    cssClass () {
+      return {
+        // disable container class for map, otherwise the map is not fullscreen
+        'container': this.$route.path !== '/'
+      }
+    }
   },
   async created () {
     this.$i18n.locale = this.locale;
