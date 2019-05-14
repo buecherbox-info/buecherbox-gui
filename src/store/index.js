@@ -17,12 +17,19 @@ export default new Vuex.Store({
   plugins: [
     createPersistedState({
       key: 'buecherbox',
+      storage: window.localStorage,
+      paths: [
+        'User.username',
+        'User.locale'
+      ]
+    }),
+    createPersistedState({
+      key: 'buecherbox',
+      storage: window.sessionStorage,
       paths: [
         'User.isLoggedIn',
         'User.userId',
-        'User.username',
-        'User.token',
-        'User.locale'
+        'User.token'
       ]
     })
   ],
