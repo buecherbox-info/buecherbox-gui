@@ -4,7 +4,7 @@
     id="login-form"
     class="box"
   >
-    <h3>{{ $t(Messages.LOGIN) }}</h3>
+    <h3>{{ title }}</h3>
 
     <!-- Notification -->
     <div
@@ -87,7 +87,7 @@
         <a
           v-if="!register"
           class="button"
-          :disabled="errors.any()"
+          :disabled="!validForm"
           @click="loginUser"
         >
           {{ $t(Messages.LOGIN) }}
@@ -190,16 +190,25 @@ export default {
     },
     validateConfirmPassword () {
       return `required|confirmed:${Messages.PASSWORD}`;
+    },
+    validForm () {
+      return !this.errors.any();
+    },
+    title () {
+      return this.register ? this.$t(Messages.REGISTER) : this.$t(Messages.LOGIN);
     }
   },
   methods: {
     async loginUser () {
+      if (!this.validForm) return;
+
       try {
         await this.$store.dispatch('User/login');
         this.$emit(EventNames.USER_LOGGED_IN);
       } catch (e) {
         this.showNotification = true;
         if (e.response.status === 401) {
+          this.errorMessages = [];
           this.errorMessages.push(Messages.LOGIN_FAILED);
           this.errorMessages.push(Messages.WRONG_AUTH);
         }
@@ -219,7 +228,9 @@ export default {
         }
       } catch (e) {
         this.showNotification = true;
+
         if (e.response.status === 409) {
+          this.errorMessages = [];
           this.errorMessages.push(Messages.REGISTERATION_FAILED);
           this.errorMessages.push(Messages.USERNAME_EXISTS);
         }
