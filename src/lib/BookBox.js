@@ -56,7 +56,7 @@ export async function addFavorite (userId, token, bookboxId) {
 export async function deleteFavorite (userId, token, bookboxId) {
   const options = {
     method: 'DELETE',
-    url: `/users/${userId}/favorites`,
+    url: `/users/${userId}/favorites/${bookboxId}`,
     headers: { 'Authorization': `bearer ${token}` },
     data: {
       bookboxId

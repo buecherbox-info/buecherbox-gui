@@ -100,7 +100,7 @@
 </template>
 
 <script>
-import { EventNames } from '../plugins/events';
+import { mapState } from 'vuex';
 import Messages from '../assets/lang/messages';
 
 export default {
@@ -127,6 +127,7 @@ export default {
     }
   },
   computed: {
+    ...mapState('User', ['userId', 'token']),
     hints () {
       return this.bookbox.hint ? this.bookbox.hint.split('\n') : [];
     },
@@ -136,8 +137,13 @@ export default {
     }
   },
   methods: {
-    deleteFavorite () {
-      this.$emit(EventNames.DELETE_FAVORITE, this.bookbox.id);
+    async deleteFavorite () {
+      const favorite = {
+        userId: this.userId,
+        token: this.token,
+        bookboxId: this.bookbox.id
+      };
+      await this.$store.dispatch('BookStorage/deleteFavorite', favorite);
     },
     showOnMap () {
       this.$router.push({ path: '/', query: { bookbox: this.bookbox.id } });
