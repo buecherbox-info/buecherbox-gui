@@ -1,3 +1,4 @@
+<!-- ToDo: Login as Page instead of Component -->
 <template>
   <!-- Login -->
   <div
@@ -47,7 +48,7 @@
           <input
             :ref="Messages.PASSWORD"
             v-model="password"
-            v-validate="'required|password'"
+            v-validate="'required'"
             :data-vv-as="$t(Messages.PASSWORD)"
             :name="Messages.PASSWORD"
             type="password"

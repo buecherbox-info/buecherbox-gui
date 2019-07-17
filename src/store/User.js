@@ -7,6 +7,7 @@ const state = {
   username: '',
   password: '',
   passwordConfirmation: '',
+  passwordOld: '',
   token: '',
   locale: 'en'
 };
@@ -21,6 +22,7 @@ const actions = {
 
     if (result.token) {
       context.commit('login', result);
+      context.commit('resetPassword')
     }
   },
   async register (context) {
@@ -34,10 +36,15 @@ const actions = {
     };
 
     context.commit('login', user);
+    context.commit('resetPassword')
   },
   async getProfile (context) {
     const result = await User.getProfile(context.state.userId, context.state.token);
     context.commit('setUsername', result.username);
+  },
+  async changePassword (context) {
+    await User.changePassword(context.state.userId, context.state.token, context.state.passwordOld, context.state.password);
+    context.commit('resetPassword')
   }
 };
 
@@ -54,6 +61,7 @@ const mutations = {
     state.username = '';
     state.password = '';
     state.passwordConfirmation = '';
+    state.passwordOld = '';
     state.isLoggedIn = false;
   },
   setIsLoggedIn (state, isLoggedIn) {
@@ -70,6 +78,14 @@ const mutations = {
   },
   setPasswordConfirmation (state, passwordConfirmation) {
     state.passwordConfirmation = passwordConfirmation;
+  },
+  setPasswordOld (state, passwordOld) {
+    state.passwordOld = passwordOld;
+  },
+  resetPassword (state) {
+    state.password = '';
+    state.passwordConfirmation = '';
+    state.passwordOld = '';
   },
   setToken (state, token) {
     state.token = token;

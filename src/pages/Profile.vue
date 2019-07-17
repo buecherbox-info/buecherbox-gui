@@ -11,8 +11,8 @@
         src="../assets/img/edit.svg"
         alt="edit-icon"
         style="cursor: pointer"
-        :title="$t(Messages.EDIT_PROFILE)"
-        @click="changePassword = !changePassword"
+        :title="$t(Messages.EDIT_USER)"
+        @click="editUser = !editUser"
       >
     </h1>
 
@@ -55,20 +55,29 @@
           <div class="field">
             <div class="control">
               <input
+                v-model="passwordOld"
+                v-validate="'required'"
+                :data-vv-as="$t(Messages.OLD_PASSWORD)"
+                :name="Messages.OLD_PASSWORD"
                 class="input"
                 type="password"
-                :placeholder="!changePassword ? '******' : $t(Messages.OLD_PASSWORD)"
-                :disabled="!changePassword"
+                :placeholder="!editUser ? '******' : $t(Messages.OLD_PASSWORD)"
+                :disabled="!editUser"
               >
             </div>
           </div>
 
           <div
-            v-if="changePassword"
+            v-if="editUser"
           >
             <div class="field">
               <div class="control">
                 <input
+                  :ref="Messages.PASSWORD"
+                  v-model="password"
+                  v-validate="'required'"
+                  :data-vv-as="$t(Messages.PASSWORD)"
+                  :name="Messages.PASSWORD"
                   class="input"
                   type="password"
                   :placeholder="$t(Messages.NEW_PASSWORD)"
@@ -79,20 +88,32 @@
             <div class="field">
               <div class="control">
                 <input
+                  v-model="passwordConfirmation"
                   class="input"
+                  v-validate="validateConfirmPassword"
+                  :data-vv-as="$t(Messages.CONFIRM_NEW_PASSWORD)"
+                  :name="Messages.CONFIRM_NEW_PASSWORD"
                   type="password"
                   :placeholder="$t(Messages.CONFIRM_NEW_PASSWORD)"
                 >
+                <p class="help is-danger">
+                  {{ errors.first(Messages.CONFIRM_NEW_PASSWORD) }}
+                </p>
               </div>
             </div>
 
             <div class="field is-grouped">
               <p class="control">
-                <a class="button">{{ $t(Messages.SENT) }}</a>
-              </p><p class="control">
                 <a
                   class="button"
-                  @click="changePassword = false"
+                  :disabled="errors.any()"
+                  @click="changePassword"
+                >{{ $t(Messages.SENT) }}</a>
+              </p>
+              <p class="control">
+                <a
+                  class="button"
+                  @click="editUser = false"
                 >{{ $t(Messages.CANCEL) }}</a>
               </p>
             </div>
@@ -131,13 +152,43 @@ export default {
   data () {
     return {
       Messages,
-      changePassword: false
+      editUser: false
     }
   },
   computed: {
     ...mapState('User', ['userId', 'isLoggedIn', 'token', 'username']),
     created () {
       return this.$store.getters['BookStorage/created'](this.userId);
+    },
+    password: {
+      get () {
+        return this.$store.state.User.password;
+      },
+      set (value) {
+        this.$store.commit('User/setPassword', value);
+      }
+    },
+    passwordConfirmation: {
+      get () {
+        return this.$store.state.User.passwordConfirmation;
+      },
+      set (value) {
+        this.$store.commit('User/setPasswordConfirmation', value);
+      }
+    },
+    passwordOld: {
+      get () {
+        return this.$store.state.User.passwordOld;
+      },
+      set (value) {
+        this.$store.commit('User/setPasswordOld', value);
+      }
+    },
+    validateConfirmPassword () {
+      return `required|confirmed:${Messages.PASSWORD}`;
+    },
+    validForm () {
+      return !this.errors.any();
     }
   },
   watch: {
@@ -171,6 +222,12 @@ export default {
     },
     hints (hints) {
       return hints ? hints.split('\n') : [];
+    },
+    async changePassword () {
+      if (!this.validForm || this.password !== this.passwordConfirmation) return;
+      await this.$store.dispatch('User/changePassword');
+      this.errors.clear();
+      this.editUser = false;
     }
   }
 };

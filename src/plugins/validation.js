@@ -13,16 +13,16 @@ import ruValidation from 'vee-validate/dist/locale/ru';
 
 let errors = [];
 
-Validator.extend('password', {
-  getMessage (field) {
-    return errors.join(' ');
-  },
-  validate (value) {
-    const error = owasp.test(value);
-    errors = error.errors;
-    return error.strong;
-  }
-});
+// Validator.extend('password', {
+//   getMessage (field) {
+//     return errors.join(' ');
+//   },
+//   validate (value) {
+//     const error = owasp.test(value);
+//     errors = error.errors;
+//     return error.strong;
+//   }
+// });
 
 export default {
   i18n: I18n,

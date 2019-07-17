@@ -24,7 +24,7 @@ export default {
   [Messages.MAP]: 'Kaart',
   [Messages.ADD_FAVORITE]: 'Favoriet toevoegen',
   [Messages.REMOVE_FAVORITE]: 'Favoriet verwijderen',
-  [Messages.EDIT_PROFILE]: 'Profiel bewerken',
+  [Messages.EDIT_USER]: 'Profiel bewerken',
   [Messages.CHANGE_LOCALE]: 'Verander de taal',
   [Messages.LOGIN_HINT]: 'Je moet inloggen om een nieuwe bookbox aan te maken.',
   [Messages.HIDE_SIDEBAR]: 'Verberg de zijbalk',

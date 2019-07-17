@@ -22,7 +22,7 @@ export default {
   MAP: 'map',
   ADD_FAVORITE: 'addFavorite',
   REMOVE_FAVORITE: 'removeFavorite',
-  EDIT_PROFILE: 'editProfile',
+  EDIT_USER: 'editUser',
   CHANGE_LOCALE: 'changeLocale',
   LOGIN_HINT: 'loginHint',
   HIDE_SIDEBAR: 'hideSidebar',

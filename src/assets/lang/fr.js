@@ -24,7 +24,7 @@ export default {
   [Messages.MAP]: 'Carte',
   [Messages.ADD_FAVORITE]: 'Ajouter favori',
   [Messages.REMOVE_FAVORITE]: 'Supprimer favori',
-  [Messages.EDIT_PROFILE]: 'Modifier le profil',
+  [Messages.EDIT_USER]: 'Modifier le profil',
   [Messages.CHANGE_LOCALE]: 'Changer la langue',
   [Messages.LOGIN_HINT]: 'Vous devez vous connecter pour créer une nouvelle boîte de livres.',
   [Messages.HIDE_SIDEBAR]: 'Masquer la barre latérale',

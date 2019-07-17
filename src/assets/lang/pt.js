@@ -24,7 +24,7 @@ export default {
   [Messages.MAP]: 'Mapa de localização',
   [Messages.ADD_FAVORITE]: 'Adicionar favorito',
   [Messages.REMOVE_FAVORITE]: 'Remover favoritos',
-  [Messages.EDIT_PROFILE]: 'Editar perfil',
+  [Messages.EDIT_USER]: 'Editar perfil',
   [Messages.CHANGE_LOCALE]: 'Alterar idioma',
   [Messages.LOGIN_HINT]: 'Tem de iniciar sessão para criar uma nova caixa de livro.',
   [Messages.HIDE_SIDEBAR]: 'Ocultar barra lateral',

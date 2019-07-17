@@ -24,7 +24,7 @@ export default {
   [Messages.MAP]: 'Mapa',
   [Messages.ADD_FAVORITE]: 'Dodaj ulubione',
   [Messages.REMOVE_FAVORITE]: 'Usuń ulubione',
-  [Messages.EDIT_PROFILE]: 'Edycja profilu',
+  [Messages.EDIT_USER]: 'Edycja profilu',
   [Messages.CHANGE_LOCALE]: 'Zmiana języka',
   [Messages.LOGIN_HINT]: 'Musisz się zalogować, aby utworzyć nową skrzynkę na książki.',
   [Messages.HIDE_SIDEBAR]: 'Ukryj pasek boczny',

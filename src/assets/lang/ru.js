@@ -24,7 +24,7 @@ export default {
   [Messages.MAP]: 'Карта',
   [Messages.ADD_FAVORITE]: 'Добавить избранное',
   [Messages.REMOVE_FAVORITE]: 'Удалить избранное',
-  [Messages.EDIT_PROFILE]: 'Редактировать профиль',
+  [Messages.EDIT_USER]: 'Редактировать профиль',
   [Messages.CHANGE_LOCALE]: 'Изменить язык',
   [Messages.LOGIN_HINT]: 'Для создания новой папки необходимо войти в систему.',
   [Messages.HIDE_SIDEBAR]: 'Скрыть боковую панель',

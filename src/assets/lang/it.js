@@ -24,7 +24,7 @@ export default {
   [Messages.MAP]: 'Mappa',
   [Messages.ADD_FAVORITE]: 'Aggiungi i preferiti',
   [Messages.REMOVE_FAVORITE]: 'Rimuovi preferiti',
-  [Messages.EDIT_PROFILE]: 'Modifica profilo',
+  [Messages.EDIT_USER]: 'Modifica profilo',
   [Messages.CHANGE_LOCALE]: 'Cambia lingua',
   [Messages.LOGIN_HINT]: 'Devi effettuare il login per creare un nuovo bookbox.',
   [Messages.HIDE_SIDEBAR]: 'Nascondi barra laterale',

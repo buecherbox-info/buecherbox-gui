@@ -24,7 +24,7 @@ export default {
   [Messages.MAP]: 'Mapa',
   [Messages.ADD_FAVORITE]: 'Añadir a favoritos',
   [Messages.REMOVE_FAVORITE]: 'Eliminar favoritos',
-  [Messages.EDIT_PROFILE]: 'Editar perfil',
+  [Messages.EDIT_USER]: 'Editar perfil',
   [Messages.CHANGE_LOCALE]: 'Cambiar de idioma',
   [Messages.LOGIN_HINT]: 'Debe iniciar sesión para crear un nuevo buzón de libros.',
   [Messages.HIDE_SIDEBAR]: 'Ocultar barra lateral',
