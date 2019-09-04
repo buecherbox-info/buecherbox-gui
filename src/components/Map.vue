@@ -189,10 +189,34 @@ export default {
       this.geocoder = new MapboxGeocoder({
         accessToken: this.accessToken,
         mapboxgl: MapboxGl,
-        language: this.$i18n.locale
+        language: this.$i18n.locale,
+        localGeocoder: this.bookboxGeoCoderSearch
       });
 
       document.getElementById('geocoder').appendChild(this.geocoder.onAdd(this.map))
+    },
+    bookboxGeoCoderSearch (query) {
+      query = query.toLowerCase();
+
+      const found = this.targets.filter((el) => {
+        return el.description.toLowerCase().includes(query) ||
+                el.description.toLowerCase().includes(query) ||
+                el.id.toString().includes(query)
+      });
+
+      const geocodes = [];
+
+      found.forEach((el) => {
+        geocodes.push({
+          center: [el.lng, el.lat],
+          place_name: `Box #${el.id}: ${el.description}`,
+          place_type: ['coordinate'],
+          properties: {},
+          type: 'Feature'
+        });
+      });
+
+      return geocodes;
     },
     focusInfobox (coordinates) {
       if (!this.map) return;
