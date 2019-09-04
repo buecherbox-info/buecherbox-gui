@@ -67,7 +67,7 @@
     </div>
     <div v-else>
       <p>{{ texts[Messages.LOGIN_HINT] }}</p>
-      <span @click="login">{{ texts[Messages.LOGIN] }}</span>
+      <a @click="login">{{ texts[Messages.LOGIN] }}</a>
     </div>
   </div>
 </template>

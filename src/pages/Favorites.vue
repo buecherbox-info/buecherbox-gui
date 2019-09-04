@@ -1,19 +1,18 @@
 <template>
-  <div id="favorites" class="content">
+  <div
+    id="favorites"
+    class="content"
+  >
     <h1>{{ $t(Messages.FAVORITES) }}</h1>
 
-    <LoginForm v-if="!isLoggedIn" />
-
-    <div v-else>
-      <!-- Created -->
-      <book-info
-        v-for="(box, idx) in userFavorites"
-        :key="'box_' + idx"
-        :bookbox="box"
-        type="favorite"
-        @deleteFavorite="deleteFavorite"
-      />
-    </div>
+    <!-- Created -->
+    <book-info
+      v-for="(box, idx) in userFavorites"
+      :key="'box_' + idx"
+      :bookbox="box"
+      type="favorite"
+      @deleteFavorite="deleteFavorite"
+    />
   </div>
 </template>
 
@@ -22,13 +21,11 @@ import { mapGetters, mapState } from 'vuex';
 import Messages from '../assets/lang/messages';
 
 import BookInfo from '../components/BookInfo';
-import LoginForm from '../components/LoginForm';
 
 export default {
   name: 'Favorites',
   components: {
-    BookInfo,
-    LoginForm
+    BookInfo
   },
   data () {
     return {
@@ -49,6 +46,8 @@ export default {
   async mounted () {
     if (this.isLoggedIn) {
       await this.getBookBoxFavoritesByUser();
+    } else {
+      this.$router.push({ path: 'login' });
     }
   },
   methods: {

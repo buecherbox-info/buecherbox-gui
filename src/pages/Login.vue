@@ -1,9 +1,9 @@
-<!-- ToDo: Login as Page instead of Component -->
+<!-- ToDo: Register as Page instead here -->
 <template>
   <!-- Login -->
   <div
-    id="login-form"
-    class="box"
+    id="login"
+    class="content"
   >
     <h3>{{ title }}</h3>
 
@@ -206,6 +206,7 @@ export default {
       try {
         await this.$store.dispatch('User/login');
         this.$emit(EventNames.USER_LOGGED_IN);
+        this.$router.push({ path: 'profile' });
       } catch (e) {
         this.showNotification = true;
         if (e.response.status === 401) {
@@ -215,15 +216,12 @@ export default {
         }
       }
     },
-    async logoutUser () {
-      await this.$store.commit('User/logout');
-      this.$emit(EventNames.USER_LOGGED_OUT);
-    },
     async registerUser () {
       try {
         if (this.register) {
           if (this.password !== this.passwordConfirmation) return;
           await this.$store.dispatch('User/register');
+          this.$router.push({ path: 'profile' });
         } else {
           this.register = !this.register;
         }

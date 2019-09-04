@@ -25,114 +25,105 @@
       Logout
     </a>
 
-    <LoginForm
-      v-if="!isLoggedIn"
-      @userLoggedIn="getBookBoxInfosByUser"
-    />
-
-    <div
-      v-else
-    >
-      <!-- Personal Data -->
-      <div class="box">
+    <!-- Personal Data -->
+    <div class="box">
+      <div class="field">
+        <label class="label">
+          {{ $t(Messages.USERNAME) }}:
+        </label>
+        <div class="control">
+          <input
+            v-model="username"
+            class="input is-disabled"
+            disabled
+          >
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">
+          {{ $t(Messages.PASSWORD) }}:
+        </label>
+        <div class="control" />
         <div class="field">
-          <label class="label">
-            {{ $t(Messages.USERNAME) }}:
-          </label>
           <div class="control">
             <input
-              v-model="username"
-              class="input is-disabled"
-              disabled
+              v-model="passwordOld"
+              v-validate="'required'"
+              :data-vv-as="$t(Messages.OLD_PASSWORD)"
+              :name="Messages.OLD_PASSWORD"
+              class="input"
+              type="password"
+              :placeholder="!editUser ? '******' : $t(Messages.OLD_PASSWORD)"
+              :disabled="!editUser"
             >
           </div>
         </div>
-        <div class="field">
-          <label class="label">
-            {{ $t(Messages.PASSWORD) }}:
-          </label>
-          <div class="control" />
+
+        <div
+          v-if="editUser"
+        >
           <div class="field">
             <div class="control">
               <input
-                v-model="passwordOld"
+                :ref="Messages.PASSWORD"
+                v-model="password"
                 v-validate="'required'"
-                :data-vv-as="$t(Messages.OLD_PASSWORD)"
-                :name="Messages.OLD_PASSWORD"
+                :data-vv-as="$t(Messages.PASSWORD)"
+                :name="Messages.PASSWORD"
                 class="input"
                 type="password"
-                :placeholder="!editUser ? '******' : $t(Messages.OLD_PASSWORD)"
-                :disabled="!editUser"
+                :placeholder="$t(Messages.NEW_PASSWORD)"
               >
             </div>
           </div>
 
-          <div
-            v-if="editUser"
-          >
-            <div class="field">
-              <div class="control">
-                <input
-                  :ref="Messages.PASSWORD"
-                  v-model="password"
-                  v-validate="'required'"
-                  :data-vv-as="$t(Messages.PASSWORD)"
-                  :name="Messages.PASSWORD"
-                  class="input"
-                  type="password"
-                  :placeholder="$t(Messages.NEW_PASSWORD)"
-                >
-              </div>
-            </div>
-
-            <div class="field">
-              <div class="control">
-                <input
-                  v-model="passwordConfirmation"
-                  class="input"
-                  v-validate="validateConfirmPassword"
-                  :data-vv-as="$t(Messages.CONFIRM_NEW_PASSWORD)"
-                  :name="Messages.CONFIRM_NEW_PASSWORD"
-                  type="password"
-                  :placeholder="$t(Messages.CONFIRM_NEW_PASSWORD)"
-                >
-                <p class="help is-danger">
-                  {{ errors.first(Messages.CONFIRM_NEW_PASSWORD) }}
-                </p>
-              </div>
-            </div>
-
-            <div class="field is-grouped">
-              <p class="control">
-                <a
-                  class="button"
-                  :disabled="errors.any()"
-                  @click="changePassword"
-                >{{ $t(Messages.SENT) }}</a>
-              </p>
-              <p class="control">
-                <a
-                  class="button"
-                  @click="editUser = false"
-                >{{ $t(Messages.CANCEL) }}</a>
+          <div class="field">
+            <div class="control">
+              <input
+                v-model="passwordConfirmation"
+                v-validate="validateConfirmPassword"
+                class="input"
+                :data-vv-as="$t(Messages.CONFIRM_NEW_PASSWORD)"
+                :name="Messages.CONFIRM_NEW_PASSWORD"
+                type="password"
+                :placeholder="$t(Messages.CONFIRM_NEW_PASSWORD)"
+              >
+              <p class="help is-danger">
+                {{ errors.first(Messages.CONFIRM_NEW_PASSWORD) }}
               </p>
             </div>
           </div>
+
+          <div class="field is-grouped">
+            <p class="control">
+              <a
+                class="button"
+                :disabled="errors.any()"
+                @click="changePassword"
+              >{{ $t(Messages.SENT) }}</a>
+            </p>
+            <p class="control">
+              <a
+                class="button"
+                @click="editUser = false"
+              >{{ $t(Messages.CANCEL) }}</a>
+            </p>
+          </div>
         </div>
       </div>
-
-      <!-- Created -->
-      <h2 class="title">
-        {{ $t(Messages.MY_BOOKBOXES) }}:
-      </h2>
-
-      <book-info
-        v-for="(box, idx) in created"
-        :key="'box_' + idx"
-        :bookbox="box"
-        type="created"
-      />
     </div>
+
+    <!-- Created -->
+    <h2 class="title">
+      {{ $t(Messages.MY_BOOKBOXES) }}:
+    </h2>
+
+    <book-info
+      v-for="(box, idx) in created"
+      :key="'box_' + idx"
+      :bookbox="box"
+      type="created"
+    />
   </div>
 </template>
 
@@ -141,13 +132,11 @@ import { mapState } from 'vuex';
 import Messages from '../assets/lang/messages';
 
 import BookInfo from '../components/BookInfo';
-import LoginForm from '../components/LoginForm';
 
 export default {
   name: 'Profile',
   components: {
-    BookInfo,
-    LoginForm
+    BookInfo
   },
   data () {
     return {
@@ -203,6 +192,8 @@ export default {
     if (this.isLoggedIn) {
       await this.getUserProfile();
       await this.getBookBoxInfosByUser();
+    } else {
+      this.$router.push({ path: 'login' });
     }
   },
   methods: {
