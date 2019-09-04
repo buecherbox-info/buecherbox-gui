@@ -200,6 +200,7 @@ export default {
     async logoutUser () {
       await this.$store.commit('User/logout');
       await this.$store.commit('BookStorage/setFavorites', []);
+      this.$router.push({ path: 'login' });
     },
     async getBookBoxInfosByUser () {
       const user = {
