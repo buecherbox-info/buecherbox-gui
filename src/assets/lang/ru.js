@@ -35,5 +35,7 @@ export default {
   [Messages.LOGIN_FAILED]: 'Не удалось войти в систему.',
   [Messages.MY_BOOKBOXES]: 'Мои книжные шкафчики',
   [Messages.REGISTERATION_FAILED]: 'Регистрация не прошла.',
-  [Messages.USERNAME_EXISTS]: 'Имя пользователя уже существует.'
+  [Messages.USERNAME_EXISTS]: 'Имя пользователя уже существует.',
+  [Messages.CHANGE_PASSWORD_FAILED]: 'Смена пароля не удалась.',
+  [Messages.WRONG_PASSWORD]: 'Неправильный пароль.'
 }

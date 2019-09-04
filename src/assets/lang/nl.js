@@ -35,5 +35,7 @@ export default {
   [Messages.LOGIN_FAILED]: 'Inloggen is mislukt.',
   [Messages.MY_BOOKBOXES]: 'Mijn boekenkasten',
   [Messages.REGISTERATION_FAILED]: 'Registratie is mislukt.',
-  [Messages.USERNAME_EXISTS]: 'De gebruikersnaam bestaat al.'
+  [Messages.USERNAME_EXISTS]: 'De gebruikersnaam bestaat al.',
+  [Messages.CHANGE_PASSWORD_FAILED]: 'Wachtwoord wijzigen is mislukt.',
+  [Messages.WRONG_PASSWORD]: 'Verkeerd wachtwoord.'
 }

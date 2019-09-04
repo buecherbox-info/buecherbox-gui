@@ -25,6 +25,17 @@
       Logout
     </a>
 
+    <div
+      v-if="showNotification"
+      class="notification is-danger"
+    >
+      <button
+        class="delete"
+        @click="showNotification = false"
+      />
+      {{ errorMessage }}
+    </div>
+
     <!-- Personal Data -->
     <div class="box">
       <div class="field">
@@ -141,7 +152,9 @@ export default {
   data () {
     return {
       Messages,
-      editUser: false
+      editUser: false,
+      showNotification: false,
+      errorMessages: []
     }
   },
   computed: {
@@ -178,6 +191,16 @@ export default {
     },
     validForm () {
       return !this.errors.any();
+    },
+    errorMessage () {
+      let errorMsg = '';
+
+      this.errorMessages.forEach((msg) => {
+        errorMsg += this.$t(msg);
+        errorMsg += ' ';
+      });
+
+      return errorMsg;
     }
   },
   watch: {
@@ -216,10 +239,20 @@ export default {
       return hints ? hints.split('\n') : [];
     },
     async changePassword () {
-      if (!this.validForm || this.password !== this.passwordConfirmation) return;
-      await this.$store.dispatch('User/changePassword');
-      this.errors.clear();
-      this.editUser = false;
+      try {
+        if (!this.validForm || this.password !== this.passwordConfirmation) return;
+        await this.$store.dispatch('User/changePassword');
+        this.errors.clear();
+        this.editUser = false;
+      } catch (e) {
+        this.showNotification = true;
+
+        if (e.response.status === 401) {
+          this.errorMessages = [];
+          this.errorMessages.push(Messages.CHANGE_PASSWORD_FAILED);
+          this.errorMessages.push(Messages.WRONG_PASSWORD);
+        }
+      }
     }
   }
 };

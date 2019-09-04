@@ -35,5 +35,6 @@ export default {
   [Messages.LOGIN_FAILED]: 'La connexion a échoué.',
   [Messages.MY_BOOKBOXES]: 'Ma boîte à livres',
   [Messages.REGISTERATION_FAILED]: "L'enregistrement a échoué.",
-  [Messages.USERNAME_EXISTS]: "Le nom d'utilisateur existe déjà."
+  [Messages.USERNAME_EXISTS]: "Le nom d'utilisateur existe déjà.",
+  [Messages.WRONG_PASSWORD]: 'Mot de passe incorrect.'
 }

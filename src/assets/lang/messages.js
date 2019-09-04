@@ -33,5 +33,7 @@ export default {
   LOGIN_FAILED: 'loginFailed',
   MY_BOOKBOXES: 'myBookboxes',
   REGISTERATION_FAILED: 'registrationFailed',
-  USERNAME_EXISTS: 'usernameExists'
+  USERNAME_EXISTS: 'usernameExists',
+  CHANGE_PASSWORD_FAILED: 'changePasswordFailed',
+  WRONG_PASSWORD: 'wrongPassword'
 };

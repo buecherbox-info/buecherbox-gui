@@ -35,5 +35,7 @@ export default {
   [Messages.LOGIN_FAILED]: 'Login failed.',
   [Messages.MY_BOOKBOXES]: 'My bookboxes',
   [Messages.REGISTERATION_FAILED]: 'Registration failed.',
-  [Messages.USERNAME_EXISTS]: 'Username already exists.'
+  [Messages.USERNAME_EXISTS]: 'Username already exists.',
+  [Messages.CHANGE_PASSWORD_FAILED]: 'Change password failed.',
+  [Messages.WRONG_PASSWORD]: 'Wrong password.'
 }

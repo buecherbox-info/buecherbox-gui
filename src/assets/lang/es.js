@@ -35,5 +35,7 @@ export default {
   [Messages.LOGIN_FAILED]: 'Error de inicio de sesión.',
   [Messages.MY_BOOKBOXES]: 'Mis cajas de libros',
   [Messages.REGISTERATION_FAILED]: 'El registro falló.',
-  [Messages.USERNAME_EXISTS]: 'El nombre de usuario ya existe.'
+  [Messages.USERNAME_EXISTS]: 'El nombre de usuario ya existe.',
+  [Messages.CHANGE_PASSWORD_FAILED]: 'Cambiar contraseña ha fallado.',
+  [Messages.WRONG_PASSWORD]: 'Contraseña incorrecta.'
 }

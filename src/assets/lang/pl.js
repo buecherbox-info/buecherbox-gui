@@ -35,5 +35,7 @@ export default {
   [Messages.LOGIN_FAILED]: 'Logowanie nie powiodło się.',
   [Messages.MY_BOOKBOXES]: 'Moje pudełka na książki',
   [Messages.REGISTERATION_FAILED]: 'Rejestracja nie powiodła się.',
-  [Messages.USERNAME_EXISTS]: 'Nazwa użytkownika już istnieje.'
+  [Messages.USERNAME_EXISTS]: 'Nazwa użytkownika już istnieje.',
+  [Messages.CHANGE_PASSWORD_FAILED]: 'Zmiana hasła nie powiodła się.',
+  [Messages.WRONG_PASSWORD]: 'Błędne hasło.'
 }

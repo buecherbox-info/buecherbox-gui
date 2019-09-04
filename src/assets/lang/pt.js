@@ -35,5 +35,7 @@ export default {
   [Messages.LOGIN_FAILED]: 'O login falhou.',
   [Messages.MY_BOOKBOXES]: 'Minhas caixas de livro',
   [Messages.REGISTERATION_FAILED]: 'O registo falhou.',
-  [Messages.USERNAME_EXISTS]: 'O nome de usuário já existe.'
+  [Messages.USERNAME_EXISTS]: 'O nome de usuário já existe.',
+  [Messages.CHANGE_PASSWORD_FAILED]: 'A alteração da senha falhou.',
+  [Messages.WRONG_PASSWORD]: 'Senha errada.'
 }
