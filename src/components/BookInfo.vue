@@ -50,6 +50,7 @@
     <input
       v-else
       type="file"
+      @change="setFile"
     >
 
     <!-- Hint -->
@@ -100,6 +101,7 @@
 </template>
 
 <script>
+import * as BookBox from '../lib/BookBox';
 import { mapState } from 'vuex';
 import Messages from '../assets/lang/messages';
 
@@ -124,7 +126,7 @@ export default {
         image: null,
         hint: this.bookbox.hint
       }
-    }
+    };
   },
   computed: {
     ...mapState('User', ['userId', 'token']),
@@ -146,12 +148,27 @@ export default {
       await this.$store.dispatch('BookStorage/deleteFavorite', favorite);
     },
     showOnMap () {
-      this.$router.push({ path: '/', query: { bookbox: this.bookbox.id } });
+      this.$router.push({
+        path: '/',
+        query: { bookbox: this.bookbox.id }
+      });
     },
-    saveEdit () {
+    async saveEdit () {
       if (this.edit) {
+        // ToDo create better alert
         alert('Wirklich bestätigen?');
       }
+
+      const updated = {
+        id: this.bookbox.id,
+        description: this.editInfos.description,
+        hint: this.editInfos.hint,
+        img: this.editInfos.imgsrc
+      };
+
+      const updatedBox = await BookBox.updateBookBoxInfos(this.userId, this.token, updated);
+
+      this.$store.commit('BookStorage/updateTarget', updatedBox);
 
       this.edit = false;
     },
@@ -161,10 +178,16 @@ export default {
         description: this.bookbox.description,
         image: null,
         hint: this.bookbox.hint
+      };
+    },
+    setFile (event) {
+      const files = event.target.files || event.dataTransfer.files;
+      if (files.length) {
+        this.editInfos.imgsrc = files[0];
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>

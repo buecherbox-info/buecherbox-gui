@@ -62,6 +62,13 @@ const mutations = {
   addTarget (state, target) {
     state.targets.push(target);
   },
+  updateTarget (state, target) {
+    const targets = [
+      ...state.targets.filter(el => el.id !== target.id),
+      target
+    ];
+    state.targets = targets.sort((prev, next) => prev.id - next.id);
+  },
   setFavorites (state, favorites) {
     state.favorites = favorites;
   },

@@ -44,6 +44,23 @@ export async function postBookBoxInfos (userId, token, bookbox) {
   return result.data;
 }
 
+export async function updateBookBoxInfos (userId, token, bookbox) {
+  const formData = new FormData();
+  formData.append('description', bookbox.description);
+  formData.append('hint', bookbox.hint);
+  formData.append('file', bookbox.img);
+
+  const options = {
+    headers: {
+      'content-type': 'multipart/form-data',
+      'authorization': `Bearer ${token}`
+    }
+  };
+
+  const result = await Axios.put(`/bookboxes/${bookbox.id}`, formData, options);
+  return result.data;
+}
+
 export async function addFavorite (userId, token, bookboxId) {
   const options = {
     headers: { 'Authorization': `bearer ${token}` }
