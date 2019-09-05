@@ -5,6 +5,8 @@
   >
     <h1>Dashboard</h1>
 
+    <!-- ToDo show no access notification -->
+
     <article class="message">
       <div class="message-header">
         <p>Bücherboxen ({{ targets.length }})</p>
@@ -77,6 +79,7 @@
             <tr>
               <th>Id</th>
               <th>Username</th>
+              <th>Role</th>
               <th>Favorites</th>
               <th>Deleted</th>
               <th>Created</th>
@@ -91,6 +94,7 @@
             >
               <td>{{ user.id }}</td>
               <td>{{ user.username }}</td>
+              <td>{{ user.rolename }}</td>
               <td>{{ user.favorites }}</td>
               <td>
                 <input
@@ -111,7 +115,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'Dashboard',
@@ -123,7 +127,8 @@ export default {
   },
   computed: {
     ...mapState('Dashboard', ['targets', 'users']),
-    ...mapState('User', ['userId', 'isLoggedIn', 'token', 'username'])
+    ...mapState('User', ['userId', 'isLoggedIn', 'token', 'username']),
+    ...mapGetters('User', ['accessDashboard'])
   },
   async mounted () {
     if (this.isLoggedIn) {

@@ -31,7 +31,8 @@ export default new Vuex.Store({
       paths: [
         'User.isLoggedIn',
         'User.userId',
-        'User.token'
+        'User.token',
+        'User.role'
       ]
     })
   ],

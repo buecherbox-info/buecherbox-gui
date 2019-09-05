@@ -1,3 +1,4 @@
+const JwtDecode = require('jwt-decode');
 const User = require('../lib/User');
 
 // initial state
@@ -9,11 +10,16 @@ const state = {
   passwordConfirmation: '',
   passwordOld: '',
   token: '',
+  role: '',
   locale: 'en'
 };
 
 // getters
-const getters = {};
+const getters = {
+  accessDashboard: (state) => {
+    return state.role && state.role === 'admin';
+  }
+};
 
 // actions
 const actions = {
@@ -54,9 +60,13 @@ const mutations = {
     state.userId = user.user.id || user.id;
     state.token = user.token;
     state.isLoggedIn = true;
+
+    const decoded = JwtDecode(user.token);
+    state.role = decoded.role;
   },
   logout (state) {
     state.token = '';
+    state.role = '';
     state.userId = -1;
     state.username = '';
     state.password = '';

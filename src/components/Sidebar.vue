@@ -53,7 +53,7 @@
               <span v-if="!collapsed">{{ $t(Messages.FAVORITES) }}</span>
             </router-link>
           </li>
-          <li v-if="isAdmin">
+          <li v-if="accessDashboard">
             <router-link
               to="/dashboard"
               class="sidebar-element"
@@ -131,7 +131,9 @@
 </template>
 
 <script>
-import { EventBus, EventNames } from '../plugins/events'
+import { mapGetters } from 'vuex';
+
+import { EventBus, EventNames } from '../plugins/events';
 import Messages from '../assets/lang/messages';
 
 export default {
@@ -140,7 +142,6 @@ export default {
     return {
       Messages,
       collapsed: false,
-      isAdmin: true,
       languages: [
         { code: 'de', language: 'Deutsch' },
         { code: 'en', language: 'English' },
@@ -155,6 +156,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('User', ['accessDashboard']),
     wrapperCss () {
       return {
         'box': true,
