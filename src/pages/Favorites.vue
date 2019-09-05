@@ -59,7 +59,6 @@ export default {
       await this.$store.dispatch('BookStorage/getBookBoxFavoritesByUser', user);
     },
     async deleteFavorite (bookboxId) {
-      console.log(bookboxId);
       const favorite = {
         userId: this.userId,
         token: this.token,

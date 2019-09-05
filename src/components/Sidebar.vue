@@ -24,6 +24,7 @@
     <transition name="fade">
       <div class="sidebar-content">
         <ul class="menu-list">
+          <!-- ToDo Icons get resized when changing language -->
           <!-- Links -->
           <li>
             <router-link
@@ -50,6 +51,19 @@
                 style="vertical-align: middle"
               >
               <span v-if="!collapsed">{{ $t(Messages.FAVORITES) }}</span>
+            </router-link>
+          </li>
+          <li v-if="isAdmin">
+            <router-link
+              to="/dashboard"
+              class="sidebar-element"
+              :title="collapsed ? $t(Messages.DASHBOARD) : ''"
+            >
+              <img
+                src="../assets/img/user.svg"
+                alt="profile-icon"
+              >
+              <span v-if="!collapsed">{{ $t(Messages.DASHBOARD) }}</span>
             </router-link>
           </li>
           <li>
@@ -126,6 +140,7 @@ export default {
     return {
       Messages,
       collapsed: false,
+      isAdmin: true,
       languages: [
         { code: 'de', language: 'Deutsch' },
         { code: 'en', language: 'English' },
