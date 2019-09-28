@@ -64,6 +64,7 @@
 
     <div class="field is-grouped">
       <p class="control">
+        <!-- ToDo Login on enter press -->
         <a
           class="button"
           :disabled="!validForm"

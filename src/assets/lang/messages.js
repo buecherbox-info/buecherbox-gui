@@ -36,5 +36,11 @@ export default {
   USERNAME: 'username',
   USERNAME_EXISTS: 'usernameExists',
   WRONG_AUTH: 'wrongAuth',
-  WRONG_PASSWORD: 'wrongPassword'
+  WRONG_PASSWORD: 'wrongPassword',
+  // ToDo translate
+  ID: 'id',
+  LAT: 'lat',
+  LNG: 'lng',
+  CREATED: 'created',
+  UPDATED: 'updated'
 };

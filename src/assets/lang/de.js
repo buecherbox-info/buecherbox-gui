@@ -38,5 +38,10 @@ export default {
   [Messages.USERNAME]: 'Benutzername',
   [Messages.USERNAME_EXISTS]: 'Benutzername existiert bereits.',
   [Messages.WRONG_AUTH]: 'Ihr Benutzername oder Passwort ist falsch.',
-  [Messages.WRONG_PASSWORD]: 'Falsches Passwort.'
+  [Messages.WRONG_PASSWORD]: 'Falsches Passwort.',
+  [Messages.ID]: 'Id',
+  [Messages.LAT]: 'Lat',
+  [Messages.LNG]: 'Lng',
+  [Messages.CREATED]: 'Erstellt',
+  [Messages.UPDATED]: 'Aktualisiert'
 }
