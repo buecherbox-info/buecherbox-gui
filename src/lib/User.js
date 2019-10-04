@@ -1,4 +1,4 @@
-const Axios = require('axios');
+import Request from './Request';
 
 export async function login (username, password) {
   const options = {
@@ -7,7 +7,7 @@ export async function login (username, password) {
       password
     }
   };
-  const result = await Axios.post('/users/auth', null, options);
+  const result = await Request.post('/users/auth', null, options);
   return result.data;
 }
 
@@ -17,7 +17,7 @@ export async function register (username, password) {
     password
   };
 
-  const result = await Axios.post('/users', data);
+  const result = await Request.post('/users', data);
   return result.data;
 }
 
@@ -26,7 +26,7 @@ export async function getProfile (userId, token) {
     headers: { 'Authorization': `bearer ${token}` }
   };
 
-  const result = await Axios.get(`/users/${userId}`, options);
+  const result = await Request.get(`/users/${userId}`, options);
   return result.data;
 }
 
@@ -40,5 +40,5 @@ export async function changePassword (userId, token, oldPassword, newPassword) {
     newPassword
   };
 
-  await Axios.post(`/users/${userId}/password`, data, options);
+  await Request.post(`/users/${userId}/password`, data, options);
 }

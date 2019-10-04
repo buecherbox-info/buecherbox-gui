@@ -26,7 +26,7 @@ const actions = {
   async login (context) {
     const result = await User.login(context.state.username, context.state.password);
 
-    if (result.token) {
+    if (result.token && result.refreshToken) {
       context.commit('login', result);
       context.commit('resetPassword')
     }
@@ -59,6 +59,7 @@ const mutations = {
   login (state, user) {
     state.userId = user.user.id || user.id;
     state.token = user.token;
+    state.refreshToken = user.refreshToken;
     state.isLoggedIn = true;
 
     const decoded = JwtDecode(user.token);

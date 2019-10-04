@@ -1,7 +1,7 @@
-const Axios = require('axios');
+import Request from './Request';
 
 export async function getBookBoxInfos () {
-  const result = await Axios.get('/bookboxes');
+  const result = await Request.get('/bookboxes');
   return result.data;
 }
 
@@ -10,7 +10,7 @@ export async function getBookBoxInfosByUser (userId, token) {
     headers: { 'Authorization': `bearer ${token}` }
   };
 
-  const result = await Axios.get(`/users/${userId}/bookboxes`, options);
+  const result = await Request.get(`/users/${userId}/bookboxes`, options);
   return result.data;
 }
 
@@ -19,7 +19,7 @@ export async function getBookBoxFavoritesByUser (userId, token) {
     headers: { 'Authorization': `bearer ${token}` }
   };
 
-  const result = await Axios.get(`/users/${userId}/favorites`, options);
+  const result = await Request.get(`/users/${userId}/favorites`, options);
   return result.data;
 }
 
@@ -40,7 +40,7 @@ export async function postBookBoxInfos (userId, token, bookbox) {
     }
   };
 
-  const result = await Axios.post('/bookboxes', formData, options);
+  const result = await Request.post('/bookboxes', formData, options);
   return result.data;
 }
 
@@ -57,7 +57,7 @@ export async function updateBookBoxInfos (userId, token, bookbox) {
     }
   };
 
-  const result = await Axios.put(`/bookboxes/${bookbox.id}`, formData, options);
+  const result = await Request.put(`/bookboxes/${bookbox.id}`, formData, options);
   return result.data;
 }
 
@@ -66,7 +66,7 @@ export async function addFavorite (userId, token, bookboxId) {
     headers: { 'Authorization': `bearer ${token}` }
   };
 
-  const result = await Axios.post(`/users/${userId}/favorites`, { bookboxId }, options);
+  const result = await Request.post(`/users/${userId}/favorites`, { bookboxId }, options);
   return result.data;
 }
 
@@ -80,5 +80,5 @@ export async function deleteFavorite (userId, token, bookboxId) {
     }
   };
 
-  await Axios(options);
+  await Request(options);
 }

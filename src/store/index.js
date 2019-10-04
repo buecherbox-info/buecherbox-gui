@@ -22,7 +22,8 @@ export default new Vuex.Store({
       storage: window.localStorage,
       paths: [
         'User.username',
-        'User.locale'
+        'User.locale',
+        'User.refreshToken'
       ]
     }),
     createPersistedState({
