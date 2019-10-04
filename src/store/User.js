@@ -47,7 +47,7 @@ const actions = {
   },
   async getProfile (context) {
     const result = await User.getProfile(context.state.userId, context.state.token);
-    context.commit('setUsername', result.username);
+    context.commit('setUser', result);
   },
   async changePassword (context) {
     await User.changePassword(context.state.userId, context.state.token, context.state.passwordOld, context.state.password);
@@ -58,7 +58,8 @@ const actions = {
 // mutations
 const mutations = {
   login (state, user) {
-    state.userId = user.user.id || user.id;
+    this.setUser(state, user);
+
     state.token = user.token;
     state.refreshToken = user.refreshToken;
     state.isLoggedIn = true;
@@ -68,6 +69,7 @@ const mutations = {
   },
   logout (state) {
     state.token = '';
+    state.refreshToken = '';
     state.role = '';
     state.userId = -1;
     state.email = '';
@@ -108,6 +110,11 @@ const mutations = {
   },
   setLocale (state, locale) {
     state.locale = locale;
+  },
+  setUser (state, user) {
+    state.userId = user.id;
+    state.email = user.email;
+    state.username = user.username;
   }
 };
 

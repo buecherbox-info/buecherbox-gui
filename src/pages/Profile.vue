@@ -38,90 +38,118 @@
 
     <!-- Personal Data -->
     <div class="box">
-      <div class="field">
-        <label class="label">
-          {{ $t(Messages.USERNAME) }}:
-        </label>
-        <div class="control">
-          <input
-            v-model="username"
-            class="input is-disabled"
-            disabled
-          >
-        </div>
-      </div>
-      <div class="field">
-        <label class="label">
-          {{ $t(Messages.PASSWORD) }}:
-        </label>
-        <div class="control" />
+      <ValidationObserver
+        ref="changeObserver"
+        v-slot="{ invalid }"
+        @submit.prevent="changePassword"
+      >
         <div class="field">
-          <div class="control">
-            <input
-              v-model="passwordOld"
-              v-validate="'required'"
-              :data-vv-as="$t(Messages.OLD_PASSWORD)"
-              :name="Messages.OLD_PASSWORD"
-              class="input"
-              type="password"
-              :placeholder="!editUser ? '******' : $t(Messages.OLD_PASSWORD)"
-              :disabled="!editUser"
+          <div class="field">
+            <label class="label">
+              {{ $t(Messages.USERNAME) }}:
+            </label>
+            <div class="control">
+              <input
+                v-model="username"
+                class="input is-disabled"
+                disabled
+              >
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">
+              {{ $t(Messages.EMAIL) }}:
+            </label>
+            <div class="control">
+              <input
+                v-model="mail"
+                class="input is-disabled"
+                disabled
+              >
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field">
+              <ValidationProvider
+                v-slot="{ errors }"
+                rules="required"
+                :name="$t(Messages.OLD_PASSWORD)"
+              >
+                <label class="label">
+                  {{ $t(Messages.PASSWORD) }}:
+                </label>
+                <div class="control">
+                  <input
+                    v-model="passwordOld"
+                    class="input"
+                    type="password"
+                    :placeholder="!editUser ? '******' : $t(Messages.OLD_PASSWORD)"
+                    :disabled="!editUser"
+                  >
+                </div>
+              </ValidationProvider>
+            </div>
+
+            <div
+              v-if="editUser"
             >
-          </div>
-        </div>
+              <div class="field">
+                <ValidationProvider
+                  rules="required"
+                  :name="$t(Messages.NEW_PASSWORD)"
+                >
+                  <div class="control">
+                    <input
+                      v-model="password"
+                      class="input"
+                      type="password"
+                      :placeholder="$t(Messages.NEW_PASSWORD)"
+                    >
+                  </div>
+                </ValidationProvider>
+              </div>
 
-        <div
-          v-if="editUser"
-        >
-          <div class="field">
-            <div class="control">
-              <input
-                :ref="Messages.PASSWORD"
-                v-model="password"
-                v-validate="'required'"
-                :data-vv-as="$t(Messages.PASSWORD)"
-                :name="Messages.PASSWORD"
-                class="input"
-                type="password"
-                :placeholder="$t(Messages.NEW_PASSWORD)"
-              >
+              <div class="field">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  :rules="`required|password:${$t(Messages.NEW_PASSWORD)}`"
+                  :name="$t(Messages.CONFIRM_NEW_PASSWORD)"
+                >
+                  <div class="control">
+                    <input
+                      v-model="passwordConfirmation"
+                      class="input"
+                      type="password"
+                      :placeholder="$t(Messages.CONFIRM_NEW_PASSWORD)"
+                    >
+                    <p class="help is-danger">
+                      {{ errors[0] }}
+                    </p>
+                  </div>
+                </ValidationProvider>
+              </div>
+
+              <div class="field is-grouped">
+                <p class="control">
+                  <a
+                    class="button"
+                    :disabled="invalid"
+                    @click="changePassword"
+                  >{{ $t(Messages.SENT) }}</a>
+                </p>
+                <p class="control">
+                  <a
+                    class="button"
+                    @click="reset"
+                  >{{ $t(Messages.CANCEL) }}</a>
+                </p>
+              </div>
             </div>
           </div>
-
-          <div class="field">
-            <div class="control">
-              <input
-                v-model="passwordConfirmation"
-                v-validate="validateConfirmPassword"
-                class="input"
-                :data-vv-as="$t(Messages.CONFIRM_NEW_PASSWORD)"
-                :name="Messages.CONFIRM_NEW_PASSWORD"
-                type="password"
-                :placeholder="$t(Messages.CONFIRM_NEW_PASSWORD)"
-              >
-              <p class="help is-danger">
-                {{ errors.first(Messages.CONFIRM_NEW_PASSWORD) }}
-              </p>
-            </div>
-          </div>
-
-          <div class="field is-grouped">
-            <p class="control">
-              <a
-                class="button"
-                :disabled="errors.any()"
-                @click="changePassword"
-              >{{ $t(Messages.SENT) }}</a>
-            </p>
-            <p class="control">
-              <a
-                class="button"
-                @click="editUser = false"
-              >{{ $t(Messages.CANCEL) }}</a>
-            </p>
-          </div>
         </div>
-      </div>
+      </ValidationObserver>
     </div>
 
     <!-- Created -->
@@ -140,6 +168,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import { ValidationObserver, ValidationProvider } from 'vee-validate';
 import Messages from '../assets/lang/messages';
 
 import BookInfo from '../components/BookInfo';
@@ -147,7 +176,9 @@ import BookInfo from '../components/BookInfo';
 export default {
   name: 'Profile',
   components: {
-    BookInfo
+    BookInfo,
+    ValidationObserver,
+    ValidationProvider
   },
   data () {
     return {
@@ -186,11 +217,8 @@ export default {
         this.$store.commit('User/setPasswordOld', value);
       }
     },
-    validateConfirmPassword () {
-      return `required|confirmed:${Messages.PASSWORD}`;
-    },
-    validForm () {
-      return !this.errors.any();
+    mail () {
+      return this.$store.state.User.email;
     },
     errorMessage () {
       let errorMsg = '';
@@ -239,8 +267,9 @@ export default {
       return hints ? hints.split('\n') : [];
     },
     async changePassword () {
+      const isValid = await this.$refs.changeObserver.validate();
+      if (!isValid || this.password !== this.passwordConfirmation) return;
       try {
-        if (!this.validForm || this.password !== this.passwordConfirmation) return;
         await this.$store.dispatch('User/changePassword');
         this.errors.clear();
         this.editUser = false;
@@ -253,6 +282,12 @@ export default {
           this.errorMessages.push(Messages.WRONG_PASSWORD);
         }
       }
+    },
+    reset () {
+      this.editUser = false;
+      this.password = '';
+      this.passwordConfirmation = '';
+      this.passwordOld = '';
     }
   }
 };
