@@ -5,6 +5,7 @@ const User = require('../lib/User');
 const state = {
   isLoggedIn: false,
   userId: -1,
+  email: '',
   username: '',
   password: '',
   passwordConfirmation: '',
@@ -32,7 +33,7 @@ const actions = {
     }
   },
   async register (context) {
-    const result = await User.register(context.state.username, context.state.password);
+    const result = await User.register(context.state.email, context.state.username, context.state.password);
 
     const user = {
       user: {
@@ -69,6 +70,7 @@ const mutations = {
     state.token = '';
     state.role = '';
     state.userId = -1;
+    state.email = '';
     state.username = '';
     state.password = '';
     state.passwordConfirmation = '';
@@ -80,6 +82,9 @@ const mutations = {
   },
   setUserId (state, userId) {
     state.userId = userId;
+  },
+  setEmail (state, email) {
+    state.email = email;
   },
   setUsername (state, username) {
     state.username = username;

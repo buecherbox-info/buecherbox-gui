@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import { localize } from 'vee-validate';
 import { mapState } from 'vuex';
 
 import Sidebar from './components/Sidebar';
@@ -28,6 +29,7 @@ export default {
   },
   async created () {
     this.$i18n.locale = this.locale;
+    localize(this.locale);
     await this.getBookbBoxInfos();
   },
   methods: {

@@ -42,5 +42,6 @@ export default {
   LAT: 'lat',
   LNG: 'lng',
   CREATED: 'created',
-  UPDATED: 'updated'
+  UPDATED: 'updated',
+  EMAIL: 'email'
 };

@@ -43,5 +43,6 @@ export default {
   [Messages.LAT]: 'Lat',
   [Messages.LNG]: 'Lng',
   [Messages.CREATED]: 'Erstellt',
-  [Messages.UPDATED]: 'Aktualisiert'
+  [Messages.UPDATED]: 'Aktualisiert',
+  [Messages.EMAIL]: 'E-Mail'
 }

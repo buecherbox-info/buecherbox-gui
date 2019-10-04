@@ -20,69 +20,80 @@
     </div>
 
     <!-- Login -->
-    <div class="field">
+    <ValidationObserver
+      ref="loginObserver"
+      v-slot="{ invalid }"
+      @submit.prevent="loginUser"
+    >
       <div class="field">
-        <label class="label">
-          {{ $t(Messages.USERNAME) }}:
-          <div class="control">
-            <input
-              v-model="username"
-              v-validate="'required'"
-              :data-vv-as="$t(Messages.USERNAME)"
-              :name="Messages.USERNAME"
-              class="input"
-              :placeholder="$t(Messages.USERNAME)"
-            >
-          </div>
-        </label>
-        <p class="help is-danger">
-          {{ errors.first(Messages.USERNAME) }}
-        </p>
-      </div>
-
-      <div class="field">
-        <label class="label">
-          {{ $t(Messages.PASSWORD) }}:
-        </label>
-        <div class="control">
-          <input
-            :ref="Messages.PASSWORD"
-            v-model="password"
-            v-validate="'required'"
-            :data-vv-as="$t(Messages.PASSWORD)"
-            :name="Messages.PASSWORD"
-            type="password"
-            class="input"
-            :placeholder="$t(Messages.PASSWORD)"
+        <div class="field">
+          <ValidationProvider
+            v-slot="{ errors }"
+            rules="required"
+            :name="$t(Messages.USERNAME)"
           >
+            <label class="label">
+              {{ $t(Messages.USERNAME) }}:
+              <div class="control">
+                <input
+                  v-model="username"
+                  class="input"
+                  :placeholder="$t(Messages.USERNAME)"
+                >
+              </div>
+            </label>
+            <p class="help is-danger">
+              {{ errors[0] }}
+            </p>
+          </ValidationProvider>
         </div>
-        <p class="help is-danger">
-          {{ errors.first(Messages.PASSWORD) }}
-        </p>
+
+        <div class="field">
+          <ValidationProvider
+            v-slot="{ errors }"
+            rules="required"
+            :name="$t(Messages.PASSWORD)"
+          >
+            <label class="label">
+              {{ $t(Messages.PASSWORD) }}:
+            </label>
+            <div class="control">
+              <input
+                v-model="password"
+                type="password"
+                class="input"
+                :placeholder="$t(Messages.PASSWORD)"
+              >
+            </div>
+            <p class="help is-danger">
+              {{ errors[0] }}
+            </p>
+          </ValidationProvider>
+        </div>
+
+        <div class="field is-grouped">
+          <p class="control">
+            <!-- ToDo Login on enter press -->
+            <a
+              class="button"
+              :disabled="invalid"
+              @click="loginUser"
+            >
+              {{ $t(Messages.LOGIN) }}
+            </a>
+          </p>
+
+          <p class="control">
+            <a
+              class="button"
+              @click="$router.push({ path: 'register' })"
+            >
+              {{ $t(Messages.REGISTER) }}
+            </a>
+          </p>
+        </div>
       </div>
-    </div>
-
-    <div class="field is-grouped">
-      <p class="control">
-        <!-- ToDo Login on enter press -->
-        <a
-          class="button"
-          :disabled="!validForm"
-          @click="loginUser"
-        >
-          {{ $t(Messages.LOGIN) }}
-        </a>
-      </p>
-
-      <p class="control">
-        <a
-          class="button"
-          @click="$router.push({ path: 'register' })"
-        >
-          {{ $t(Messages.REGISTER) }}
-        </a>
-      </p>
-    </div>
+    </ValidationObserver>
   </div>
 </template>
 
@@ -90,9 +101,14 @@
 import { EventNames } from '../plugins/events';
 import { mapState } from 'vuex';
 import Messages from '../assets/lang/messages';
+import { ValidationObserver, ValidationProvider } from 'vee-validate';
 
 export default {
   name: 'LoginForm',
+  components: {
+    ValidationObserver,
+    ValidationProvider
+  },
   data () {
     return {
       Messages,
@@ -135,17 +151,12 @@ export default {
       });
 
       return errorMsg;
-    },
-    validateConfirmPassword () {
-      return `required|confirmed:${Messages.PASSWORD}`;
-    },
-    validForm () {
-      return !this.errors.any();
     }
   },
   methods: {
     async loginUser () {
-      if (!this.validForm) return;
+      const isValid = await this.$refs.loginObserver.validate();
+      if (!isValid) return;
 
       try {
         await this.$store.dispatch('User/login');

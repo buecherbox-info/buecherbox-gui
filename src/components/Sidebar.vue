@@ -131,6 +131,7 @@
 </template>
 
 <script>
+import { localize } from 'vee-validate';
 import { mapGetters } from 'vuex';
 
 import { EventBus, EventNames } from '../plugins/events';
@@ -173,6 +174,7 @@ export default {
     changeLocale (event) {
       const locale = event.target.value;
       this.$i18n.locale = locale;
+      localize(locale);
       this.$store.commit('User/setLocale', locale);
       EventBus.$emit(EventNames.CHANGE_LOCALE);
     }

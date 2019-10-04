@@ -1,6 +1,5 @@
-import I18n from './i18n';
-// import owasp from 'owasp-password-strength-test';
-// import { Validator } from 'vee-validate';
+import { required, confirmed, length, email } from 'vee-validate/dist/rules';
+import { configure, extend, localize } from 'vee-validate';
 
 import deValidation from 'vee-validate/dist/locale/de';
 import enValidation from 'vee-validate/dist/locale/en';
@@ -11,45 +10,29 @@ import nlValidation from 'vee-validate/dist/locale/nl';
 import plValidation from 'vee-validate/dist/locale/pl';
 import ruValidation from 'vee-validate/dist/locale/ru';
 
-// let errors = [];
-
-// Validator.extend('password', {
-//   getMessage (field) {
-//     return errors.join(' ');
-//   },
-//   validate (value) {
-//     const error = owasp.test(value);
-//     errors = error.errors;
-//     return error.strong;
-//   }
-// });
-
-export default {
-  i18n: I18n,
-  dictionary: {
-    de: {
-      messages: {
-        ...deValidation.messages,
-        password: 'A-Z,a-z,0-9,§%/!&@#+-/, mind. 10 Zeichen'
-      }
-    },
-    en: {
-      de: {
-        messages: {
-          ...enValidation.messages,
-          password: 'A-Z,a-z,0-9,§%/!&@#+-/, at least 10 characters'
-        }
-      }
-    },
-    es: esValidation,
-    fr: frValidation,
-    it: itValidation,
-    nl: nlValidation,
-    pl: plValidation,
-    ru: ruValidation
-  },
-  classes: true,
-  classNames: {
-    invalid: 'is-danger'
+configure({
+  classes: {
+    invalid: 'is-danger',
+    valid: 'is-success'
   }
-}
+});
+
+extend('required', required);
+extend('confirmed', confirmed);
+extend('email', email);
+extend('password', {
+  validate: (value, { other }) => value === other,
+  message: 'The password confirmation does not match.',
+  params: [{ name: 'other', isTarget: true }]
+});
+
+localize({
+  de: deValidation,
+  en: enValidation,
+  es: esValidation,
+  fr: frValidation,
+  it: itValidation,
+  nl: nlValidation,
+  pl: plValidation,
+  ru: ruValidation
+});
