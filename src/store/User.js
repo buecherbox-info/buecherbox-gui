@@ -29,6 +29,7 @@ const actions = {
 
     if (result.token && result.refreshToken) {
       context.commit('login', result);
+      context.commit('setUser', result.user);
       context.commit('resetPassword')
     }
   },
@@ -58,8 +59,6 @@ const actions = {
 // mutations
 const mutations = {
   login (state, user) {
-    this.setUser(state, user);
-
     state.token = user.token;
     state.refreshToken = user.refreshToken;
     state.isLoggedIn = true;
