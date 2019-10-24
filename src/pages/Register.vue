@@ -144,7 +144,12 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate';
 import Messages from '../assets/lang/messages';
 
 export default {
-  name: 'LoginForm',
+  name: 'Register',
+  metaInfo () {
+    return {
+      title: this.$t(Messages.REGISTER)
+    }
+  },
   components: {
     ValidationObserver,
     ValidationProvider

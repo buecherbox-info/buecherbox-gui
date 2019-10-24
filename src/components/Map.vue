@@ -31,7 +31,8 @@ export default {
     return {
       map: null,
       // https://account.mapbox.com/
-      accessToken: '***REMOVED***',
+      // accessToken: '***REMOVED***',
+      accessToken: 'pk.eyJ1IjoidGltbWVwZmVpZmUiLCJhIjoiY2p1cG11Y2ljMHJndjQ0bzFoYXNkYTI3ZiJ9.pJaOkvaK5KPNsklpTngEAg',
       options: {
         container: 'map',
         style: 'mapbox://styles/timmepfeife/cjv8fr1tq0lck1hp94kgp4fhb',
