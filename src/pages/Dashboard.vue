@@ -26,62 +26,6 @@
           v-if="showBookboxes"
           class="message-body"
         >
-          <div class="table-container">
-            <table class="table is-striped is-hoverable">
-              <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>{{ $t(Messages.USERNAME) }}</th>
-                  <th>{{ $t(Messages.FAVORITES) }}</th>
-                  <th>{{ $t(Messages.DESCRIPTION) }}</th>
-                  <th>{{ $t(Messages.LOCATION) }}</th>
-                  <th>Lat</th>
-                  <th>Lng</th>
-                  <th>{{ $t(Messages.HINT) }}</th>
-                  <th>Created</th>
-                  <th>Updated</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  v-for="target in targets"
-                  :key="target.id"
-                >
-                  <td
-                    class="map-link"
-                    @click="showOnMap(target.id)"
-                  >
-                    {{ target.id }}
-                  </td>
-                  <td>{{ target.username }}</td>
-                  <td>{{ target.favorites }}</td>
-                  <td>{{ target.description }}</td>
-                  <td>{{ target.location }}</td>
-                  <td>{{ target.lat }}</td>
-                  <td>{{ target.lng }}</td>
-                  <td>{{ target.hint }}</td>
-                  <td>{{ splitDate(target.created) }}</td>
-                  <td>{{ splitDate(target.updated) }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </article>
-
-      <article class="message">
-        <div class="message-header">
-          <p>Bücherboxen ({{ targets.length }})</p>
-          <button
-            class="delete"
-            aria-label="delete"
-            @click="showBookboxes = !showBookboxes"
-          />
-        </div>
-        <div
-          v-if="showBookboxes"
-          class="message-body"
-        >
           <table class="table">
             <thead>
               <tr>
