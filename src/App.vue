@@ -15,6 +15,41 @@ import Sidebar from './components/Sidebar';
 
 export default {
   name: 'App',
+  metaInfo () {
+    return {
+      titleTemplate: '%s | Buecherbox',
+      meta: [
+        { name: 'description', content: 'ToDo' },
+        { name: 'author', content: 'ToDo' },
+        { name: 'keywords', content: 'ToDo, ToDo, Todo' },
+
+        // OpenGraph data (Most widely used)
+        { property: 'og:title', content: 'ToDo' },
+        { property: 'og:site_name', content: 'ToDo' },
+        // The list of types is available here: http://ogp.me/#types
+        { property: 'og:type', content: 'website' },
+        // Should the the same as your canonical link, see below.
+        { property: 'og:url', content: 'ToDo' },
+        { property: 'og:image', content: 'ToDo' },
+        // Often the same as your meta description, but not always.
+        { property: 'og:description', content: 'ToDo' },
+
+        // Twitter card
+        { name: 'twitter:card', content: 'ToDo' },
+        { name: 'twitter:site', content: 'ToDo' },
+        { name: 'twitter:title', content: 'ToDo' },
+        { name: 'twitter:description', content: 'ToDo' },
+        // Your twitter handle, if you have one.
+        { name: 'twitter:creator', content: 'ToDo' },
+        { name: 'twitter:image:src', content: 'ToDo' },
+
+        // Google / Schema.org markup:
+        { itemprop: 'name', content: 'ToDo' },
+        { itemprop: 'description', content: 'ToDo' },
+        { itemprop: 'image', content: 'ToDo' }
+      ]
+    }
+  },
   components: {
     Sidebar
   },

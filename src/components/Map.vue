@@ -31,6 +31,7 @@ export default {
     return {
       map: null,
       // https://account.mapbox.com/
+      // accessToken: '***REMOVED***',
       accessToken: '***REMOVED***',
       options: {
         container: 'map',

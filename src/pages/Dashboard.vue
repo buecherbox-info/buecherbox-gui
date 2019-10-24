@@ -3,7 +3,7 @@
     id="dashboard"
     class="content"
   >
-    <h1>Dashboard</h1>
+    <h1>{{ $t(Messages.DASHBOARD) }}</h1>
 
     <!-- ToDo show no access notification -->
     <div
@@ -183,6 +183,11 @@ import Messages from '../assets/lang/messages';
 
 export default {
   name: 'Dashboard',
+  metaInfo () {
+    return {
+      title: this.$t(Messages.DASHBOARD)
+    }
+  },
   data () {
     return {
       Messages,

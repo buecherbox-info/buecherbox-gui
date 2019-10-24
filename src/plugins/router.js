@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import VueMeta from 'vue-meta';
 import VueRouter from 'vue-router';
 
 import About from '../pages/About';
@@ -10,6 +11,7 @@ import Profile from '../pages/Profile';
 import Register from '../pages/Register';
 
 Vue.use(VueRouter);
+Vue.use(VueMeta);
 
 const router = [
   { path: '/', component: Index, props: true },

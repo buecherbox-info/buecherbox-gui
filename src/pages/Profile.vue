@@ -175,6 +175,11 @@ import BookInfo from '../components/BookInfo';
 
 export default {
   name: 'Profile',
+  metaInfo () {
+    return {
+      title: this.$t(Messages.PROFILE)
+    }
+  },
   components: {
     BookInfo,
     ValidationObserver,

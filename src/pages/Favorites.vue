@@ -24,6 +24,11 @@ import BookInfo from '../components/BookInfo';
 
 export default {
   name: 'Favorites',
+  metaInfo () {
+    return {
+      title: this.$t(Messages.FAVORITES)
+    }
+  },
   components: {
     BookInfo
   },
