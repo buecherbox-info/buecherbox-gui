@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 
 import About from '../pages/About';
 import Dashboard from '../pages/Dashboard';
+import Error from '../pages/Error';
 import Favorites from '../pages/Favorites';
 import Index from '../pages/Index';
 import Login from '../pages/Login';
@@ -15,6 +16,7 @@ Vue.use(VueMeta);
 
 const router = [
   { path: '/', component: Index, props: true },
+  { path: '*', component: Error, props: true },
   { path: '/about', component: About, props: true },
   { path: '/dashboard', component: Dashboard, props: true },
   { path: '/favorites', component: Favorites, props: true },
