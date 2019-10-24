@@ -10,6 +10,7 @@
 <script>
 import Axios from 'axios';
 import * as BookBox from '../lib/BookBox';
+import Config from '../../config';
 import MapboxGl from 'mapbox-gl'
 import Vue from 'vue'
 import { mapGetters, mapState } from 'vuex'
@@ -32,7 +33,7 @@ export default {
     return {
       map: null,
       // https://account.mapbox.com/
-      // accessToken: '***REMOVED***',
+      accessToken: Config.mapbox.accesstoken,
       options: {
         container: 'map',
         style: 'mapbox://styles/timmepfeife/cjv8fr1tq0lck1hp94kgp4fhb',
