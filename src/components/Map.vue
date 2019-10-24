@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import Axios from 'axios';
 import * as BookBox from '../lib/BookBox';
 import MapboxGl from 'mapbox-gl'
 import Vue from 'vue'
@@ -32,7 +33,6 @@ export default {
       map: null,
       // https://account.mapbox.com/
       // accessToken: '***REMOVED***',
-      accessToken: 'pk.eyJ1IjoidGltbWVwZmVpZmUiLCJhIjoiY2p1cG11Y2ljMHJndjQ0bzFoYXNkYTI3ZiJ9.pJaOkvaK5KPNsklpTngEAg',
       options: {
         container: 'map',
         style: 'mapbox://styles/timmepfeife/cjv8fr1tq0lck1hp94kgp4fhb',
@@ -77,6 +77,7 @@ export default {
   },
   async mounted () {
     if (!this.map) {
+      await this.getUserLocation();
       this.createMap();
     }
 
@@ -285,6 +286,18 @@ export default {
         bookboxId
       };
       await this.$store.dispatch('BookStorage/deleteFavorite', favorite);
+    },
+    async getUserLocation () {
+      try {
+        const result = await Axios.get('http://ip-api.com/json');
+
+        if (result.data.status !== 'success') return;
+
+        this.options.center = [ result.data.lon, result.data.lat ];
+        this.options.zoom = 5;
+      } catch (e) {
+        // Do nothing
+      }
     }
   }
 };
