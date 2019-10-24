@@ -21,6 +21,14 @@ export default {
       type: Boolean,
       default: true
     }
+  },
+  mounted () {
+    document.documentElement.style.overflow = 'hidden';
+    document.body.scroll = 'no';
+  },
+  destroyed () {
+    document.documentElement.style.overflow = 'auto';
+    document.body.scroll = 'yes';
   }
 };
 </script>
