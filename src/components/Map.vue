@@ -201,11 +201,12 @@ export default {
     bookboxGeoCoderSearch (query) {
       query = query.toLowerCase();
 
-      const found = this.targets.filter((el) => {
-        return el.description.toLowerCase().includes(query) ||
-                el.description.toLowerCase().includes(query) ||
-                el.id.toString().includes(query)
-      });
+      const found = this.targets.filter(el =>
+        el.description.toLowerCase().includes(query) ||
+        el.location.toLowerCase().includes(query) ||
+        el.hint.toLowerCase().includes(query) ||
+        el.id.toString().includes(query)
+      );
 
       const geocodes = [];
 
