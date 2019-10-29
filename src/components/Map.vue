@@ -193,7 +193,8 @@ export default {
         accessToken: this.accessToken,
         mapboxgl: MapboxGl,
         language: this.$i18n.locale,
-        localGeocoder: this.bookboxGeoCoderSearch
+        localGeocoder: this.bookboxGeoCoderSearch,
+        localGeocoderOnly: !this.isLoggedIn
       });
 
       document.getElementById('geocoder').appendChild(this.geocoder.onAdd(this.map))
