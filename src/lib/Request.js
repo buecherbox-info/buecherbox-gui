@@ -16,7 +16,7 @@ RefreshInterceptor(Instance, async (failedRequest) => {
   }
 
   const options = {
-    headers: { 'Authorization': `Bearer ${refreshToken}` }
+    headers: { Authorization: `Bearer ${refreshToken}` }
   };
 
   const result = await Instance.get(`/users/${userId}/refresh`, options);
@@ -28,7 +28,7 @@ RefreshInterceptor(Instance, async (failedRequest) => {
 
   Store.commit('User/setToken', token);
 
-  failedRequest.response.config.headers['Authorization'] = `Bearer ${token}`;
+  failedRequest.response.config.headers.Authorization = `Bearer ${token}`;
   return Promise.resolve();
 });
 

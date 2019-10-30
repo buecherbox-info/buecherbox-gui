@@ -24,7 +24,7 @@ export async function register (email, username, password) {
 
 export async function getProfile (userId, token) {
   const options = {
-    headers: { 'Authorization': `bearer ${token}` }
+    headers: { Authorization: `bearer ${token}` }
   };
 
   const result = await Request.get(`/users/${userId}`, options);
@@ -33,7 +33,7 @@ export async function getProfile (userId, token) {
 
 export async function changePassword (userId, token, oldPassword, newPassword) {
   const options = {
-    headers: { 'Authorization': `bearer ${token}` }
+    headers: { Authorization: `bearer ${token}` }
   };
 
   const data = {

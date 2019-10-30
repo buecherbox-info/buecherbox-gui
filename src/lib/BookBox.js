@@ -7,7 +7,7 @@ export async function getBookBoxInfos () {
 
 export async function getBookBoxInfosByUser (userId, token) {
   const options = {
-    headers: { 'Authorization': `bearer ${token}` }
+    headers: { Authorization: `bearer ${token}` }
   };
 
   const result = await Request.get(`/users/${userId}/bookboxes`, options);
@@ -16,7 +16,7 @@ export async function getBookBoxInfosByUser (userId, token) {
 
 export async function getBookBoxFavoritesByUser (userId, token) {
   const options = {
-    headers: { 'Authorization': `bearer ${token}` }
+    headers: { Authorization: `bearer ${token}` }
   };
 
   const result = await Request.get(`/users/${userId}/favorites`, options);
@@ -36,7 +36,7 @@ export async function postBookBoxInfos (userId, token, bookbox) {
   const options = {
     headers: {
       'content-type': 'multipart/form-data',
-      'authorization': `Bearer ${token}`
+      authorization: `Bearer ${token}`
     }
   };
 
@@ -53,7 +53,7 @@ export async function updateBookBoxInfos (userId, token, bookbox) {
   const options = {
     headers: {
       'content-type': 'multipart/form-data',
-      'authorization': `Bearer ${token}`
+      authorization: `Bearer ${token}`
     }
   };
 
@@ -63,7 +63,7 @@ export async function updateBookBoxInfos (userId, token, bookbox) {
 
 export async function addFavorite (userId, token, bookboxId) {
   const options = {
-    headers: { 'Authorization': `bearer ${token}` }
+    headers: { Authorization: `bearer ${token}` }
   };
 
   const result = await Request.post(`/users/${userId}/favorites`, { bookboxId }, options);
@@ -74,7 +74,7 @@ export async function deleteFavorite (userId, token, bookboxId) {
   const options = {
     method: 'DELETE',
     url: `/users/${userId}/favorites/${bookboxId}`,
-    headers: { 'Authorization': `bearer ${token}` },
+    headers: { Authorization: `bearer ${token}` },
     data: {
       bookboxId
     }

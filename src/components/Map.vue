@@ -296,7 +296,7 @@ export default {
 
         if (result.data.status !== 'success') return;
 
-        this.options.center = [ result.data.lon, result.data.lat ];
+        this.options.center = [result.data.lon, result.data.lat];
         this.options.zoom = 5;
       } catch (e) {
         // Do nothing

@@ -160,9 +160,9 @@ export default {
     ...mapGetters('User', ['accessDashboard']),
     wrapperCss () {
       return {
-        'box': true,
+        box: true,
         'sidebar-wrapper': true,
-        'collapsed': this.collapsed
+        collapsed: this.collapsed
       }
     }
   },
