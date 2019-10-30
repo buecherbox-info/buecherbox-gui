@@ -18,7 +18,7 @@ const state = {
 // getters
 const getters = {
   accessDashboard: (state) => {
-    return state.role && state.role === 'admin';
+    return state.isLoggedIn && state.role && state.role === 'admin';
   }
 };
 
