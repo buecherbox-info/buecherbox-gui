@@ -193,7 +193,8 @@ export default {
         accessToken: this.accessToken,
         mapboxgl: MapboxGl,
         language: this.$i18n.locale,
-        localGeocoder: this.bookboxGeoCoderSearch
+        localGeocoder: this.bookboxGeoCoderSearch,
+        localGeocoderOnly: !this.isLoggedIn
       });
 
       document.getElementById('geocoder').appendChild(this.geocoder.onAdd(this.map))
@@ -211,9 +212,14 @@ export default {
       const geocodes = [];
 
       found.forEach((el) => {
+        let placeName = `Box #${el.id}`;
+        if (el.description) {
+          placeName += `: ${el.description}`;
+        }
+
         geocodes.push({
           center: [el.lng, el.lat],
-          place_name: `Box #${el.id}: ${el.description}`,
+          place_name: placeName,
           place_type: ['coordinate'],
           properties: {},
           type: 'Feature'
@@ -228,9 +234,9 @@ export default {
       this.map.flyTo({
         center: [
           coordinates.lng,
-          coordinates.lat - 0.01
+          coordinates.lat
         ],
-        zoom: 14
+        zoom: 16
       });
     },
     resetMap () {
@@ -291,11 +297,9 @@ export default {
     },
     async getUserLocation () {
       try {
-        const result = await Axios.get('http://ip-api.com/json');
+        const result = await Axios.get('https://freegeoip.app/json/');
 
-        if (result.data.status !== 'success') return;
-
-        this.options.center = [ result.data.lon, result.data.lat ];
+        this.options.center = [result.data.longitude, result.data.latitude];
         this.options.zoom = 5;
       } catch (e) {
         // Do nothing
