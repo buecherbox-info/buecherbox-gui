@@ -58,7 +58,7 @@ export default {
     cssClass () {
       return {
         // disable container class for map, otherwise the map is not fullscreen
-        'container': this.$route.path !== '/'
+        container: this.$route.path !== '/'
       }
     }
   },

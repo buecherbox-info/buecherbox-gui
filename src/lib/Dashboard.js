@@ -2,7 +2,7 @@ import Request from './Request';
 
 export async function getBookBoxInfos (token) {
   const options = {
-    headers: { 'Authorization': `bearer ${token}` }
+    headers: { Authorization: `bearer ${token}` }
   };
 
   const result = await Request.get('/dashboard/bookboxes', options);
@@ -11,7 +11,7 @@ export async function getBookBoxInfos (token) {
 
 export async function getUserInfos (token) {
   const options = {
-    headers: { 'Authorization': `bearer ${token}` }
+    headers: { Authorization: `bearer ${token}` }
   };
 
   const result = await Request.get('/dashboard/users', options);

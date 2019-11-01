@@ -1,4 +1,4 @@
-import { required, confirmed, length, email } from 'vee-validate/dist/rules';
+import { required, confirmed, email } from 'vee-validate/dist/rules';
 import { configure, extend, localize } from 'vee-validate';
 
 import deValidation from 'vee-validate/dist/locale/de';

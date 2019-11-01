@@ -133,7 +133,7 @@ export default {
       return imgId ? `http://localhost:3000/images/${imgId}${thumnail}` : '';
     },
     hints () {
-      let hint = this.target.hint;
+      const hint = this.target.hint;
       return hint ? hint.split('\n') : [];
     }
   },
