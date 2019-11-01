@@ -299,6 +299,8 @@ export default {
       try {
         const result = await Axios.get('https://freegeoip.app/json/');
 
+        if (!result.data) return;
+
         this.options.center = [result.data.longitude, result.data.latitude];
         this.options.zoom = 5;
       } catch (e) {
