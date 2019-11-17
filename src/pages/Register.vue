@@ -204,12 +204,6 @@ export default {
       });
 
       return errorMsg;
-    },
-    validateConfirmPassword () {
-      return `required|confirmed:${Messages.PASSWORD}`;
-    },
-    validForm () {
-      return !this.errors.any();
     }
   },
   methods: {

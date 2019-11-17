@@ -268,15 +268,11 @@ export default {
     async getUserProfile () {
       await this.$store.dispatch('User/getProfile');
     },
-    hints (hints) {
-      return hints ? hints.split('\n') : [];
-    },
     async changePassword () {
       const isValid = await this.$refs.changeObserver.validate();
       if (!isValid || this.password !== this.passwordConfirmation) return;
       try {
         await this.$store.dispatch('User/changePassword');
-        this.errors.clear();
         this.editUser = false;
       } catch (e) {
         this.showNotification = true;
